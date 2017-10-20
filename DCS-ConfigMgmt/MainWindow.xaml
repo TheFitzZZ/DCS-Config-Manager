@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DCS_ConfigMgmt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="924th DCS Configuration Manager" Height="460" Width="525">
     <Grid>
+
+        <Label x:Name="label_dcsdir_current" Content="DCS Path Current" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_dcsdir_alpha" Content="DCS Path Alpha" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_dcsdir_beta" Content="DCS Path Beta" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_dcsdir_current" Content="Pick dir" HorizontalAlignment="Left" Margin="128,13,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_current_Click"/>
+        <Button x:Name="button_dcsdir_alpha" Content="Pick dir" HorizontalAlignment="Left" Margin="128,44,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_alpha_Click"/>
+        <Button x:Name="button_dcsdir_beta" Content="Pick dir" HorizontalAlignment="Left" Margin="128,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_beta_Click"/>
+        <TextBox x:Name="textBox_dcsdir_current" HorizontalAlignment="Left" Height="23" Margin="222,13,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="textBox_dcsdir_alpha" HorizontalAlignment="Left" Height="23" Margin="222,44,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="textBox_dcsdir_beta" HorizontalAlignment="Left" Height="23" Margin="222,72,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+        <CheckBox x:Name="checkBox_dcsdir_current" Content="" HorizontalAlignment="Left" Margin="475,18,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="475,49,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="475,75,0,0" VerticalAlignment="Top"/>
+
+        <Button x:Name="button" Content="Link all to primary for controls" HorizontalAlignment="Left" Margin="297,110,0,0" VerticalAlignment="Top" Width="173"/>
+
+        <Label x:Name="label" Content="Current" HorizontalAlignment="Left" Margin="58,190,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button1" Content="Load non-VR" HorizontalAlignment="Left" Margin="58,221,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy" Content="Load VR" HorizontalAlignment="Left" Margin="58,246,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy1" Content="Save as non-VR" HorizontalAlignment="Left" Margin="58,271,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy2" Content="Save as VR" HorizontalAlignment="Left" Margin="58,296,0,0" VerticalAlignment="Top" Width="89"/>
         
+        <Label x:Name="label_Copy" Content="Alpha" HorizontalAlignment="Left" Margin="191,190,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button1_Copy3" Content="Load non-VR" HorizontalAlignment="Left" Margin="191,221,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy4" Content="Load VR" HorizontalAlignment="Left" Margin="191,246,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy5" Content="Save as non-VR" HorizontalAlignment="Left" Margin="191,271,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy6" Content="Save as VR" HorizontalAlignment="Left" Margin="191,296,0,0" VerticalAlignment="Top" Width="89"/>
+        
+        <Label x:Name="label_Copy1" Content="Beta" HorizontalAlignment="Left" Margin="324,190,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button1_Copy7" Content="Load non-VR" HorizontalAlignment="Left" Margin="324,221,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy8" Content="Load VR" HorizontalAlignment="Left" Margin="324,246,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy9" Content="Save as non-VR" HorizontalAlignment="Left" Margin="324,271,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="button1_Copy10" Content="Save as VR" HorizontalAlignment="Left" Margin="324,296,0,0" VerticalAlignment="Top" Width="89"/>
+
     </Grid>
 </Window>
