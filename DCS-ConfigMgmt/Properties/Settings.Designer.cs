@@ -70,5 +70,89 @@ namespace DCS_ConfigMgmt.Properties {
                 this["sMasterBranch"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bSawConfigWarning {
+            get {
+                return ((bool)(this["bSawConfigWarning"]));
+            }
+            set {
+                this["bSawConfigWarning"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bVRConfActiveCurrent {
+            get {
+                return ((bool)(this["bVRConfActiveCurrent"]));
+            }
+            set {
+                this["bVRConfActiveCurrent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bVRConfActiveAlpha {
+            get {
+                return ((bool)(this["bVRConfActiveAlpha"]));
+            }
+            set {
+                this["bVRConfActiveAlpha"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bVRConfActiveBeta {
+            get {
+                return ((bool)(this["bVRConfActiveBeta"]));
+            }
+            set {
+                this["bVRConfActiveBeta"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bFirstUseVRCurrent {
+            get {
+                return ((bool)(this["bFirstUseVRCurrent"]));
+            }
+            set {
+                this["bFirstUseVRCurrent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bFirstUseVRAlpha {
+            get {
+                return ((bool)(this["bFirstUseVRAlpha"]));
+            }
+            set {
+                this["bFirstUseVRAlpha"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bFirstUseVRBeta {
+            get {
+                return ((bool)(this["bFirstUseVRBeta"]));
+            }
+            set {
+                this["bFirstUseVRBeta"] = value;
+            }
+        }
     }
 }

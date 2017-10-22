@@ -25,22 +25,16 @@
         <Button x:Name="button_unlinkcontrols" Content="Unlink controls" HorizontalAlignment="Left" Margin="380,110,0,0" VerticalAlignment="Top" Width="90" Click="Button_unlinkcontrols_Click" IsEnabled="False"/>
 
         <Label x:Name="label" Content="Current" HorizontalAlignment="Left" Margin="58,149,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="58,180,0,0" VerticalAlignment="Top" Width="89" Click="button_load_nonvr_current_Click"/>
-        <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="58,205,0,0" VerticalAlignment="Top" Width="89" Click="button_load_vr_current_Click"/>
-        <Button x:Name="button_save_nonvr_current" Content="Save as non-VR" HorizontalAlignment="Left" Margin="58,230,0,0" VerticalAlignment="Top" Width="89" Click="button_save_nonvr_current_Click"/>
-        <Button x:Name="button_save_vr_current" Content="Save as VR" HorizontalAlignment="Left" Margin="58,255,0,0" VerticalAlignment="Top" Width="89" Click="button_save_vr_current_Click"/>
+        <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="58,180,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_nonvr_current_Click"/>
+        <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="58,205,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_vr_current_Click"/>
 
         <Label x:Name="label_Copy" Content="Alpha" HorizontalAlignment="Left" Margin="191,149,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_load_nonvr_alpha" Content="Load non-VR" HorizontalAlignment="Left" Margin="191,180,0,0" VerticalAlignment="Top" Width="89" Click="button_load_nonvr_alpha_Click"/>
-        <Button x:Name="button_load_vr_alpha" Content="Load VR" HorizontalAlignment="Left" Margin="191,205,0,0" VerticalAlignment="Top" Width="89" Click="button_load_vr_alpha_Click"/>
-        <Button x:Name="button_save_nonvr_alpha" Content="Save as non-VR" HorizontalAlignment="Left" Margin="191,230,0,0" VerticalAlignment="Top" Width="89" Click="button_save_nonvr_alpha_Click"/>
-        <Button x:Name="button_save_vr_alpha" Content="Save as VR" HorizontalAlignment="Left" Margin="191,255,0,0" VerticalAlignment="Top" Width="89" Click="button_save_vr_alpha_Click"/>
+        <Button x:Name="button_load_nonvr_alpha" Content="Load non-VR" HorizontalAlignment="Left" Margin="191,180,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_nonvr_alpha_Click"/>
+        <Button x:Name="button_load_vr_alpha" Content="Load VR" HorizontalAlignment="Left" Margin="191,205,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_vr_alpha_Click"/>
 
         <Label x:Name="label_Copy1" Content="Beta" HorizontalAlignment="Left" Margin="324,149,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_load_nonvr_beta" Content="Load non-VR" HorizontalAlignment="Left" Margin="324,180,0,0" VerticalAlignment="Top" Width="89" Click="button_load_nonvr_beta_Click"/>
-        <Button x:Name="button_load_vr_beta" Content="Load VR" HorizontalAlignment="Left" Margin="324,205,0,0" VerticalAlignment="Top" Width="89" Click="button_load_vr_beta_Click"/>
-        <Button x:Name="button_save_nonvr_beta" Content="Save as non-VR" HorizontalAlignment="Left" Margin="324,230,0,0" VerticalAlignment="Top" Width="89" Click="Button_save_nonvr_beta_Click"/>
-        <Button x:Name="button_save_vr_beta" Content="Save as VR" HorizontalAlignment="Left" Margin="324,255,0,0" VerticalAlignment="Top" Width="89" Click="Button_save_vr_beta_Click"/>
+        <Button x:Name="button_load_nonvr_beta" Content="Load non-VR" HorizontalAlignment="Left" Margin="324,180,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_nonvr_beta_Click"/>
+        <Button x:Name="button_load_vr_beta" Content="Load VR" HorizontalAlignment="Left" Margin="324,205,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_vr_beta_Click"/>
 
 
     </Grid>

@@ -114,8 +114,60 @@ namespace DCS_ConfigMgmt
                 button_unlinkcontrols.IsEnabled = true;
                 button_linkcontrols.IsEnabled = false;
             }
-            
 
+            //Check for first run
+            if (!Properties.Settings.Default.bSawConfigWarning)
+            {
+                System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
+                    "As this is your first time using this tool, please check the automatically detected directories and determine if your current config has VR enabled or not.\n\n" +
+                    "Click 'Load VR Settings' if VR is currently -disabled-.\n" +
+                    "Click 'Load nonVR Settings' if VR is currently -enabled-.\n\nThis will create a copy of the current configuration. Then you may load the other one to do your VR/nonVR settings. After that, you can just switch between them. " +
+                    "Please do this for every version installed. If you don't use VR, just ignore it.", "First use information");
+
+                Properties.Settings.Default.bSawConfigWarning = true;
+                Properties.Settings.Default.Save();
+            }
+
+            //Check configs for VR/nonVR and disable buttons accordingly
+            if (!Properties.Settings.Default.bFirstUseVRCurrent)
+            {
+                if (Properties.Settings.Default.bVRConfActiveCurrent)
+                {
+                    button_load_vr_current.IsEnabled = false;
+                    button_load_nonvr_current.IsEnabled = true;
+                }
+                else
+                {
+                    button_load_vr_current.IsEnabled = true;
+                    button_load_nonvr_current.IsEnabled = false;
+                }
+            }
+            if (!Properties.Settings.Default.bFirstUseVRBeta)
+            {
+                if (Properties.Settings.Default.bVRConfActiveBeta)
+                {
+                    button_load_vr_beta.IsEnabled = false;
+                    button_load_nonvr_beta.IsEnabled = true;
+                }
+                else
+                {
+                    button_load_vr_beta.IsEnabled = true;
+                    button_load_nonvr_beta.IsEnabled = false;
+                }
+            }
+            if (!Properties.Settings.Default.bFirstUseVRAlpha)
+            {
+                if (Properties.Settings.Default.bVRConfActiveAlpha)
+                {
+                    button_load_vr_alpha.IsEnabled = false;
+                    button_load_nonvr_alpha.IsEnabled = true;
+                }
+                else
+                {
+                    button_load_vr_alpha.IsEnabled = true;
+                    button_load_nonvr_alpha.IsEnabled = false;
+                }
+            }
         }
 
         #region Paths and SymLinks
@@ -390,7 +442,7 @@ namespace DCS_ConfigMgmt
             }
             catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show(e.Message + "\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind an dopen an issue on github via the support link.\nThanks!");
+                System.Windows.Forms.MessageBox.Show(e.Message + "\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
             }
         }
 
@@ -420,22 +472,16 @@ namespace DCS_ConfigMgmt
         //
         private void Button_load_nonvr_current_Click(object sender, RoutedEventArgs e)
         {
-
+            SwitchVRConfig("current", false);
+            button_load_nonvr_current.IsEnabled = false;
+            button_load_vr_current.IsEnabled = true;
         }
 
         private void Button_load_vr_current_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_save_nonvr_current_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_save_vr_current_Click(object sender, RoutedEventArgs e)
-        {
-
+            SwitchVRConfig("current", true);
+            button_load_nonvr_current.IsEnabled = true;
+            button_load_vr_current.IsEnabled = false;
         }
 
         //
@@ -443,22 +489,16 @@ namespace DCS_ConfigMgmt
         //
         private void Button_load_nonvr_alpha_Click(object sender, RoutedEventArgs e)
         {
-
+            SwitchVRConfig("alpha", false);
+            button_load_nonvr_alpha.IsEnabled = false;
+            button_load_vr_alpha.IsEnabled = true;
         }
 
         private void Button_load_vr_alpha_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_save_nonvr_alpha_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_save_vr_alpha_Click(object sender, RoutedEventArgs e)
-        {
-
+            SwitchVRConfig("alpha", true);
+            button_load_nonvr_alpha.IsEnabled = true;
+            button_load_vr_alpha.IsEnabled = false;
         }
 
         //
@@ -466,30 +506,127 @@ namespace DCS_ConfigMgmt
         //
         private void Button_load_nonvr_beta_Click(object sender, RoutedEventArgs e)
         {
-
+            SwitchVRConfig("beta", false);
+            button_load_nonvr_beta.IsEnabled = false;
+            button_load_vr_beta.IsEnabled = true;
         }
 
         private void Button_load_vr_beta_Click(object sender, RoutedEventArgs e)
         {
-
+            SwitchVRConfig("beta", true);
+            button_load_nonvr_beta.IsEnabled = true;
+            button_load_vr_beta.IsEnabled = false;
         }
 
-        private void Button_save_nonvr_beta_Click(object sender, RoutedEventArgs e)
+        //
+        // Switch VR configuration
+        //
+        private void SwitchVRConfig(string sBranch, bool bVR)
         {
+            //Prepare alternative paths
+            string sPathCurrent = Properties.Settings.Default.sPathCurrent + "\\config\\options.lua";
+            string sPathCurrentnonVR = Properties.Settings.Default.sPathCurrent + "\\config\\options.lua.nonvr";
+            string sPathCurrentVR = Properties.Settings.Default.sPathCurrent + "\\config\\options.lua.vr";
+            string sPathAlpha = Properties.Settings.Default.sPathAlpha + "\\config\\options.lua";
+            string sPathAlphanonVR = Properties.Settings.Default.sPathAlpha + "\\config\\options.lua.nonvr";
+            string sPathAlphaVR = Properties.Settings.Default.sPathAlpha + "\\config\\options.lua.vr";
+            string sPathBeta = Properties.Settings.Default.sPathBeta + "\\config\\options.lua";
+            string sPathBetanonVR = Properties.Settings.Default.sPathBeta + "\\config\\options.lua.nonvr";
+            string sPathBetaVR = Properties.Settings.Default.sPathBeta + "\\config\\options.lua.vr";
 
-        }
+            if(!bVR)
+            {
+                if(sBranch == "current")
+                {
+                    MoveFile(sPathCurrent, sPathCurrentVR, sBranch);
+                    MoveFile(sPathCurrentnonVR, sPathCurrent, sBranch);
+                    Properties.Settings.Default.bVRConfActiveCurrent = false;
+                    Properties.Settings.Default.bFirstUseVRCurrent = false;
+                }
+                else if(sBranch == "alpha")
+                {
+                    MoveFile(sPathAlpha, sPathAlphaVR, sBranch);
+                    MoveFile(sPathAlphanonVR, sPathAlpha, sBranch);
+                    Properties.Settings.Default.bVRConfActiveAlpha = false;
+                    Properties.Settings.Default.bFirstUseVRAlpha = false;
+                }
+                else if (sBranch == "beta")
+                {
+                    MoveFile(sPathBeta, sPathBetaVR, sBranch);
+                    MoveFile(sPathBetanonVR, sPathBeta, sBranch);
+                    Properties.Settings.Default.bVRConfActiveBeta = false;
+                    Properties.Settings.Default.bFirstUseVRBeta = false;
+                }
+            }
+            else if(bVR)
+            {
+                if (sBranch == "current")
+                {
+                    MoveFile(sPathCurrent, sPathCurrentnonVR, sBranch);
+                    MoveFile(sPathCurrentVR, sPathCurrent, sBranch);
+                    Properties.Settings.Default.bVRConfActiveCurrent = true;
+                    Properties.Settings.Default.bFirstUseVRCurrent = false;
+                }
+                else if (sBranch == "alpha")
+                {
+                    MoveFile(sPathAlpha, sPathAlphanonVR, sBranch);
+                    MoveFile(sPathAlphaVR, sPathAlpha, sBranch);
+                    Properties.Settings.Default.bVRConfActiveAlpha = true;
+                    Properties.Settings.Default.bFirstUseVRAlpha = false;
+                }
+                else if (sBranch == "beta")
+                {
+                    MoveFile(sPathBeta, sPathBetanonVR, sBranch);
+                    MoveFile(sPathBetaVR, sPathBeta, sBranch);
+                    Properties.Settings.Default.bVRConfActiveBeta = true;
+                    Properties.Settings.Default.bFirstUseVRBeta = false;
+                }
+            }
+            else { System.Windows.Forms.MessageBox.Show("WTF happened here?! Please tell the coder!", "Watch EKRAN"); }
 
-        private void Button_save_vr_beta_Click(object sender, RoutedEventArgs e)
-        {
-
+            Properties.Settings.Default.Save();
         }
 
 
         //
-        // 
+        // Move file
         //
-
+        private void MoveFile(string sSource, string sTarget, string sBranch)
+        {
+            try
+            {
+                if ((sBranch.Contains("current") & Properties.Settings.Default.bFirstUseVRCurrent & !sSource.Contains("vr")) | (sBranch.Contains("alpha") & Properties.Settings.Default.bFirstUseVRAlpha & !sSource.Contains("vr")) | (sBranch.Contains("beta") & Properties.Settings.Default.bFirstUseVRBeta & !sSource.Contains("vr")))
+                {
+                    File.Copy(sSource, sTarget);
+                }
+                else
+                {
+                    File.Move(sSource, sTarget);
+                }                
+            }
+            catch (Exception e)
+            {
+                if((sBranch.Contains("current") & Properties.Settings.Default.bFirstUseVRCurrent) | (sBranch.Contains("alpha") & Properties.Settings.Default.bFirstUseVRAlpha) | (sBranch.Contains("beta") & Properties.Settings.Default.bFirstUseVRBeta))
+                {
+                    //hmm
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show(e.Message + "\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
+                }
+                
+            }
+     
+        }
         #endregion
+
+        //
+        // System message
+        //
+
+        //
+        // Create shortcuts
+        //
 
     }
 }
