@@ -5,36 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DCS_ConfigMgmt"
         mc:Ignorable="d"
-        Title="924th DCS Configuration Manager" Height="336" Width="525">
+        Title="924th DCS Configuration Manager" Height="266" Width="534">
     <Grid>
 
-        <Label x:Name="label_dcsdir_current" Content="DCS Path Current" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_dcsdir_alpha" Content="DCS Path Alpha" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_dcsdir_beta" Content="DCS Path Beta" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_dcsdir_current" Content="Pick dir" HorizontalAlignment="Left" Margin="128,13,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_current_Click"/>
-        <Button x:Name="button_dcsdir_alpha" Content="Pick dir" HorizontalAlignment="Left" Margin="128,44,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_alpha_Click"/>
-        <Button x:Name="button_dcsdir_beta" Content="Pick dir" HorizontalAlignment="Left" Margin="128,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_beta_Click"/>
-        <TextBox x:Name="textBox_dcsdir_current" HorizontalAlignment="Left" Height="23" Margin="222,13,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
-        <TextBox x:Name="textBox_dcsdir_alpha" HorizontalAlignment="Left" Height="23" Margin="222,44,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
-        <TextBox x:Name="textBox_dcsdir_beta" HorizontalAlignment="Left" Height="23" Margin="222,72,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
-        <RadioButton x:Name="radioButton_dcsdir_current" Content="" HorizontalAlignment="Left" Margin="475,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_current_Checked"/>
-        <RadioButton x:Name="radioButton_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="475,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_alpha_Checked"/>
-        <RadioButton x:Name="radioButton_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="475,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_beta_Checked"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="235" VerticalAlignment="Top" Width="526">
+            <TabItem Header="About">
+                <Grid Background="#FFE5E5E5">
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="169" Margin="10,10,0,0" VerticalAlignment="Top" Width="162" Source="Resources/j9241.png" Stretch="Fill"/>
+                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="159" Width="311" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version 0.1"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Post issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Link Controls">
+                <Grid Background="#FFE5E5E5">
+                    <RadioButton x:Name="radioButton_dcsdir_current" Content="" HorizontalAlignment="Left" Margin="46,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_current_Checked"/>
+                    <RadioButton x:Name="radioButton_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="141,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_alpha_Checked"/>
+                    <RadioButton x:Name="radioButton_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="231,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_beta_Checked"/>
 
-        <Button x:Name="button_linkcontrols" Content="Link controls" HorizontalAlignment="Left" Margin="285,110,0,0" VerticalAlignment="Top" Width="90" Click="Button_linkcontrols_Click" IsEnabled="False"/>
-        <Button x:Name="button_unlinkcontrols" Content="Unlink controls" HorizontalAlignment="Left" Margin="380,110,0,0" VerticalAlignment="Top" Width="90" Click="Button_unlinkcontrols_Click" IsEnabled="False"/>
+                    <Button x:Name="button_linkcontrols" Content="Link controls" HorizontalAlignment="Left" Margin="46,137,0,0" VerticalAlignment="Top" Width="89" Click="Button_linkcontrols_Click" IsEnabled="False"/>
+                    <Button x:Name="button_unlinkcontrols" Content="Unlink controls" HorizontalAlignment="Left" Margin="161,137,0,0" VerticalAlignment="Top" Width="89" Click="Button_unlinkcontrols_Click" IsEnabled="False"/>
+                    <Image x:Name="image1" HorizontalAlignment="Left" Height="88" Margin="10,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Current.png"/>
+                    <Image x:Name="image1_Copy" HorizontalAlignment="Left" Height="88" Margin="103,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Alpha.png"/>
+                    <Image x:Name="image1_Copy1" HorizontalAlignment="Left" Height="88" Margin="196,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Beta.png"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="187" Margin="336,10,0,0" TextWrapping="Wrap" Text="Linking your controls!&#xD;&#xA;&#xD;&#xA;With this option you can &quot;link&quot; your other DCS instances to your chosen &quot;primary&quot; one, making them share one set of input configuration.&#xD;&#xA;The other directories get renamed upon being linked and restored to their original state when you unlink them. &#xD;&#xA;" VerticalAlignment="Top" Width="174"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="VR Config">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_current_Click"/>
+                    <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_current_Click"/>
+                    <Button x:Name="button_load_nonvr_alpha" Content="Load non-VR" HorizontalAlignment="Left" Margin="102,102,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_alpha_Click"/>
+                    <Button x:Name="button_load_vr_alpha" Content="Load VR" HorizontalAlignment="Left" Margin="102,127,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_alpha_Click"/>
+                    <Button x:Name="button_load_nonvr_beta" Content="Load non-VR" HorizontalAlignment="Left" Margin="194,102,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_beta_Click"/>
+                    <Button x:Name="button_load_vr_beta" Content="Load VR" HorizontalAlignment="Left" Margin="194,127,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_beta_Click"/>
+                    <Image x:Name="image_VRConfig_DCSCurrent" HorizontalAlignment="Left" Height="87" Margin="10,10,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Current_VR.png"/>
+                    <Image x:Name="image2_VRConfig_DCSAlpha" HorizontalAlignment="Left" Height="87" Margin="102,10,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Alpha_VR.png"/>
+                    <Image x:Name="image2_VRConfig_DCSBeta" HorizontalAlignment="Left" Height="87" Margin="194,10,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Beta_VR.png"/>
+                    <TextBox x:Name="textBox_VRConfig_Info" HorizontalAlignment="Left" Height="187" Margin="336,10,0,0" TextWrapping="Wrap" Text="Easily switch to VR!&#xA;&#xA;With this option you can jump between VR and non VR configurations with ease. &#xA;&#xA;You can also create shortcuts on your desktop so you don't even have to start this app!&#xA;" VerticalAlignment="Top" Width="174"/>
+                    <Button x:Name="buttonCreate_Shortcut_Current" Content="Create Shortcut" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="87"/>
+                    <Button x:Name="buttonCreate_Shortcut_Alpha" Content="Create Shortcut" HorizontalAlignment="Left" Margin="102,152,0,0" VerticalAlignment="Top" Width="87"/>
+                    <Button x:Name="buttonCreate_Shortcut_Beta" Content="Create Shortcut" HorizontalAlignment="Left" Margin="194,152,0,0" VerticalAlignment="Top" Width="87"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="button_dcsdir_current" Content="Pick dir" HorizontalAlignment="Left" Margin="76,15,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_current_Click"/>
+                    <Button x:Name="button_dcsdir_alpha" Content="Pick dir" HorizontalAlignment="Left" Margin="76,76,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_alpha_Click"/>
+                    <Button x:Name="button_dcsdir_beta" Content="Pick dir" HorizontalAlignment="Left" Margin="76,137,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_beta_Click"/>
+                    <TextBox x:Name="textBox_dcsdir_current" HorizontalAlignment="Left" Height="23" Margin="76,40,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+                    <TextBox x:Name="textBox_dcsdir_alpha" HorizontalAlignment="Left" Height="23" Margin="76,101,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+                    <TextBox x:Name="textBox_dcsdir_beta" HorizontalAlignment="Left" Height="23" Margin="76,162,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+                    <Image x:Name="image3" HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Current.png"/>
+                    <Image x:Name="image3_Copy" HorizontalAlignment="Left" Height="61" Margin="10,71,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Alpha.png"/>
+                    <Image x:Name="image3_Copy1" HorizontalAlignment="Left" Height="61" Margin="10,132,0,-4" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Beta.png"/>
+                </Grid>
+            </TabItem>
 
-        <Label x:Name="label" Content="Current" HorizontalAlignment="Left" Margin="58,149,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="58,180,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_nonvr_current_Click"/>
-        <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="58,205,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_vr_current_Click"/>
-
-        <Label x:Name="label_Copy" Content="Alpha" HorizontalAlignment="Left" Margin="191,149,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_load_nonvr_alpha" Content="Load non-VR" HorizontalAlignment="Left" Margin="191,180,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_nonvr_alpha_Click"/>
-        <Button x:Name="button_load_vr_alpha" Content="Load VR" HorizontalAlignment="Left" Margin="191,205,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_vr_alpha_Click"/>
-
-        <Label x:Name="label_Copy1" Content="Beta" HorizontalAlignment="Left" Margin="324,149,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_load_nonvr_beta" Content="Load non-VR" HorizontalAlignment="Left" Margin="324,180,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_nonvr_beta_Click"/>
-        <Button x:Name="button_load_vr_beta" Content="Load VR" HorizontalAlignment="Left" Margin="324,205,0,0" VerticalAlignment="Top" Width="89" Click="Button_load_vr_beta_Click"/>
+        </TabControl>
 
 
     </Grid>

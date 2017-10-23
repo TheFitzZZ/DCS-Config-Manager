@@ -48,7 +48,7 @@ namespace DCS_ConfigMgmt
             Directory = 1
         }
 
-        public MainWindow()
+        public MainWindow(string sStartOption)
         {
             InitializeComponent();
 
@@ -56,24 +56,24 @@ namespace DCS_ConfigMgmt
             // Get DCS directories if settings are empty
             if (Properties.Settings.Default.sPathCurrent == "")
             {
-                Properties.Settings.Default.sPathCurrent = GetDCSSavePath("current release");
+                Properties.Settings.Default.sPathCurrent = GetDCSSavePath("current");
                 Properties.Settings.Default.Save();
             }
 
             if (Properties.Settings.Default.sPathAlpha == "")
             {
-                Properties.Settings.Default.sPathAlpha = GetDCSSavePath("alpha release");
+                Properties.Settings.Default.sPathAlpha = GetDCSSavePath("alpha");
                 Properties.Settings.Default.Save();
             }
 
             if (Properties.Settings.Default.sPathBeta == "")
             {
-                Properties.Settings.Default.sPathBeta = GetDCSSavePath("beta release");
+                Properties.Settings.Default.sPathBeta = GetDCSSavePath("beta");
                 Properties.Settings.Default.Save();
             }
 
             //Write textboxes
-            if (GetDCSRegistryPath("current release") != null)
+            if (GetDCSRegistryPath("current") != null)
             {
                 textBox_dcsdir_current.Text = Properties.Settings.Default.sPathCurrent;
             }
@@ -82,7 +82,7 @@ namespace DCS_ConfigMgmt
                 textBox_dcsdir_current.Text = "Not found.";
             }
 
-            if (GetDCSRegistryPath("alpha release") != null)
+            if (GetDCSRegistryPath("alpha") != null)
             {
                     textBox_dcsdir_alpha.Text = Properties.Settings.Default.sPathAlpha;
             }
@@ -91,7 +91,7 @@ namespace DCS_ConfigMgmt
                 textBox_dcsdir_alpha.Text = "Not found.";
             }
 
-            if (GetDCSRegistryPath("beta release") != null)
+            if (GetDCSRegistryPath("beta") != null)
             {
                 textBox_dcsdir_beta.Text = Properties.Settings.Default.sPathBeta;
             }
@@ -168,6 +168,21 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_alpha.IsEnabled = false;
                 }
             }
+
+            //
+            // Automated startup
+            //
+            if (sStartOption != "")
+            {
+                //Debug
+                //System.Windows.Forms.MessageBox.Show(sStartOption);
+
+                //Start the handler
+                StartupHandler(sStartOption);
+
+                //We're done, exit.
+                System.Windows.Application.Current.Shutdown();
+            }
         }
 
         #region Paths and SymLinks
@@ -177,18 +192,18 @@ namespace DCS_ConfigMgmt
         /// 
         private void Button_dcsdir_current_Click(object sender, RoutedEventArgs e)
         {
-            string branch = "current release";
+            string branch = "current";
             textBox_dcsdir_current.Text = DirectoryPicker(branch);
         }
         private void Button_dcsdir_alpha_Click(object sender, RoutedEventArgs e)
         {
-            string branch = "alpha release";
+            string branch = "alpha";
             textBox_dcsdir_alpha.Text = DirectoryPicker(branch);
         }
 
         private void Button_dcsdir_beta_Click(object sender, RoutedEventArgs e)
         {
-            string branch = "beta release";
+            string branch = "beta";
             textBox_dcsdir_beta.Text = DirectoryPicker(branch);
         }
         /// 
@@ -214,19 +229,19 @@ namespace DCS_ConfigMgmt
             string sDCSpath = null;
             RegistryKey hkcu = Registry.CurrentUser; //HKCU Registry
 
-            if (branch == "current release")
+            if (branch == "current")
             {
                 hkcu = hkcu.OpenSubKey(@"Software\Eagle Dynamics\DCS World");
                 try { sDCSpath = (string)hkcu.GetValue("Path"); }
                 catch { }
             }
-            else if (branch == "alpha release")
+            else if (branch == "alpha")
             {
                 hkcu = hkcu.OpenSubKey(@"Software\Eagle Dynamics\DCS World 2 OpenAlpha");
                 try { sDCSpath = (string)hkcu.GetValue("Path"); }
                 catch { }
             }
-            else if (branch == "beta release")
+            else if (branch == "beta")
             {
                 hkcu = hkcu.OpenSubKey(@"Software\Eagle Dynamics\DCS World OpenBeta");
                 try { sDCSpath = (string)hkcu.GetValue("Path"); }
@@ -244,15 +259,15 @@ namespace DCS_ConfigMgmt
             string sDCSpath = null;
             string sUserProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
-            if (branch == "current release")
+            if (branch == "current")
             {
                 sDCSpath = sUserProfile + "\\Saved Games\\DCS";
             }
-            else if (branch == "alpha release")
+            else if (branch == "alpha")
             {
                 sDCSpath = sUserProfile + "\\Saved Games\\DCS.openalpha";
             }
-            else if (branch == "beta release")
+            else if (branch == "beta")
             {
                 sDCSpath = sUserProfile + "\\Saved Games\\DCS.openbeta";
             }
@@ -451,7 +466,6 @@ namespace DCS_ConfigMgmt
         /// 
         static void CreateSymLink(string sSource, string sTarget)
         {             
-            //CreateSymbolicLink(symbolicLink, dirName, SymbolicLink.Directory);
             JunctionPoint.Create(sTarget, sSource, false /*don't overwrite*/);
         }
         /// 
@@ -459,7 +473,6 @@ namespace DCS_ConfigMgmt
         /// 
         static void DeleteSymLink(string sTarget)
         {
-            //CreateSymbolicLink(symbolicLink, dirName, SymbolicLink.Directory);
             JunctionPoint.Delete(sTarget);
         }
 
@@ -619,6 +632,73 @@ namespace DCS_ConfigMgmt
      
         }
         #endregion
+
+        //
+        // Startup option handler
+        //
+        private void StartupHandler(string sStartOption)
+        {
+            //Possible option:
+            //current, currentvr, alpha, alphavr, beta, betavr
+
+            if (sStartOption == "current")
+            {
+                if (Properties.Settings.Default.bVRConfActiveCurrent)
+                {
+                    SwitchVRConfig("current", false);
+                }
+                DCSStarter("current");
+            }
+            else if (sStartOption == "alpha")
+            {
+                if (Properties.Settings.Default.bVRConfActiveAlpha)
+                {
+                    SwitchVRConfig("alpha", false);
+                }
+                DCSStarter("alpha");
+            }
+            else if (sStartOption == "beta")
+            {
+                if (Properties.Settings.Default.bVRConfActiveBeta)
+                {
+                    SwitchVRConfig("beta", false);
+                }
+                DCSStarter("beta");
+            }
+            else if (sStartOption == "currentvr")
+            {
+                if (!Properties.Settings.Default.bVRConfActiveCurrent)
+                {
+                    SwitchVRConfig("current", true);
+                }
+                DCSStarter("current");
+            }
+            else if (sStartOption == "alphavr")
+            {
+                if (!Properties.Settings.Default.bVRConfActiveAlpha)
+                {
+                    SwitchVRConfig("alpha", true);
+                }
+                DCSStarter("alpha");
+            }
+            else if (sStartOption == "betavr")
+            {
+                if (!Properties.Settings.Default.bVRConfActiveBeta)
+                {
+                    SwitchVRConfig("beta", true);
+                }
+                DCSStarter("beta");
+            }
+        }
+
+        private void DCSStarter(string branch)
+        {
+            //Get path to game files
+            if(branch == "current")
+            {
+                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+            }
+        }
 
         //
         // System message

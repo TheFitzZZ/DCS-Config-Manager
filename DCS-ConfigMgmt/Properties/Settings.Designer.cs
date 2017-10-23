@@ -154,5 +154,17 @@ namespace DCS_ConfigMgmt.Properties {
                 this["bFirstUseVRBeta"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sStartupOption {
+            get {
+                return ((string)(this["sStartupOption"]));
+            }
+            set {
+                this["sStartupOption"] = value;
+            }
+        }
     }
 }
