@@ -166,5 +166,41 @@ namespace DCS_ConfigMgmt.Properties {
                 this["sStartupOption"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bManualPathCurrent {
+            get {
+                return ((bool)(this["bManualPathCurrent"]));
+            }
+            set {
+                this["bManualPathCurrent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bManualPathAlpha {
+            get {
+                return ((bool)(this["bManualPathAlpha"]));
+            }
+            set {
+                this["bManualPathAlpha"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bManualPathBeta {
+            get {
+                return ((bool)(this["bManualPathBeta"]));
+            }
+            set {
+                this["bManualPathBeta"] = value;
+            }
+        }
     }
 }

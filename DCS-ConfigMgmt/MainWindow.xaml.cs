@@ -1,17 +1,4 @@
-﻿/// 
-/// Todo:
-/// - Saving current branch, read and enable radiobutton+other visual, use for unlink button, enable unlink button only when set
-/// - do the symlink thing for link and unlink
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +16,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace DCS_ConfigMgmt
 {
@@ -73,31 +61,43 @@ namespace DCS_ConfigMgmt
             }
 
             //Write textboxes
-            if (GetDCSRegistryPath("current") != null)
+            if (GetDCSRegistryPath("current") != null | Properties.Settings.Default.bManualPathCurrent)
             {
                 textBox_dcsdir_current.Text = Properties.Settings.Default.sPathCurrent;
             }
             else
             {
                 textBox_dcsdir_current.Text = "Not found.";
+                radioButton_dcsdir_current.IsEnabled = false;
+                button_load_nonvr_current.IsEnabled = false;
+                button_load_vr_current.IsEnabled = false;
+                buttonCreate_Shortcut_Current.IsEnabled = false;
             }
 
-            if (GetDCSRegistryPath("alpha") != null)
+            if (GetDCSRegistryPath("alpha") != null | Properties.Settings.Default.bManualPathAlpha)
             {
                     textBox_dcsdir_alpha.Text = Properties.Settings.Default.sPathAlpha;
             }
             else
             {
                 textBox_dcsdir_alpha.Text = "Not found.";
+                radioButton_dcsdir_alpha.IsEnabled = false;
+                button_load_nonvr_alpha.IsEnabled = false;
+                button_load_vr_alpha.IsEnabled = false;
+                buttonCreate_Shortcut_Alpha.IsEnabled = false;
             }
 
-            if (GetDCSRegistryPath("beta") != null)
+            if (GetDCSRegistryPath("beta") != null | Properties.Settings.Default.bManualPathBeta)
             {
                 textBox_dcsdir_beta.Text = Properties.Settings.Default.sPathBeta;
             }
             else
             {
                 textBox_dcsdir_beta.Text = "Not found.";
+                radioButton_dcsdir_beta.IsEnabled = false;
+                button_load_nonvr_beta.IsEnabled = false;
+                button_load_vr_beta.IsEnabled = false;
+                buttonCreate_Shortcut_Beta.IsEnabled = false;
             }
 
             //check for current branch
@@ -194,18 +194,80 @@ namespace DCS_ConfigMgmt
         {
             string branch = "current";
             textBox_dcsdir_current.Text = DirectoryPicker(branch);
+            radioButton_dcsdir_current.IsEnabled = true;
+            button_load_nonvr_current.IsEnabled = true;
+            button_load_vr_current.IsEnabled = true;
+            buttonCreate_Shortcut_Current.IsEnabled = true;
+            Properties.Settings.Default.sPathCurrent = textBox_dcsdir_current.Text;
+            Properties.Settings.Default.bManualPathCurrent = true;
+            Properties.Settings.Default.Save();
         }
         private void Button_dcsdir_alpha_Click(object sender, RoutedEventArgs e)
         {
             string branch = "alpha";
             textBox_dcsdir_alpha.Text = DirectoryPicker(branch);
+            radioButton_dcsdir_alpha.IsEnabled = true;
+            button_load_nonvr_alpha.IsEnabled = true;
+            button_load_vr_alpha.IsEnabled = true;
+            buttonCreate_Shortcut_Alpha.IsEnabled = true;
+            Properties.Settings.Default.sPathAlpha = textBox_dcsdir_alpha.Text;
+            Properties.Settings.Default.bManualPathAlpha = true;
+            Properties.Settings.Default.Save();
         }
 
         private void Button_dcsdir_beta_Click(object sender, RoutedEventArgs e)
         {
             string branch = "beta";
             textBox_dcsdir_beta.Text = DirectoryPicker(branch);
+            radioButton_dcsdir_beta.IsEnabled = true;
+            button_load_nonvr_beta.IsEnabled = true;
+            button_load_vr_beta.IsEnabled = true;
+            buttonCreate_Shortcut_Beta.IsEnabled = true;
+            Properties.Settings.Default.sPathBeta = textBox_dcsdir_beta.Text;
+            Properties.Settings.Default.bManualPathBeta = true;
+            Properties.Settings.Default.Save();
         }
+
+
+        //Remove buttons
+        private void Button_dcsdir_current_remove_Click(object sender, RoutedEventArgs e)
+        {
+            textBox_dcsdir_current.Text = "Not found.";
+            radioButton_dcsdir_current.IsEnabled = false;
+            button_load_nonvr_current.IsEnabled = false;
+            button_load_vr_current.IsEnabled = false;
+            buttonCreate_Shortcut_Current.IsEnabled = false;
+            Properties.Settings.Default.sPathCurrent = textBox_dcsdir_current.Text;
+            Properties.Settings.Default.bManualPathCurrent = false;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Button_dcsdir_alpha_remove_Click(object sender, RoutedEventArgs e)
+        {
+            textBox_dcsdir_alpha.Text = "Not found.";
+            radioButton_dcsdir_alpha.IsEnabled = false;
+            button_load_nonvr_alpha.IsEnabled = false;
+            button_load_vr_alpha.IsEnabled = false;
+            buttonCreate_Shortcut_Alpha.IsEnabled = false;
+            Properties.Settings.Default.sPathAlpha = textBox_dcsdir_alpha.Text;
+            Properties.Settings.Default.bManualPathAlpha = false;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Button_dcsdir_beta_remove_Click(object sender, RoutedEventArgs e)
+        {
+            textBox_dcsdir_beta.Text = "Not found.";
+            radioButton_dcsdir_beta.IsEnabled = false;
+            button_load_nonvr_beta.IsEnabled = false;
+            button_load_vr_beta.IsEnabled = false;
+            buttonCreate_Shortcut_Beta.IsEnabled = false;
+            Properties.Settings.Default.sPathBeta = textBox_dcsdir_beta.Text;
+            Properties.Settings.Default.bManualPathBeta = false;
+            Properties.Settings.Default.Save();
+        }
+
+
+
         /// 
         /// Path selection function - returns string
         /// 
@@ -697,8 +759,29 @@ namespace DCS_ConfigMgmt
             if(branch == "current")
             {
                 System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                Process.Start(@"C:\windows\notepad.exe");
+            }
+            else if(branch == "alpha")
+            {
+                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                Process.Start(@"C:\windows\notepad.exe");
+            }
+            else if (branch == "beta")
+            {
+                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                Process.Start(@"C:\windows\notepad.exe");
             }
         }
+
+        //
+        // Hyperlink opener
+        //
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+        }
+
 
         //
         // System message

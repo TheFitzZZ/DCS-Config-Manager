@@ -12,7 +12,10 @@
             <TabItem Header="About">
                 <Grid Background="#FFE5E5E5">
                     <Image x:Name="image" HorizontalAlignment="Left" Height="169" Margin="10,10,0,0" VerticalAlignment="Top" Width="162" Source="Resources/j9241.png" Stretch="Fill"/>
-                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="159" Width="311" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version 0.1"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Post issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
+                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="137" Width="311" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version 0.1"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Post issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
+                    <TextBlock Margin="189,162,225.429,27.286">          
+                        <Hyperlink NavigateUri="https://github.com/TheFitzZZ/DCS-Config-Manager" RequestNavigate="Hyperlink_RequestNavigate">Visit GitHub project</Hyperlink>
+                    </TextBlock>
                 </Grid>
             </TabItem>
             <TabItem Header="Link Controls">
@@ -26,7 +29,7 @@
                     <Image x:Name="image1" HorizontalAlignment="Left" Height="88" Margin="10,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Current.png"/>
                     <Image x:Name="image1_Copy" HorizontalAlignment="Left" Height="88" Margin="103,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Alpha.png"/>
                     <Image x:Name="image1_Copy1" HorizontalAlignment="Left" Height="88" Margin="196,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Beta.png"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="187" Margin="336,10,0,0" TextWrapping="Wrap" Text="Linking your controls!&#xD;&#xA;&#xD;&#xA;With this option you can &quot;link&quot; your other DCS instances to your chosen &quot;primary&quot; one, making them share one set of input configuration.&#xD;&#xA;The other directories get renamed upon being linked and restored to their original state when you unlink them. &#xD;&#xA;" VerticalAlignment="Top" Width="174"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="187" Margin="336,10,0,0" TextWrapping="Wrap" Text="Linking your controls!&#xA;&#xA;With this option you can &quot;link&quot; your other DCS instances to your chosen &quot;primary&quot; one, making them share one set of input configurations.&#xA;The other directories get renamed upon being linked and restored to their original state when you unlink them. &#xA;" VerticalAlignment="Top" Width="174"/>
                 </Grid>
             </TabItem>
             <TabItem Header="VR Config">
@@ -48,15 +51,19 @@
             </TabItem>
             <TabItem Header="Settings">
                 <Grid Background="#FFE5E5E5">
-                    <Button x:Name="button_dcsdir_current" Content="Pick dir" HorizontalAlignment="Left" Margin="76,15,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_current_Click"/>
-                    <Button x:Name="button_dcsdir_alpha" Content="Pick dir" HorizontalAlignment="Left" Margin="76,76,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_alpha_Click"/>
-                    <Button x:Name="button_dcsdir_beta" Content="Pick dir" HorizontalAlignment="Left" Margin="76,137,0,0" VerticalAlignment="Top" Width="75" Click="Button_dcsdir_beta_Click"/>
-                    <TextBox x:Name="textBox_dcsdir_current" HorizontalAlignment="Left" Height="23" Margin="76,40,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
-                    <TextBox x:Name="textBox_dcsdir_alpha" HorizontalAlignment="Left" Height="23" Margin="76,101,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
-                    <TextBox x:Name="textBox_dcsdir_beta" HorizontalAlignment="Left" Height="23" Margin="76,162,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="248"/>
+                    <Button x:Name="button_dcsdir_current" Content="Change directory" HorizontalAlignment="Left" Margin="76,15,0,0" VerticalAlignment="Top" Width="123" Click="Button_dcsdir_current_Click"/>
+                    <Button x:Name="button_dcsdir_alpha" Content="Change directory" HorizontalAlignment="Left" Margin="76,76,0,0" VerticalAlignment="Top" Width="123" Click="Button_dcsdir_alpha_Click"/>
+                    <Button x:Name="button_dcsdir_beta" Content="Change directory" HorizontalAlignment="Left" Margin="76,137,0,0" VerticalAlignment="Top" Width="123" Click="Button_dcsdir_beta_Click"/>
+                    <TextBox x:Name="textBox_dcsdir_current" HorizontalAlignment="Left" Height="23" Margin="76,40,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="255" IsEnabled="False"/>
+                    <TextBox x:Name="textBox_dcsdir_alpha" HorizontalAlignment="Left" Height="23" Margin="76,101,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="255" IsEnabled="False"/>
+                    <TextBox x:Name="textBox_dcsdir_beta" HorizontalAlignment="Left" Height="23" Margin="76,162,0,0" TextWrapping="Wrap" Text="None selected" VerticalAlignment="Top" Width="255" IsEnabled="False"/>
                     <Image x:Name="image3" HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Current.png"/>
                     <Image x:Name="image3_Copy" HorizontalAlignment="Left" Height="61" Margin="10,71,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Alpha.png"/>
                     <Image x:Name="image3_Copy1" HorizontalAlignment="Left" Height="61" Margin="10,132,0,-4" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Beta.png"/>
+                    <TextBox x:Name="textBox_Settings_Info" HorizontalAlignment="Left" Height="187" Margin="336,10,0,0" TextWrapping="Wrap" Text="Pick your directories!&#xD;&#xA;&#xD;&#xA;I tried to detect your DCS config directories and most of you should be fine. &#xD;&#xA;&#xD;&#xA;If not, just click &quot;Change directory&quot; and fix it yourself!&#xA;" VerticalAlignment="Top" Width="174"/>
+                    <Button x:Name="button_dcsdir_current_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="208,15,0,0" VerticalAlignment="Top" Width="123" Click="Button_dcsdir_current_remove_Click"/>
+                    <Button x:Name="button_dcsdir_alpha_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="208,76,0,0" VerticalAlignment="Top" Width="123" Click="Button_dcsdir_alpha_remove_Click"/>
+                    <Button x:Name="button_dcsdir_beta_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="208,137,0,0" VerticalAlignment="Top" Width="123" Click="Button_dcsdir_beta_remove_Click"/>
                 </Grid>
             </TabItem>
 
