@@ -1,22 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+//using System.Windows.Forms;
+//using System.Windows.Controls;
+//using System.Windows.Data;
+//using System.Windows.Documents;
+//using System.Windows.Input;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using MahApps.Metro.Controls;
+using System.Text;
+using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Forms;
 
 namespace DCS_ConfigMgmt
 {
@@ -24,9 +28,41 @@ namespace DCS_ConfigMgmt
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     /// 
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow //Window
     {
+        [ComImport]
+        [Guid("00021401-0000-0000-C000-000000000046")]
+        internal class ShellLink
+        {
+        }
+
+        [ComImport]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [Guid("000214F9-0000-0000-C000-000000000046")]
+        internal interface IShellLink
+        {
+            void GetPath([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile, int cchMaxPath, out IntPtr pfd, int fFlags);
+            void GetIDList(out IntPtr ppidl);
+            void SetIDList(IntPtr pidl);
+            void GetDescription([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszName, int cchMaxName);
+            void SetDescription([MarshalAs(UnmanagedType.LPWStr)] string pszName);
+            void GetWorkingDirectory([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszDir, int cchMaxPath);
+            void SetWorkingDirectory([MarshalAs(UnmanagedType.LPWStr)] string pszDir);
+            void GetArguments([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszArgs, int cchMaxPath);
+            void SetArguments([MarshalAs(UnmanagedType.LPWStr)] string pszArgs);
+            void GetHotkey(out short pwHotkey);
+            void SetHotkey(short wHotkey);
+            void GetShowCmd(out int piShowCmd);
+            void SetShowCmd(int iShowCmd);
+            void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath, int cchIconPath, out int piIcon);
+            void SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string pszIconPath, int iIcon);
+            void SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string pszPathRel, int dwReserved);
+            void Resolve(IntPtr hwnd, int fFlags);
+            void SetPath([MarshalAs(UnmanagedType.LPWStr)] string pszFile);
+        }
+
         [DllImport("kernel32.dll")]
+
         static extern bool CreateSymbolicLink(
         string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
 
@@ -42,19 +78,19 @@ namespace DCS_ConfigMgmt
 
             //// Prefilling all DCS directories
             // Get DCS directories if settings are empty
-            if (Properties.Settings.Default.sPathCurrent == "")
+            if (Properties.Settings.Default.sPathCurrent == "" | Properties.Settings.Default.sPathCurrent == "Not found.")
             {
                 Properties.Settings.Default.sPathCurrent = GetDCSSavePath("current");
                 Properties.Settings.Default.Save();
             }
 
-            if (Properties.Settings.Default.sPathAlpha == "")
+            if (Properties.Settings.Default.sPathAlpha == "" | Properties.Settings.Default.sPathAlpha == "Not found.")
             {
                 Properties.Settings.Default.sPathAlpha = GetDCSSavePath("alpha");
                 Properties.Settings.Default.Save();
             }
 
-            if (Properties.Settings.Default.sPathBeta == "")
+            if (Properties.Settings.Default.sPathBeta == "" | Properties.Settings.Default.sPathBeta == "Not found.")
             {
                 Properties.Settings.Default.sPathBeta = GetDCSSavePath("beta");
                 Properties.Settings.Default.Save();
@@ -763,8 +799,10 @@ namespace DCS_ConfigMgmt
             }
             else if(branch == "alpha")
             {
-                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-                Process.Start(@"C:\windows\notepad.exe");
+                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                //Process.Start(@"C:\windows\notepad.exe");
+
+                
             }
             else if (branch == "beta")
             {
@@ -782,7 +820,6 @@ namespace DCS_ConfigMgmt
             e.Handled = true;
         }
 
-
         //
         // System message
         //
@@ -790,6 +827,47 @@ namespace DCS_ConfigMgmt
         //
         // Create shortcuts
         //
+        private void AppShortcutToDesktop(string linkName)
+        {
+            string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
+            IShellLink link = (IShellLink)new ShellLink();
+
+            // setup shortcut information
+            link.SetDescription("My Description");
+            link.SetPath(@"C:\Users\chrsch\Source\Repos\DCS-Config-Manager\DCS-ConfigMgmt\bin\Debug\DCS-ConfigMgmt.exe");
+            link.SetArguments("alpha");
+            link.SetIconLocation(@"C:\Users\chrsch\Source\Repos\DCS-Config-Manager\DCS-ConfigMgmt\bin\Debug\Resources\DCS_Icon_Alpha.ico",0);
+
+            // save it
+            IPersistFile file = (IPersistFile)link;
+            file.Save(Path.Combine(deskDir, "MyLink.lnk"), false);
+
+            //using (StreamWriter writer = new StreamWriter(deskDir + "\\" + linkName + ".url"))
+            //{
+            //    string app = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //    writer.WriteLine("[InternetShortcut]");
+            //    writer.WriteLine("URL=file:///" + app);
+            //    writer.WriteLine("IconIndex=0");
+            //    string icon = app.Replace('\\', '/');
+            //    writer.WriteLine("IconFile=" + icon);
+            //    writer.Flush();
+            //}
+        }
+
+        private void ButtonCreate_Shortcut_Current_Click(object sender, RoutedEventArgs e)
+        {
+            AppShortcutToDesktop("current");
+        }
+
+        private void ButtonCreate_Shortcut_Alpha_Click(object sender, RoutedEventArgs e)
+        {
+            AppShortcutToDesktop("alpha");
+        }
+
+        private void ButtonCreate_Shortcut_Beta_Click(object sender, RoutedEventArgs e)
+        {
+            AppShortcutToDesktop("beta");
+        }
     }
 }
