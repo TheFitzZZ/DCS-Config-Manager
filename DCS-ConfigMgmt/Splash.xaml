@@ -1,0 +1,21 @@
+﻿<Window x:Class="DCS_ConfigMgmt.Splash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DCS_ConfigMgmt"
+        mc:Ignorable="d"
+         Title="SplashWindow" Height="100" Width="547.714"
+        
+        
+          
+                      ResizeMode="NoResize" WindowStyle="None"  
+                      WindowStartupLocation="CenterScreen" 
+                      Background="#FF2B2B2B" 
+                      BorderThickness="0" 
+                      BorderBrush="#FF96ACC0">
+    <Grid>
+        <Image x:Name="image_SplashWindow" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="Resources/DCS_Icon_Current.png"/>
+        <Label x:Name="label_SplashWindow" Content="Starting DCS Current VR" HorizontalAlignment="Left" Margin="104,17,0,0" VerticalAlignment="Top" Height="69" Width="433" FontWeight="Bold" FontSize="36" Foreground="White"/>
+    </Grid>
+</Window>

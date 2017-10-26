@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace DCS_ConfigMgmt
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for Splash.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Splash : Window
     {
-        public Window1()
+        public Splash()
         {
             InitializeComponent();
         }

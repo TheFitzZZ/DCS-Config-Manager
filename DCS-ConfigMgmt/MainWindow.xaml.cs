@@ -63,8 +63,7 @@ namespace DCS_ConfigMgmt
 
         [DllImport("kernel32.dll")]
 
-        static extern bool CreateSymbolicLink(
-        string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
+        static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
 
         enum SymbolicLink
         {
@@ -799,10 +798,8 @@ namespace DCS_ConfigMgmt
             }
             else if(branch == "alpha")
             {
-                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-                //Process.Start(@"C:\windows\notepad.exe");
-
-                
+                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                Process.Start(@"C:\windows\notepad.exe");
             }
             else if (branch == "beta")
             {
@@ -869,5 +866,11 @@ namespace DCS_ConfigMgmt
         {
             AppShortcutToDesktop("beta");
         }
+        //protected override void OnClosed(EventArgs e)
+        //{
+        //    base.OnClosed(e);
+
+        //    App.Current.Shutdown();
+        //}
     }
 }
