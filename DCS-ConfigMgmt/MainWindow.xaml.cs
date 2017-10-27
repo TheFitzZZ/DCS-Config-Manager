@@ -807,22 +807,23 @@ namespace DCS_ConfigMgmt
 
         private void DCSStarter(string branch)
         {
-            //Get path to game files
-            if(branch == "current")
-            {
-                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-                Process.Start(@"C:\windows\notepad.exe");
-            }
-            else if(branch == "alpha")
-            {
-                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-                Process.Start(@"C:\windows\notepad.exe");
-            }
-            else if (branch == "beta")
-            {
-                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-                Process.Start(@"C:\windows\notepad.exe");
-            }
+            Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
+
+            ////Get path to game files
+            //if(branch == "current")
+            //{
+            //    Process.Start(GetDCSRegistryPath(branch)+"\\bin\\dcs_updater.exe");
+            //}
+            //else if(branch == "alpha")
+            //{
+            //    //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+            //    Process.Start(@"C:\windows\notepad.exe");
+            //}
+            //else if (branch == "beta")
+            //{
+            //    //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+            //    Process.Start(@"C:\windows\notepad.exe");
+            //}
         }
 
         //
@@ -853,7 +854,7 @@ namespace DCS_ConfigMgmt
             string linkName = "DCS " + branch + ".lnk";
             string linkNameVR = "DCS " + branch + " VR.lnk";
 
-            //System.Windows.Forms.MessageBox.Show(iconPath);
+            
 
             IShellLink link = (IShellLink)new ShellLink();
 
