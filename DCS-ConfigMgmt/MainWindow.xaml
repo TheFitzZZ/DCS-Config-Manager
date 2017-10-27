@@ -27,7 +27,7 @@
             <TabItem Header="About">
                 <Grid Background="#FF3F3F46" Margin="0,0,0.286,-0.286">
                     <Image x:Name="image924thLogo" HorizontalAlignment="Left" Height="169" Margin="10,10,0,0" VerticalAlignment="Top" Width="162" Source="Resources/j9241.png" Stretch="Fill"/>
-                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="137" Width="311" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version 0.1"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Post issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
+                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="137" Width="311" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version 0.1"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Please p"/><Run Text="ost issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
                     <TextBlock Margin="189,162,225.429,27.286" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://github.com/TheFitzZZ/DCS-Config-Manager" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">Visit GitHub project</Hyperlink>
                     </TextBlock>
@@ -47,7 +47,7 @@
                     <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="195" Margin="336,10,0,0" TextWrapping="Wrap" Text="Linking your controls!&#xA;&#xA;With this option you can &quot;link&quot; your other DCS instances to your chosen &quot;primary&quot; one, making them share one set of input configurations.&#xA;The other directories get renamed upon being linked and restored to their original state when you unlink them. &#xA;" VerticalAlignment="Top" Width="187"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="VR Config">
+            <TabItem Header="VR Config" GotFocus="TabItem_GotFocus">
                 <Grid Background="#FF3F3F46">
                     <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_current_Click"/>
                     <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_current_Click"/>

@@ -150,21 +150,8 @@ namespace DCS_ConfigMgmt
                 button_linkcontrols.IsEnabled = false;
             }
 
-            //Check for first run
-            if (!Properties.Settings.Default.bSawConfigWarning)
-            {
-                System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
-                    "As this is your first time using this tool, please check the automatically detected directories and determine if your current config has VR enabled or not.\n\n" +
-                    "Click 'Load VR Settings' if VR is currently -disabled-.\n" +
-                    "Click 'Load nonVR Settings' if VR is currently -enabled-.\n\nThis will create a copy of the current configuration. Then you may load the other one to do your VR/nonVR settings. After that, you can just switch between them. " +
-                    "Please do this for every version installed. If you don't use VR, just ignore it.", "First use information");
-
-                Properties.Settings.Default.bSawConfigWarning = true;
-                Properties.Settings.Default.Save();
-            }
-
             //Check configs for VR/nonVR and disable buttons accordingly
-            if (!Properties.Settings.Default.bFirstUseVRCurrent)
+            if (!Properties.Settings.Default.bFirstUseVRCurrent & Properties.Settings.Default.sPathCurrent != "Not found.")
             {
                 if (Properties.Settings.Default.bVRConfActiveCurrent)
                 {
@@ -177,7 +164,7 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_current.IsEnabled = false;
                 }
             }
-            if (!Properties.Settings.Default.bFirstUseVRBeta)
+            if (!Properties.Settings.Default.bFirstUseVRBeta & Properties.Settings.Default.sPathBeta != "Not found.")
             {
                 if (Properties.Settings.Default.bVRConfActiveBeta)
                 {
@@ -190,7 +177,7 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_beta.IsEnabled = false;
                 }
             }
-            if (!Properties.Settings.Default.bFirstUseVRAlpha)
+            if (!Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
             {
                 if (Properties.Settings.Default.bVRConfActiveAlpha)
                 {
@@ -274,6 +261,7 @@ namespace DCS_ConfigMgmt
             buttonCreate_Shortcut_Current.IsEnabled = false;
             Properties.Settings.Default.sPathCurrent = textBox_dcsdir_current.Text;
             Properties.Settings.Default.bManualPathCurrent = false;
+            Properties.Settings.Default.bVRConfActiveCurrent = false;
             Properties.Settings.Default.Save();
         }
 
@@ -286,6 +274,7 @@ namespace DCS_ConfigMgmt
             buttonCreate_Shortcut_Alpha.IsEnabled = false;
             Properties.Settings.Default.sPathAlpha = textBox_dcsdir_alpha.Text;
             Properties.Settings.Default.bManualPathAlpha = false;
+            Properties.Settings.Default.bVRConfActiveAlpha = false;
             Properties.Settings.Default.Save();
         }
 
@@ -298,6 +287,7 @@ namespace DCS_ConfigMgmt
             buttonCreate_Shortcut_Beta.IsEnabled = false;
             Properties.Settings.Default.sPathBeta = textBox_dcsdir_beta.Text;
             Properties.Settings.Default.bManualPathBeta = false;
+            Properties.Settings.Default.bVRConfActiveBeta = false;
             Properties.Settings.Default.Save();
         }
 
@@ -369,6 +359,9 @@ namespace DCS_ConfigMgmt
                 sDCSpath = sUserProfile + "\\Saved Games\\DCS.openbeta";
             }
             //System.Windows.Forms.MessageBox.Show(sDCSpath);
+
+            if(!Directory.Exists(sDCSpath)) { sDCSpath = "Not found."; }
+
             return sDCSpath;
         }
 
@@ -428,10 +421,34 @@ namespace DCS_ConfigMgmt
             radioButton_dcsdir_alpha.IsChecked = false;
             radioButton_dcsdir_beta.IsChecked = false;
 
-            radioButton_dcsdir_current.IsEnabled = true;
-            radioButton_dcsdir_alpha.IsEnabled = true;
-            radioButton_dcsdir_beta.IsEnabled = true;
+            if (GetDCSRegistryPath("current") != null | Properties.Settings.Default.bManualPathCurrent)
+            {
+                radioButton_dcsdir_current.IsEnabled = true;
+            }
+            else
+            {
+                radioButton_dcsdir_current.IsEnabled = false;                
+            }
 
+            if (GetDCSRegistryPath("alpha") != null | Properties.Settings.Default.bManualPathAlpha)
+            {
+                radioButton_dcsdir_alpha.IsEnabled = true;
+            }
+            else
+            {
+                radioButton_dcsdir_alpha.IsEnabled = false;
+            }
+
+            if (GetDCSRegistryPath("beta") != null | Properties.Settings.Default.bManualPathBeta)
+            {
+                radioButton_dcsdir_beta.IsEnabled = true;
+            }
+            else
+            {
+                radioButton_dcsdir_beta.IsEnabled = false;
+            }
+            
+            
             button_unlinkcontrols.IsEnabled = false;
 
             LinkToBranch(sMasterBranch, true);
@@ -793,17 +810,17 @@ namespace DCS_ConfigMgmt
             //Get path to game files
             if(branch == "current")
             {
-                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
                 Process.Start(@"C:\windows\notepad.exe");
             }
             else if(branch == "alpha")
             {
-                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
                 Process.Start(@"C:\windows\notepad.exe");
             }
             else if (branch == "beta")
             {
-                System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
+                //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
                 Process.Start(@"C:\windows\notepad.exe");
             }
         }
@@ -818,59 +835,75 @@ namespace DCS_ConfigMgmt
         }
 
         //
-        // System message
-        //
-
-        //
         // Create shortcuts
         //
-        private void AppShortcutToDesktop(string linkName)
+        private void AppShortcutToDesktop(string branch)
         {
+            branch = branch.ToLower();
+
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string appDir = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+            string linkDesc = "Changes your DCS " + branch + " configuration to non VR and starts it";
+            string linkDescVR = "Changes your DCS " + branch + " configuration to VR and starts it";
+
+            string iconPath = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + ".ico";
+            string iconPathVR = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + "_VR.ico";
+
+            string linkName = "DCS " + branch + ".lnk";
+            string linkNameVR = "DCS " + branch + " VR.lnk";
+
+            //System.Windows.Forms.MessageBox.Show(iconPath);
 
             IShellLink link = (IShellLink)new ShellLink();
 
-            // setup shortcut information
-            link.SetDescription("My Description");
-            link.SetPath(@"C:\Users\chrsch\Source\Repos\DCS-Config-Manager\DCS-ConfigMgmt\bin\Debug\DCS-ConfigMgmt.exe");
-            link.SetArguments("alpha");
-            link.SetIconLocation(@"C:\Users\chrsch\Source\Repos\DCS-Config-Manager\DCS-ConfigMgmt\bin\Debug\Resources\DCS_Icon_Alpha.ico",0);
+            // setup shortcut information nonvr
+            link.SetDescription(linkDesc);
+            link.SetPath(appDir);
+            link.SetArguments(branch);
+            link.SetIconLocation(iconPath, 0);
 
             // save it
             IPersistFile file = (IPersistFile)link;
-            file.Save(Path.Combine(deskDir, "MyLink.lnk"), false);
+            file.Save(Path.Combine(deskDir, linkName), false);
 
-            //using (StreamWriter writer = new StreamWriter(deskDir + "\\" + linkName + ".url"))
-            //{
-            //    string app = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //    writer.WriteLine("[InternetShortcut]");
-            //    writer.WriteLine("URL=file:///" + app);
-            //    writer.WriteLine("IconIndex=0");
-            //    string icon = app.Replace('\\', '/');
-            //    writer.WriteLine("IconFile=" + icon);
-            //    writer.Flush();
-            //}
+            // setup shortcut information vr
+            link.SetDescription(linkDescVR);
+            link.SetPath(appDir);
+            link.SetArguments((branch + "vr"));
+            link.SetIconLocation(iconPathVR, 0);
+
+            // save it
+            IPersistFile fileVR = (IPersistFile)link;
+            fileVR.Save(Path.Combine(deskDir, linkNameVR), false);
         }
-
         private void ButtonCreate_Shortcut_Current_Click(object sender, RoutedEventArgs e)
         {
             AppShortcutToDesktop("current");
         }
-
         private void ButtonCreate_Shortcut_Alpha_Click(object sender, RoutedEventArgs e)
         {
             AppShortcutToDesktop("alpha");
         }
-
         private void ButtonCreate_Shortcut_Beta_Click(object sender, RoutedEventArgs e)
         {
             AppShortcutToDesktop("beta");
         }
-        //protected override void OnClosed(EventArgs e)
-        //{
-        //    base.OnClosed(e);
 
-        //    App.Current.Shutdown();
-        //}
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //Check for first run
+            if (!Properties.Settings.Default.bSawConfigWarning)
+            {
+                System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
+                    "As this is your first time using this tool, please determine if your current DCS config has VR enabled or not.\n\n" +
+                    "Click 'Load VR Settings' if VR is currently -DISABLED-.\n" +
+                    "Click 'Load nonVR Settings' if VR is currently -ENABLED-.\n\nThis will create a copy of the current configuration. " +
+                    "Please do this for every version installed. If you don't use VR, just ignore it.", "WATCH EKRAN");
+
+                Properties.Settings.Default.bSawConfigWarning = true;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }
