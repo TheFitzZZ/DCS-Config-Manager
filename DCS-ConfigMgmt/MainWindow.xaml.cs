@@ -76,7 +76,7 @@ namespace DCS_ConfigMgmt
         {
             InitializeComponent();
 
-            if(sStartOption != "")
+            if(sStartOption == "")
             {
                 //Get globalist agenda (aka load global config)
                 CopyConfig("load");
@@ -958,11 +958,11 @@ namespace DCS_ConfigMgmt
             {
                 if(action =="save")
                 {
-                    File.Copy(currentConfig.FilePath, globalConfig);
+                    File.Copy(currentConfig.FilePath, globalConfig, true);
                 }
                 else
                 {
-                    File.Copy(globalConfig, currentConfig.FilePath);
+                    File.Copy(globalConfig, currentConfig.FilePath, true);
                 }
                 
             }
