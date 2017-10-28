@@ -848,9 +848,30 @@ namespace DCS_ConfigMgmt
             string linkDesc = "Changes your DCS " + branch + " configuration to non VR and starts it";
             string linkDescVR = "Changes your DCS " + branch + " configuration to VR and starts it";
 
-            string iconPath = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + ".ico";
-            string iconPathVR = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + "_VR.ico";
+            //string iconPath = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + ".ico";
+            //string iconPathVR = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + "_VR.ico";
+            string iconPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
+            Int16 iconIndex = 0;
+            Int16 iconIndexVR = 0;
+
+            if (branch == "current")
+            {
+                iconIndex = 6;
+                iconIndexVR = 7;
+            }
+            else if(branch == "alpha")
+            {
+                iconIndex = 2;
+                iconIndexVR = 3;
+            }
+            else if (branch == "beta")
+            {
+                iconIndex = 4;
+                iconIndexVR = 5;
+            }
+
+            
             string linkName = "DCS " + branch + ".lnk";
             string linkNameVR = "DCS " + branch + " VR.lnk";
 
@@ -862,7 +883,7 @@ namespace DCS_ConfigMgmt
             link.SetDescription(linkDesc);
             link.SetPath(appDir);
             link.SetArguments(branch);
-            link.SetIconLocation(iconPath, 0);
+            link.SetIconLocation(iconPath, iconIndex);
 
             // save it
             IPersistFile file = (IPersistFile)link;
@@ -872,7 +893,7 @@ namespace DCS_ConfigMgmt
             link.SetDescription(linkDescVR);
             link.SetPath(appDir);
             link.SetArguments((branch + "vr"));
-            link.SetIconLocation(iconPathVR, 0);
+            link.SetIconLocation(iconPath, iconIndexVR);
 
             // save it
             IPersistFile fileVR = (IPersistFile)link;
