@@ -91,9 +91,11 @@ namespace DCS_ConfigMgmt
             try
             {
                 //Now Create all of the directories
-                foreach (string dirPath in Directory.GetDirectories(appDir, "*",
-                    SearchOption.AllDirectories))
-                    Directory.CreateDirectory(dirPath.Replace(appDir, deskDir));
+                //foreach (string dirPath in Directory.GetDirectories(appDir, "*",
+                //    SearchOption.AllDirectories))
+                    //Directory.CreateDirectory(dirPath.Replace(appDir, deskDir));
+
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr");
 
                 //Copy all the files & Replaces any files with the same name
                 foreach (string newPath in Directory.GetFiles(appDir, "*.*",
