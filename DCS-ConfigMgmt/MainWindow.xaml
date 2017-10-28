@@ -18,7 +18,7 @@
                        ShowMinButton="False"
                        ShowMaxRestoreButton="False"
                        
-                       ShowIconOnTitleBar="True" Background="#FF252525"
+                       ShowIconOnTitleBar="True" Background="#FF252525" Closing="MetroWindow_Closing"
         >
 
     <Grid>

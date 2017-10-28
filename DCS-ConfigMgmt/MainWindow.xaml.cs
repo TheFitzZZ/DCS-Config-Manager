@@ -21,6 +21,7 @@ using MahApps.Metro.Controls;
 using System.Text;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace DCS_ConfigMgmt
 {
@@ -74,6 +75,15 @@ namespace DCS_ConfigMgmt
         public MainWindow(string sStartOption)
         {
             InitializeComponent();
+
+            if(sStartOption != "")
+            {
+                //Get globalist agenda (aka load global config)
+                CopyConfig("load");
+
+                //Reload configuration
+                Properties.Settings.Default.Reload();
+            }
 
             //// Prefilling all DCS directories
             // Get DCS directories if settings are empty
@@ -298,8 +308,10 @@ namespace DCS_ConfigMgmt
         /// 
         private string DirectoryPicker(string branch)
         {
-            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
-            dlg.Description = "Please select your DCS folder (" + branch + ")";
+            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = "Please select your DCS folder (" + branch + ")"
+            };
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 //System.Windows.Forms.MessageBox.Show(dlg.SelectedPath);
@@ -843,14 +855,14 @@ namespace DCS_ConfigMgmt
             branch = branch.ToLower();
 
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string appDir = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string appDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.exe";
 
             string linkDesc = "Changes your DCS " + branch + " configuration to non VR and starts it";
             string linkDescVR = "Changes your DCS " + branch + " configuration to VR and starts it";
 
             //string iconPath = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + ".ico";
             //string iconPathVR = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + "_VR.ico";
-            string iconPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string iconPath = appDir;
 
             Int16 iconIndex = 0;
             Int16 iconIndexVR = 0;
@@ -925,6 +937,38 @@ namespace DCS_ConfigMgmt
 
                 Properties.Settings.Default.bSawConfigWarning = true;
                 Properties.Settings.Default.Save();
+            }
+        }
+
+        //
+        // Stuff to do when the main window closes
+        //
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //Copy the settings to a known location for later pickup
+            CopyConfig("save");
+        }
+
+        private void CopyConfig(string action)
+        {
+            var currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            string globalConfig = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\user.config";
+
+            try
+            {
+                if(action =="save")
+                {
+                    File.Copy(currentConfig.FilePath, globalConfig);
+                }
+                else
+                {
+                    File.Copy(globalConfig, currentConfig.FilePath);
+                }
+                
+            }
+            catch (Exception reeeeeeeeeeeee)
+            {
+                System.Windows.Forms.MessageBox.Show(reeeeeeeeeeeee.Message + "\n\nWatch EKRAN!\n\nCouldn't copy program settings from/to AppData (Action: " + action + "). Please report on my GitHub page, thanks!");
             }
         }
     }
