@@ -76,7 +76,7 @@ namespace DCS_ConfigMgmt
         {
             InitializeComponent();
 
-            if(sStartOption == "")
+            if(sStartOption != "")
             {
                 //Get globalist agenda (aka load global config)
                 CopyConfig("load");
