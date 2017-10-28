@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +32,7 @@ namespace DCS_ConfigMgmt
 
             if (sStartOption == "")
             {
+                CopyApp();
                 MainWindow mainWindow = new MainWindow(sStartOption);
                 mainWindow.Show();
                 //splash.Close();
@@ -74,6 +76,33 @@ namespace DCS_ConfigMgmt
                 MainWindow mainWindow = new MainWindow(sStartOption);
                 System.Threading.Thread.Sleep(4000);
                 splash.Close();
+            }
+        }
+
+
+        //
+        // Dirty workaround to overcome issues introduced by ClickOnce updating - copy the currently used assembly into a well known directory so that shortcuts always point to the same target
+        //
+        void CopyApp()
+        {
+            string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\";
+            string appDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            try
+            {
+                //Now Create all of the directories
+                foreach (string dirPath in Directory.GetDirectories(appDir, "*",
+                    SearchOption.AllDirectories))
+                    Directory.CreateDirectory(dirPath.Replace(appDir, deskDir));
+
+                //Copy all the files & Replaces any files with the same name
+                foreach (string newPath in Directory.GetFiles(appDir, "*.*",
+                    SearchOption.AllDirectories))
+                    File.Copy(newPath, newPath.Replace(appDir, deskDir), true);
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message + "\nWatch EKRAN!\n Couldn't copy program data to AppData. Please report on my GitHub page, thanks!");
             }
         }
     }
