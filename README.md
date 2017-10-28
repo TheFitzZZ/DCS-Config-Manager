@@ -14,8 +14,6 @@ Changelog:
 - Added line tab seperator
 - Disabled text wrap for directory textbox and lowered font size for more visibility
 - Anti-Aliasing enabled for images
-- Icons for shortcuts fixed
-
 
 
 Todo: 
@@ -23,6 +21,7 @@ Todo:
 Easy: 
 
 Medium:
+- Icons for shortcuts
 - Textbox for VR is shit
 
 Hard:
