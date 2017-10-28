@@ -174,6 +174,11 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_current.IsEnabled = false;
                 }
             }
+            else if(Properties.Settings.Default.bFirstUseVRCurrent & Properties.Settings.Default.sPathCurrent != "Not found.")
+            {
+                CheckOptionsLua("current");
+            }
+
             if (!Properties.Settings.Default.bFirstUseVRBeta & Properties.Settings.Default.sPathBeta != "Not found.")
             {
                 if (Properties.Settings.Default.bVRConfActiveBeta)
@@ -186,6 +191,10 @@ namespace DCS_ConfigMgmt
                     button_load_vr_beta.IsEnabled = true;
                     button_load_nonvr_beta.IsEnabled = false;
                 }
+            }
+            else if (!Properties.Settings.Default.bFirstUseVRBeta & Properties.Settings.Default.sPathBeta != "Not found.")
+            {
+                CheckOptionsLua("alpha");
             }
             if (!Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
             {
@@ -200,11 +209,15 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_alpha.IsEnabled = false;
                 }
             }
+            else if (!Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
+            {
+                CheckOptionsLua("beta");
+            }   
 
-            //
-            // Automated startup
-            //
-            if (sStartOption != "")
+                //
+                // Automated startup
+                //
+                if (sStartOption != "")
             {
                 //Debug
                 //System.Windows.Forms.MessageBox.Show(sStartOption);
@@ -215,6 +228,10 @@ namespace DCS_ConfigMgmt
                 //We're done, exit.
                 System.Windows.Application.Current.Shutdown();
             }
+
+
+            //Debug calls
+            //CheckOptionsLua("current");
         }
 
         #region Paths and SymLinks
@@ -927,17 +944,17 @@ namespace DCS_ConfigMgmt
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
             //Check for first run
-            if (!Properties.Settings.Default.bSawConfigWarning)
-            {
-                System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
-                    "As this is your first time using this tool, please determine if your current DCS config has VR enabled or not.\n\n" +
-                    "Click 'Load VR Settings' if VR is currently -DISABLED-.\n" +
-                    "Click 'Load nonVR Settings' if VR is currently -ENABLED-.\n\nThis will create a copy of the current configuration. " +
-                    "Please do this for every version installed. If you don't use VR, just ignore it.", "WATCH EKRAN");
+            //if (!Properties.Settings.Default.bSawConfigWarning)
+            //{
+            //    System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
+            //        "As this is your first time using this tool, please determine if your current DCS config has VR enabled or not.\n\n" +
+            //        "Click 'Load VR Settings' if VR is currently -DISABLED-.\n" +
+            //        "Click 'Load nonVR Settings' if VR is currently -ENABLED-.\n\nThis will create a copy of the current configuration. " +
+            //        "Please do this for every version installed. If you don't use VR, just ignore it.", "WATCH EKRAN");
 
-                Properties.Settings.Default.bSawConfigWarning = true;
-                Properties.Settings.Default.Save();
-            }
+            //    Properties.Settings.Default.bSawConfigWarning = true;
+            //    Properties.Settings.Default.Save();
+            //}
         }
 
         //
@@ -971,5 +988,100 @@ namespace DCS_ConfigMgmt
                 System.Windows.Forms.MessageBox.Show(reeeeeeeeeeeee.Message + "\n\nWatch EKRAN!\n\nCouldn't copy program settings from/to AppData (Action: " + action + "). Please report on my GitHub page, thanks!");
             }
         }
+
+        //
+        // LUA Interaction
+        //
+        private void CheckOptionsLua(string branch)
+        {
+            //Prepare stuff 
+            object objNull = null;
+            RoutedEventArgs reeNull = null;
+            int iLineToWrite = 0;
+            string sLineToWrite = null;
+
+            //Get directory
+            string sLuaPath = "";
+            if(branch == "current")
+            {
+                sLuaPath = Properties.Settings.Default.sPathCurrent + "\\config\\options.lua";
+            }
+            else if(branch == "alpha")
+            {
+                sLuaPath = Properties.Settings.Default.sPathAlpha + "\\config\\options.lua";
+            }
+            else if (branch == "beta")
+            {
+                sLuaPath = Properties.Settings.Default.sPathBeta + "\\config\\options.lua";
+            }
+
+
+            //Read the content
+            string[] sContent = File.ReadAllLines(sLuaPath);
+            //System.Windows.Forms.MessageBox.Show(sContent[3]);
+            
+            //Search for VR setting in file
+
+            string sVRoff = "		[\"enable\"] = false,";
+            string sVRon = "		[\"enable\"] = true,";
+
+            if(sContent != null)
+            {
+                //This is a shit implementation but I am too lazy to integrate a Lua reader
+                int iLineOn = Array.IndexOf(sContent, sVRon);
+                int iLineOff = Array.IndexOf(sContent, sVRoff);
+
+                if(iLineOff > iLineOn)
+                {
+                    //System.Windows.Forms.MessageBox.Show("Off");
+                    //Simulate button press to initiate the copying of the current config
+                    switch (branch)
+                    {
+                        case "current":
+                            Button_load_vr_current_Click(objNull, reeNull);
+                            break;
+                        case "alpha":
+                            Button_load_vr_current_Click(objNull, reeNull);
+                            break;
+                        case "beta":
+                            Button_load_vr_current_Click(objNull, reeNull);
+                            break;
+                    }
+
+                    //Set variables for writing the new option
+                    iLineToWrite = iLineOff;
+                    sLineToWrite = sVRon;
+                }
+                else
+                {
+                    //System.Windows.Forms.MessageBox.Show("On");
+                    //Simulate button press to initiate the copying of the current config
+                    switch (branch)
+                    {
+                        case "current":
+                            Button_load_nonvr_current_Click(objNull, reeNull);
+                            break;
+                        case "alpha":
+                            Button_load_nonvr_current_Click(objNull, reeNull);
+                            break;
+                        case "beta":
+                            Button_load_nonvr_current_Click(objNull, reeNull);
+                            break;
+                    }
+
+                    //Set variables for writing the new option
+                    iLineToWrite = iLineOn;
+                    sLineToWrite = sVRoff;
+                }
+
+                //Write the file back with the opposite configuration
+                sContent[iLineToWrite] = sLineToWrite;
+                File.WriteAllLines(sLuaPath,sContent);
+
+            }
+            else { System.Windows.Forms.MessageBox.Show("Something went wrong! Your options.lua was not found!"); }
+
+        }
+
     }
 }
