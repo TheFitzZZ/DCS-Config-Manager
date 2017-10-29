@@ -31,13 +31,14 @@
                     <TextBlock Margin="189,162,225.429,27.286" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://github.com/TheFitzZZ/DCS-Config-Manager" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">Visit GitHub project</Hyperlink>
                     </TextBlock>
+                    <Label x:Name="labelResetSettings" Content="Reset settings" HorizontalAlignment="Left" Margin="453,181,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDoubleClick="LabelResetSettings_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Link Controls |" Padding="1,2,6,2" Margin="7,0,-7,0">
                 <Grid Background="#FF3F3F46">
                     <RadioButton x:Name="radioButton_dcsdir_current" Content="" HorizontalAlignment="Left" Margin="44,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_current_Checked"/>
-                    <RadioButton x:Name="radioButton_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="155,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_alpha_Checked"/>
-                    <RadioButton x:Name="radioButton_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="265,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_beta_Checked"/>
+                    <RadioButton x:Name="radioButton_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="156,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_alpha_Checked"/>
+                    <RadioButton x:Name="radioButton_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="266,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_beta_Checked"/>
 
                     <Button x:Name="button_linkcontrols" Content="Link controls" HorizontalAlignment="Left" Margin="44,147,0,0" VerticalAlignment="Top" Width="114" Click="Button_linkcontrols_Click" IsEnabled="False"/>
                     <Button x:Name="button_unlinkcontrols" Content="Unlink controls" HorizontalAlignment="Left" Margin="171,147,0,0" VerticalAlignment="Top" Width="118" Click="Button_unlinkcontrols_Click" IsEnabled="False"/>

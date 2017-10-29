@@ -192,7 +192,7 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_beta.IsEnabled = false;
                 }
             }
-            else if (!Properties.Settings.Default.bFirstUseVRBeta & Properties.Settings.Default.sPathBeta != "Not found.")
+            else if (Properties.Settings.Default.bFirstUseVRBeta & Properties.Settings.Default.sPathBeta != "Not found.")
             {
                 CheckOptionsLua("alpha");
             }
@@ -209,7 +209,7 @@ namespace DCS_ConfigMgmt
                     button_load_nonvr_alpha.IsEnabled = false;
                 }
             }
-            else if (!Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
+            else if (Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
             {
                 CheckOptionsLua("beta");
             }   
@@ -1083,5 +1083,10 @@ namespace DCS_ConfigMgmt
 
         }
 
+        private void LabelResetSettings_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            System.Windows.Forms.MessageBox.Show("Don't know why you touched this - but okay. Wish granted!", "Watch EKRAN");
+        }
     }
 }
