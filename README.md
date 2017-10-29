@@ -10,6 +10,10 @@ Things to note:
 
 Changelog:
 
+30.10.2017 - RC5
+- Added settings reset button ... a little hidden - you don't need that anyway!
+- Added checks so a re-install doesn't hurt anymore (hopefully)
+
 28.10.2017 - RC4
 - Added line tab seperator
 - Disabled text wrap for directory textbox and lowered font size for more visibility
