@@ -90,20 +90,19 @@ namespace DCS_ConfigMgmt
             if (Properties.Settings.Default.sPathCurrent == "" | Properties.Settings.Default.sPathCurrent == "Not found.")
             {
                 Properties.Settings.Default.sPathCurrent = GetDCSSavePath("current");
-                Properties.Settings.Default.Save();
             }
 
             if (Properties.Settings.Default.sPathAlpha == "" | Properties.Settings.Default.sPathAlpha == "Not found.")
             {
                 Properties.Settings.Default.sPathAlpha = GetDCSSavePath("alpha");
-                Properties.Settings.Default.Save();
             }
 
             if (Properties.Settings.Default.sPathBeta == "" | Properties.Settings.Default.sPathBeta == "Not found.")
             {
                 Properties.Settings.Default.sPathBeta = GetDCSSavePath("beta");
-                Properties.Settings.Default.Save();
             }
+            Properties.Settings.Default.Save();
+            CopyConfig("save");
 
             //Write textboxes
             if (GetDCSRegistryPath("current") != null | Properties.Settings.Default.bManualPathCurrent)
@@ -188,6 +187,7 @@ namespace DCS_ConfigMgmt
 
                 Properties.Settings.Default.sMasterBranch = sMasterBranch;
                 Properties.Settings.Default.Save();
+                CopyConfig("save");
 
                 button_unlinkcontrols.IsEnabled = true;
                 button_linkcontrols.IsEnabled = false;
@@ -284,6 +284,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.sPathCurrent = textBox_dcsdir_current.Text;
             Properties.Settings.Default.bManualPathCurrent = true;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
         private void Button_dcsdir_alpha_Click(object sender, RoutedEventArgs e)
         {
@@ -296,6 +297,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.sPathAlpha = textBox_dcsdir_alpha.Text;
             Properties.Settings.Default.bManualPathAlpha = true;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
         private void Button_dcsdir_beta_Click(object sender, RoutedEventArgs e)
         {
@@ -308,6 +310,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.sPathBeta = textBox_dcsdir_beta.Text;
             Properties.Settings.Default.bManualPathBeta = true;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
 
 
@@ -323,6 +326,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.bManualPathCurrent = false;
             Properties.Settings.Default.bVRConfActiveCurrent = false;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
         private void Button_dcsdir_alpha_remove_Click(object sender, RoutedEventArgs e)
         {
@@ -335,6 +339,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.bManualPathAlpha = false;
             Properties.Settings.Default.bVRConfActiveAlpha = false;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
         private void Button_dcsdir_beta_remove_Click(object sender, RoutedEventArgs e)
         {
@@ -347,6 +352,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.bManualPathBeta = false;
             Properties.Settings.Default.bVRConfActiveBeta = false;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
 
         
@@ -449,7 +455,6 @@ namespace DCS_ConfigMgmt
             else if (radioButton_dcsdir_beta.IsChecked.Value) { sMasterBranch = "Beta"; }
 
             Properties.Settings.Default.sMasterBranch = sMasterBranch;
-            Properties.Settings.Default.Save();
             LinkToBranch(sMasterBranch, false);
 
             button_unlinkcontrols.IsEnabled = true;
@@ -463,6 +468,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.sPathAlpha = textBox_dcsdir_alpha.Text;
             Properties.Settings.Default.sPathBeta = textBox_dcsdir_beta.Text;
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
         private void Button_unlinkcontrols_Click(object sender, RoutedEventArgs e)
         {
@@ -473,6 +479,7 @@ namespace DCS_ConfigMgmt
 
             Properties.Settings.Default.sMasterBranch = "";
             Properties.Settings.Default.Save();
+            CopyConfig("save");
 
             radioButton_dcsdir_current.IsChecked = false;
             radioButton_dcsdir_alpha.IsChecked = false;
@@ -777,6 +784,7 @@ namespace DCS_ConfigMgmt
             else { System.Windows.Forms.MessageBox.Show("WTF happened here?! Please tell the coder!", "Watch EKRAN"); }
 
             Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
 
 
