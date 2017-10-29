@@ -159,6 +159,39 @@ namespace DCS_ConfigMgmt
                 button_unlinkcontrols.IsEnabled = true;
                 button_linkcontrols.IsEnabled = false;
             }
+            else
+            {
+                //Should only do stuff when app got reinstalled / reset
+                
+                //Paths to check
+                string sPathCurrent = Properties.Settings.Default.sPathCurrent + "\\config\\input";
+                string sPathAlpha = Properties.Settings.Default.sPathAlpha + "\\config\\input";
+                string sPathBeta = Properties.Settings.Default.sPathBeta + "\\config\\input";
+
+                string sMasterBranch = "";
+
+                if (JunctionPoint.Exists(sPathAlpha) & JunctionPoint.Exists(sPathBeta))
+                {
+                    sMasterBranch = "Current";
+                    radioButton_dcsdir_current.IsChecked = true;
+                }
+                else if (JunctionPoint.Exists(sPathBeta) & JunctionPoint.Exists(sPathCurrent))
+                {
+                    sMasterBranch = "Alpha";
+                    radioButton_dcsdir_alpha.IsChecked = true;
+                }
+                else if (JunctionPoint.Exists(sPathAlpha) & JunctionPoint.Exists(sPathCurrent))
+                {
+                    sMasterBranch = "Beta";
+                    radioButton_dcsdir_beta.IsChecked = true;
+                }
+
+                Properties.Settings.Default.sMasterBranch = sMasterBranch;
+                Properties.Settings.Default.Save();
+
+                button_unlinkcontrols.IsEnabled = true;
+                button_linkcontrols.IsEnabled = false;
+            }
 
             //Check configs for VR/nonVR and disable buttons accordingly
             if (!Properties.Settings.Default.bFirstUseVRCurrent & Properties.Settings.Default.sPathCurrent != "Not found.")
@@ -194,8 +227,9 @@ namespace DCS_ConfigMgmt
             }
             else if (Properties.Settings.Default.bFirstUseVRBeta & Properties.Settings.Default.sPathBeta != "Not found.")
             {
-                CheckOptionsLua("alpha");
+                CheckOptionsLua("beta");
             }
+
             if (!Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
             {
                 if (Properties.Settings.Default.bVRConfActiveAlpha)
@@ -211,7 +245,7 @@ namespace DCS_ConfigMgmt
             }
             else if (Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
             {
-                CheckOptionsLua("beta");
+                CheckOptionsLua("alpha");
             }   
 
                 //
@@ -241,8 +275,8 @@ namespace DCS_ConfigMgmt
         /// 
         private void Button_dcsdir_current_Click(object sender, RoutedEventArgs e)
         {
-            string branch = "current";
-            textBox_dcsdir_current.Text = DirectoryPicker(branch);
+            //string branch = "current";
+            textBox_dcsdir_current.Text = DirectoryPicker("current");
             radioButton_dcsdir_current.IsEnabled = true;
             button_load_nonvr_current.IsEnabled = true;
             button_load_vr_current.IsEnabled = true;
@@ -253,8 +287,8 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_alpha_Click(object sender, RoutedEventArgs e)
         {
-            string branch = "alpha";
-            textBox_dcsdir_alpha.Text = DirectoryPicker(branch);
+            //string branch = "alpha";
+            textBox_dcsdir_alpha.Text = DirectoryPicker("alpha");
             radioButton_dcsdir_alpha.IsEnabled = true;
             button_load_nonvr_alpha.IsEnabled = true;
             button_load_vr_alpha.IsEnabled = true;
@@ -263,11 +297,10 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.bManualPathAlpha = true;
             Properties.Settings.Default.Save();
         }
-
         private void Button_dcsdir_beta_Click(object sender, RoutedEventArgs e)
         {
-            string branch = "beta";
-            textBox_dcsdir_beta.Text = DirectoryPicker(branch);
+            //string branch = "beta";
+            textBox_dcsdir_beta.Text = DirectoryPicker("beta");
             radioButton_dcsdir_beta.IsEnabled = true;
             button_load_nonvr_beta.IsEnabled = true;
             button_load_vr_beta.IsEnabled = true;
@@ -291,7 +324,6 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.bVRConfActiveCurrent = false;
             Properties.Settings.Default.Save();
         }
-
         private void Button_dcsdir_alpha_remove_Click(object sender, RoutedEventArgs e)
         {
             textBox_dcsdir_alpha.Text = "Not found.";
@@ -304,7 +336,6 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.bVRConfActiveAlpha = false;
             Properties.Settings.Default.Save();
         }
-
         private void Button_dcsdir_beta_remove_Click(object sender, RoutedEventArgs e)
         {
             textBox_dcsdir_beta.Text = "Not found.";
@@ -318,8 +349,7 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.Save();
         }
 
-
-
+        
         /// 
         /// Path selection function - returns string
         /// 
@@ -394,6 +424,7 @@ namespace DCS_ConfigMgmt
             return sDCSpath;
         }
 
+        
         /// 
         ///Savegame folder radio button actions
         /// 
@@ -401,12 +432,10 @@ namespace DCS_ConfigMgmt
         {
             button_linkcontrols.IsEnabled = true;
         }
-
         private void RadioButton_dcsdir_alpha_Checked(object sender, RoutedEventArgs e)
         {
             button_linkcontrols.IsEnabled = true;
         }
-
         private void RadioButton_dcsdir_beta_Checked(object sender, RoutedEventArgs e)
         {
             button_linkcontrols.IsEnabled = true;
@@ -435,7 +464,6 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.sPathBeta = textBox_dcsdir_beta.Text;
             Properties.Settings.Default.Save();
         }
-
         private void Button_unlinkcontrols_Click(object sender, RoutedEventArgs e)
         {
             string sMasterBranch = "";
@@ -482,6 +510,8 @@ namespace DCS_ConfigMgmt
 
             LinkToBranch(sMasterBranch, true);
         }
+        
+        
         /// 
         ///Get DCS Savegame folder - returns string
         /// 
@@ -608,15 +638,21 @@ namespace DCS_ConfigMgmt
         ///Create a symlink - returns void
         /// 
         static void CreateSymLink(string sSource, string sTarget)
-        {             
-            JunctionPoint.Create(sTarget, sSource, false /*don't overwrite*/);
+        {
+            if (!JunctionPoint.Exists(sTarget))
+            {
+                JunctionPoint.Create(sTarget, sSource, false /*don't overwrite*/);
+            }
         }
         /// 
         ///Delete a symlink - returns void
         /// 
         static void DeleteSymLink(string sTarget)
         {
-            JunctionPoint.Delete(sTarget);
+            if (JunctionPoint.Exists(sTarget))
+            {
+                JunctionPoint.Delete(sTarget);
+            }
         }
 
         #endregion
@@ -753,11 +789,19 @@ namespace DCS_ConfigMgmt
             {
                 if ((sBranch.Contains("current") & Properties.Settings.Default.bFirstUseVRCurrent & !sSource.Contains("vr")) | (sBranch.Contains("alpha") & Properties.Settings.Default.bFirstUseVRAlpha & !sSource.Contains("vr")) | (sBranch.Contains("beta") & Properties.Settings.Default.bFirstUseVRBeta & !sSource.Contains("vr")))
                 {
-                    File.Copy(sSource, sTarget);
+                    File.Copy(sSource, sTarget, true);
                 }
                 else
                 {
-                    File.Move(sSource, sTarget);
+                    if(File.Exists(sTarget) & !sSource.Contains("vr"))
+                    {
+                        File.Delete(sTarget);
+                        File.Move(sSource, sTarget);
+                    }
+                    else
+                    {
+                        File.Move(sSource, sTarget);
+                    }
                 }                
             }
             catch (Exception e)
@@ -768,7 +812,7 @@ namespace DCS_ConfigMgmt
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(e.Message + "\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
+                    System.Windows.Forms.MessageBox.Show(e.Message + "\n" + sBranch + " || " + sSource + " -> " + sTarget + "\n\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
                 }
                 
             }
@@ -1041,10 +1085,10 @@ namespace DCS_ConfigMgmt
                             Button_load_vr_current_Click(objNull, reeNull);
                             break;
                         case "alpha":
-                            Button_load_vr_current_Click(objNull, reeNull);
+                            Button_load_vr_alpha_Click(objNull, reeNull);
                             break;
                         case "beta":
-                            Button_load_vr_current_Click(objNull, reeNull);
+                            Button_load_vr_beta_Click(objNull, reeNull);
                             break;
                     }
 
@@ -1062,10 +1106,10 @@ namespace DCS_ConfigMgmt
                             Button_load_nonvr_current_Click(objNull, reeNull);
                             break;
                         case "alpha":
-                            Button_load_nonvr_current_Click(objNull, reeNull);
+                            Button_load_nonvr_alpha_Click(objNull, reeNull);
                             break;
                         case "beta":
-                            Button_load_nonvr_current_Click(objNull, reeNull);
+                            Button_load_nonvr_beta_Click(objNull, reeNull);
                             break;
                     }
 
@@ -1087,6 +1131,7 @@ namespace DCS_ConfigMgmt
         {
             Properties.Settings.Default.Reset();
             System.Windows.Forms.MessageBox.Show("Don't know why you touched this - but okay. Wish granted!", "Watch EKRAN");
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
