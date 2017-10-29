@@ -10,7 +10,9 @@ Things to note:
 
 Changelog:
 
-28.10.2017 - RC3
+28.10.2017 - RC4
 - Added line tab seperator
 - Disabled text wrap for directory textbox and lowered font size for more visibility
 - Anti-Aliasing enabled for images
+- Now automatically prepares configs for VR/non-vr
+- Added global configuration / temp application directory for shortcuts
