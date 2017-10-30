@@ -1045,7 +1045,7 @@ namespace DCS_ConfigMgmt
                 else
                 {
                     //Lazy hack lol
-                    if (!Directory.Exists(currentConfig.FilePath))
+                    if (!Directory.Exists(currentConfig.FilePath) & !File.Exists(currentConfig.FilePath))
                     {
                         Directory.CreateDirectory(currentConfig.FilePath);
                         Directory.Delete(currentConfig.FilePath);
