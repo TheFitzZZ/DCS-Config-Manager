@@ -1,6 +1,7 @@
 # DCS Configuration Manager
 
-### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/CurrentVersion.zip) current version 2017 RC5
+### [Download](https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/DCS%20Configuration%20Manger.application) current version 2017 RC5
+(Right-click, save as, start it from there)
 
 
 ### What's this?
