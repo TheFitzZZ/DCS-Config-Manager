@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Bundle Name="DCSCM_Installer" Version="1.0.0.0" Manufacturer="" UpgradeCode="f5b28715-501a-4844-8906-b2484b52d1cc">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+			<!-- TODO: Define the list of chained packages. -->
+			<!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+      <
+		</Chain>
+	</Bundle>
+  <Fragment>
+    <PackageGroup Id="DCSCM Setup">
+      <ExePackage Id="DCSCM Setup"
+                  DisplayName="DCSCM Setup"
+                  DownloadURL="https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/DCS%20Configuration%20Manger.application"
+                  Compressed="no"
+                  Vital="yes"
+                 
+      />            
+    </PackageGroup>
+  </Fragment>
+</Wix>

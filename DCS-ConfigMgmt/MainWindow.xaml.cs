@@ -78,6 +78,9 @@ namespace DCS_ConfigMgmt
 
             if(sStartOption != "")
             {
+                //Save to force creation of file at first run
+                Properties.Settings.Default.Save();
+
                 //Get globalist agenda (aka load global config)
                 CopyConfig("load");
 
@@ -248,10 +251,10 @@ namespace DCS_ConfigMgmt
                 CheckOptionsLua("alpha");
             }   
 
-                //
-                // Automated startup
-                //
-                if (sStartOption != "")
+            //
+            // Automated startup
+            //
+            if (sStartOption != "")
             {
                 //Debug
                 //System.Windows.Forms.MessageBox.Show(sStartOption);
@@ -276,7 +279,11 @@ namespace DCS_ConfigMgmt
         private void Button_dcsdir_current_Click(object sender, RoutedEventArgs e)
         {
             //string branch = "current";
-            textBox_dcsdir_current.Text = DirectoryPicker("current");
+            string sTempDir = DirectoryPicker("current");
+            if(sTempDir != null)
+            {
+                textBox_dcsdir_current.Text = sTempDir;
+            }
             radioButton_dcsdir_current.IsEnabled = true;
             button_load_nonvr_current.IsEnabled = true;
             button_load_vr_current.IsEnabled = true;
@@ -288,8 +295,11 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_alpha_Click(object sender, RoutedEventArgs e)
         {
-            //string branch = "alpha";
-            textBox_dcsdir_alpha.Text = DirectoryPicker("alpha");
+            string sTempDir = DirectoryPicker("alpha");
+            if (sTempDir != null)
+            {
+                textBox_dcsdir_alpha.Text = sTempDir;
+            }
             radioButton_dcsdir_alpha.IsEnabled = true;
             button_load_nonvr_alpha.IsEnabled = true;
             button_load_vr_alpha.IsEnabled = true;
@@ -301,8 +311,11 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_beta_Click(object sender, RoutedEventArgs e)
         {
-            //string branch = "beta";
-            textBox_dcsdir_beta.Text = DirectoryPicker("beta");
+            string sTempDir = DirectoryPicker("beta");
+            if (sTempDir != null)
+            {
+                textBox_dcsdir_beta.Text = sTempDir;
+            }
             radioButton_dcsdir_beta.IsEnabled = true;
             button_load_nonvr_beta.IsEnabled = true;
             button_load_vr_beta.IsEnabled = true;
@@ -1031,6 +1044,12 @@ namespace DCS_ConfigMgmt
                 }
                 else
                 {
+                    //Lazy hack lol
+                    if (!Directory.Exists(currentConfig.FilePath))
+                    {
+                        Directory.CreateDirectory(currentConfig.FilePath);
+                        Directory.Delete(currentConfig.FilePath);
+                    }
                     File.Copy(globalConfig, currentConfig.FilePath, true);
                 }
                 

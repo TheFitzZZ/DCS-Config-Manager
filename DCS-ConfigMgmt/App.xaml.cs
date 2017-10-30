@@ -30,6 +30,10 @@ namespace DCS_ConfigMgmt
                 sStartOption = e.Args[0];
             }
 
+            
+            //Debug
+            //sStartOption = "current";
+
             if (sStartOption == "")
             {
                 CopyApp();
