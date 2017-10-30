@@ -1,14 +1,27 @@
-# DCS-Config-Manager
+# DCS Configuration Manager
+
+### What's this?
+The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files!
 
 
+![DCSCM](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/DCM.gif)
 
-Things to note:
-- Windows 10s SmartScreen will not trust it in the early weeks of release, as I do not have a code signing certificate
+
+### Features:
+- **Single-instance control mappings!**
+Links your control settings of all your DCS instances to just one. No more import/export when you changed your mappings and switch from 1.5 to 2.0! (Or to beta, or any directoion really).
+- **VR configuration management!**
+Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR everytime and switch it back later? Now you can change between VR and non-VR configurations with just one click in the app. Don't wanna start the app? Let it create Shortcuts for you, so you can directly launch the right version with the right configuration!
+
+![DCSCMIcons](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/icons.PNG)
+
+### Things to note:
+- Windows 10s SmartScreen will not trust it in the early weeks of release, as I do not have a code signing certificate (yet)
 - This also applies to cloud connected anti-malware. If they ask if you want to submit it - please do. So I get get "vetted" :-)
 - If you're really paranoid (and I won't blame you for that), grab the source, check the code and compile it yourself. 
 
 
-Changelog:
+### Changelog:
 
 30.10.2017 - RC5
 - Added settings reset button ... a little hidden - you don't need that anyway!
@@ -20,3 +33,7 @@ Changelog:
 - Anti-Aliasing enabled for images
 - Now automatically prepares configs for VR/non-vr
 - Added global configuration / temp application directory for shortcuts
+
+
+
+Please note: this project is neither related nor endorsed by Eagle Dynamics or The Fighter Collection. It's just a fan project for the community. If you as a rights holder have any issues with used assets, please contact me and I'll resolve this asap.
