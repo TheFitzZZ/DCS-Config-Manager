@@ -1,8 +1,6 @@
 # DCS Configuration Manager
 
-### [Download](https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/DCS%20Configuration%20Manger.application) current version 2017 RC5
-**(Right-click, save as, start it from your download directory)**
-
+### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/setup.exe) current version 2017 RC5
 
 ### What's this?
 The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files!
