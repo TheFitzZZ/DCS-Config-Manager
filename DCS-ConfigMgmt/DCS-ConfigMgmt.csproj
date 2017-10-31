@@ -261,6 +261,11 @@
   <PropertyGroup>
     <PostBuildEvent>D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)" "$(ProjectDir)icons"
 D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(TargetPath)" "$(ProjectDir)icons"
-</PostBuildEvent>
+timeout 3
+del "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application"
+timeout 3
+copy "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCS Configuration Manger.application" "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application"
+timeout 3
+iexpress /q /n D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\setup.sed</PostBuildEvent>
   </PropertyGroup>
 </Project>
