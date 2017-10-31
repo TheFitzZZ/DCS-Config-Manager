@@ -27,8 +27,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>37</ApplicationRevision>
-    <ApplicationVersion>1.0.0.37</ApplicationVersion>
+    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -76,6 +76,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
@@ -246,19 +250,32 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\924th.ico" />
-    <Resource Include="Icons\DCS_Icon_Alpha.ico" />
-    <Resource Include="Icons\DCS_Icon_Alpha_VR.ico" />
-    <Resource Include="Icons\DCS_Icon_Beta.ico" />
-    <Resource Include="Icons\DCS_Icon_Beta_VR.ico" />
-    <Resource Include="Icons\DCS_Icon_Current.ico" />
-    <Resource Include="Icons\DCS_Icon_Current_VR.ico" />
+    <Content Include="Icons\DCS_Icon_Alpha.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\DCS_Icon_Alpha_VR.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\DCS_Icon_Beta.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\DCS_Icon_Beta_VR.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\DCS_Icon_Current.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\DCS_Icon_Current_VR.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)" "$(ProjectDir)icons"
-D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(TargetPath)" "$(ProjectDir)icons"
+    <PostBuildEvent>D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(TargetPath)" "$(ProjectDir)icons"
+D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)" "$(ProjectDir)icons"
 
-powershell Compress-Archive -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.exe', 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force</PostBuildEvent>
+powershell Compress-Archive -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.exe', 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
