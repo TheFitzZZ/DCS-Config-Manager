@@ -26,6 +26,10 @@ Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time 
 
 ### Changelog:
 
+31.10.2017 - RC6 (not yet uploaded)
+- Various fixes for crashes and inconsistencies (this is how I describe when I can't remember what I did)
+- Binaries are now signed - such cert, very trust, much awesome
+
 30.10.2017 - RC5
 - Added settings reset button ... a little hidden - you don't need that anyway!
 - Added checks so a re-install doesn't hurt anymore (hopefully)
