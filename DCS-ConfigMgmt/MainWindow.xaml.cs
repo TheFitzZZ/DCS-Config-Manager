@@ -76,17 +76,14 @@ namespace DCS_ConfigMgmt
         {
             InitializeComponent();
 
-            if(sStartOption != "")
-            {
-                //Save to force creation of file at first run
-                Properties.Settings.Default.Save();
-
+            //if(sStartOption != "")
+            //{
                 //Get globalist agenda (aka load global config)
                 CopyConfig("load");
 
                 //Reload configuration
                 Properties.Settings.Default.Reload();
-            }
+            //}
 
             //// Prefilling all DCS directories
             // Get DCS directories if settings are empty
@@ -1045,12 +1042,15 @@ namespace DCS_ConfigMgmt
                 else
                 {
                     //Lazy hack lol
-                    if (!Directory.Exists(currentConfig.FilePath) & !File.Exists(currentConfig.FilePath))
+                    if (File.Exists(globalConfig))
                     {
-                        Directory.CreateDirectory(currentConfig.FilePath);
-                        Directory.Delete(currentConfig.FilePath);
+                        if (!Directory.Exists(currentConfig.FilePath) & !File.Exists(currentConfig.FilePath))
+                        {
+                            Directory.CreateDirectory(currentConfig.FilePath);
+                            Directory.Delete(currentConfig.FilePath);
+                        }
+                        File.Copy(globalConfig, currentConfig.FilePath, true);
                     }
-                    File.Copy(globalConfig, currentConfig.FilePath, true);
                 }
                 
             }
