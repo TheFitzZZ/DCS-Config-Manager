@@ -975,6 +975,7 @@ namespace DCS_ConfigMgmt
             link.SetPath(appDir);
             link.SetArguments(branch);
             link.SetIconLocation(iconPath, iconIndex);
+            //link.SetIconLocation(null, iconIndex);
 
             // save it
             IPersistFile file = (IPersistFile)link;
