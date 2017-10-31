@@ -898,7 +898,11 @@ namespace DCS_ConfigMgmt
 
         private void DCSStarter(string branch)
         {
-            Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
+            try
+            {
+                Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
+            }
+            catch { }
 
             ////Get path to game files
             //if(branch == "current")
