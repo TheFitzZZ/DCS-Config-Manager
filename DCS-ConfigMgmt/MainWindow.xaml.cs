@@ -939,27 +939,41 @@ namespace DCS_ConfigMgmt
             string linkDesc = "Changes your DCS " + branch + " configuration to non VR and starts it";
             string linkDescVR = "Changes your DCS " + branch + " configuration to VR and starts it";
 
+            string iconDirCommon = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\icons\\DCS_Icon_Current.ico";
+            string iconDirCommonVR = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\icons\\DCS_Icon_Current_vr.ico";
+            string iconDirAlpha = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\icons\\DCS_Icon_Alpha.ico";
+            string iconDirAlphaVR = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\icons\\DCS_Icon_Alpha_vr.ico";
+            string iconDirBeta = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\icons\\DCS_Icon_Beta.ico";
+            string iconDirBetaVR = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\icons\\DCS_Icon_Beta_vr.ico";
+
             //string iconPath = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + ".ico";
             //string iconPathVR = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\DCS_Icon_" + branch + "_VR.ico";
-            string iconPath = appDir;
+            string iconPath = null;
+            string iconPathVR = null;
 
             Int16 iconIndex = 0;
             Int16 iconIndexVR = 0;
 
             if (branch == "current")
             {
-                iconIndex = 6;
-                iconIndexVR = 7;
+                //iconIndex = 6;
+                //iconIndexVR = 7;
+                iconPath = iconDirCommon;
+                iconPathVR = iconDirCommonVR;
             }
             else if(branch == "alpha")
             {
-                iconIndex = 2;
-                iconIndexVR = 3;
+                //iconIndex = 2;
+                //iconIndexVR = 3;
+                iconPath = iconDirAlpha;
+                iconPathVR = iconDirAlphaVR;
             }
             else if (branch == "beta")
             {
-                iconIndex = 4;
-                iconIndexVR = 5;
+                //iconIndex = 4;
+                //iconIndexVR = 5;
+                iconPath = iconDirBeta;
+                iconPathVR = iconDirBetaVR;
             }
 
             
@@ -985,7 +999,7 @@ namespace DCS_ConfigMgmt
             link.SetDescription(linkDescVR);
             link.SetPath(appDir);
             link.SetArguments((branch + "vr"));
-            link.SetIconLocation(iconPath, iconIndexVR);
+            link.SetIconLocation(iconPathVR, iconIndexVR);
 
             // save it
             IPersistFile fileVR = (IPersistFile)link;
