@@ -157,7 +157,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="DCS-ConfigMgmt_TemporaryKey.pfx" />
-    <None Include="Installer\setup.SED" />
+    <None Include="Installer\DCSCM-Setup.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -254,18 +254,11 @@
     <Resource Include="Icons\DCS_Icon_Current_VR.ico" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Installer\setup.exe" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)" "$(ProjectDir)icons"
 D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(TargetPath)" "$(ProjectDir)icons"
-timeout 3
-del "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application"
-timeout 3
-copy "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCS Configuration Manger.application" "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application"
-timeout 3
-iexpress /q /n D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\setup.sed</PostBuildEvent>
+
+powershell Compress-Archive -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.exe', 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force</PostBuildEvent>
   </PropertyGroup>
 </Project>
