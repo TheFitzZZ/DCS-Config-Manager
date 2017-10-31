@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -261,7 +261,11 @@
   <PropertyGroup>
     <PostBuildEvent>D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)" "$(ProjectDir)icons"
 D:\Development\DCS-ConfigMgmt\InsertIcons.exe "$(TargetPath)" "$(ProjectDir)icons"
-copy "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCS Configuration Manger.application" "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application" /Y
+timeout 3
+del "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application"
+timeout 3
+copy "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCS Configuration Manger.application" "D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\DCSCM.application"
+timeout 3
 iexpress /q /n D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\setup.sed</PostBuildEvent>
   </PropertyGroup>
 </Project>
