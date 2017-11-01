@@ -1,6 +1,7 @@
 # DCS Configuration Manager
 
-### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 RC5
+### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 RC6
+**SmartScreen will still tell you it's not signed ... EVEN THOUGH IT IS :-( - Will try to fix this asap**
 
 ### What's this?
 The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files!
