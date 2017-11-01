@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("DCS Configuration Manger")]
 [assembly: AssemblyDescription("Helps managing control and VR configuration for DCS")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("924th vFW // FitzZZ")]
+[assembly: AssemblyCompany("Christoph Schmidt")]
 [assembly: AssemblyProduct("DCS Configuration Manger")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
