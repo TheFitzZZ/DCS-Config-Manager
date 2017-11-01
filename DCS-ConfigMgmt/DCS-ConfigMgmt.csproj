@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>59</ApplicationRevision>
+    <ApplicationRevision>61</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -164,7 +164,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="createinstallerzip.cmd" />
     <None Include="DCS-ConfigMgmt_TemporaryKey.pfx" />
     <None Include="DigiCert_CodeSigning_2017.pfx" />
     <None Include="Installer\DCSCM-Setup.zip" />
@@ -281,9 +280,9 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Target Name="BeforePublish">
+  <Target Name="AfterCompile">
     <Exec Command="&quot;c:\Program Files (x86)\Windows Kits\10\bin\x86\signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256  /sha1 fd55be715daf5a06a43a6800f125dae26dbbd858 &quot;$(TargetDir)$(TargetFileName)" />
-    <Exec Command="powershell remove-item -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip'" />
+    <Exec Command="powershell remove-item -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -ErrorAction Ignore" />
   </Target>
   <Target Name="AfterPublish">
     <Exec Command="powershell Compress-Archive -Path '$(PublishDir)setup.exe','$(PublishDir)*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force" />

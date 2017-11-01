@@ -1123,7 +1123,6 @@ namespace DCS_ConfigMgmt
 
                 if(iLineOff > iLineOn)
                 {
-                    //System.Windows.Forms.MessageBox.Show("Off");
                     //Simulate button press to initiate the copying of the current config
                     switch (branch)
                     {
@@ -1167,6 +1166,39 @@ namespace DCS_ConfigMgmt
                 //Write the file back with the opposite configuration
                 sContent[iLineToWrite] = sLineToWrite;
                 File.WriteAllLines(sLuaPath,sContent);
+
+                //Switch back to original config to avoid confusion (especially for nonVR users)
+                if (iLineOff > iLineOn)
+                {
+                    switch (branch)
+                    {
+                        case "current":
+                            Button_load_nonvr_current_Click(objNull, reeNull); 
+                            break;
+                        case "alpha":
+                            Button_load_nonvr_alpha_Click(objNull, reeNull); 
+                            break;
+                        case "beta":
+                            Button_load_nonvr_beta_Click(objNull, reeNull); 
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (branch)
+                    {
+                        case "current":
+                            Button_load_vr_current_Click(objNull, reeNull);
+                            break;
+                        case "alpha":
+                            Button_load_vr_alpha_Click(objNull, reeNull);
+                            break;
+                        case "beta":
+                            Button_load_vr_beta_Click(objNull, reeNull);
+                            break;
+                    }
+                }
+
 
             }
             else { System.Windows.Forms.MessageBox.Show("Something went wrong! Your options.lua was not found!"); }
