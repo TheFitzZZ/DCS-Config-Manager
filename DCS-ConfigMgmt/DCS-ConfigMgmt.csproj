@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>46</ApplicationRevision>
+    <ApplicationRevision>48</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -277,8 +277,13 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"c:\Program Files (x86)\Windows Kits\10\bin\x86\signtool.exe" sign /tr http://timestamp.digicert.com /td sha256 /fd sha256  /sha1 fd55be715daf5a06a43a6800f125dae26dbbd858 "$(TargetDir)DCS Configuration Manger.exe"
-powershell Compress-Archive -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.exe', 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force
-</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
+  <Target Name="BeforePublish">
+    <Exec Command="&quot;c:\Program Files (x86)\Windows Kits\10\bin\x86\signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256  /sha1 fd55be715daf5a06a43a6800f125dae26dbbd858 &quot;$(TargetDir)DCS Configuration Manger.exe&quot;" />
+  </Target>
+  <Target Name="AfterPublish">
+    <Exec Command="powershell Compress-Archive -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.exe', 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force" />
+  </Target>
 </Project>
