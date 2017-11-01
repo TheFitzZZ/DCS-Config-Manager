@@ -1,10 +1,10 @@
 # DCS Configuration Manager
 
 ### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 RC6
-**SmartScreen will still tell you it's not signed ... EVEN THOUGH IT IS :-( - Will try to fix this asap**
+**SmartScreen will still tell you it's not signed ... even though it :-( - Will try to fix this asap**
 
 ### What's this?
-The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files!
+The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files! The goal was to make you interact with the app itself as little as possible, as noone likes more overhead before you can go fly your sortie! Use it once, set everything up - done!
 
 
 ![DCSCM](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/DCM.gif)
@@ -21,8 +21,7 @@ Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time 
 ![DCSCMIcons](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/icons.PNG)
 
 ### Things to note:
-- Windows 10s SmartScreen will not trust it in the early weeks of release, as I do not have a code signing certificate (yet)
-- This also applies to cloud connected anti-malware. If they ask if you want to submit it - please do. So I get "vetted" :-)
+- Windows 10 SmartScreen will not trust it in the early weeks of release (until I know how to stop it from ignoring the certificate when downloaded from the internet)
 - If you're really paranoid (and I won't blame you for that), grab the source, check the code and compile it yourself.
 
 ### Changelog:
