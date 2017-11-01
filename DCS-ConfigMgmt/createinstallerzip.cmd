@@ -1,0 +1,2 @@
+powershell start-sleep 10
+powershell Compress-Archive -Path 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.exe','D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\publish\*.application' -DestinationPath 'D:\Development\DCS-ConfigMgmt\DCS-ConfigMgmt\Installer\DCSCM-Setup.zip' -Force
