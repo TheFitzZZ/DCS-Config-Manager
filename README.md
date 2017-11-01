@@ -22,8 +22,7 @@ Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time 
 ### Things to note:
 - Windows 10s SmartScreen will not trust it in the early weeks of release, as I do not have a code signing certificate (yet)
 - This also applies to cloud connected anti-malware. If they ask if you want to submit it - please do. So I get "vetted" :-)
-- If you're really paranoid (and I won't blame you for that), grab the source, check the code and compile it yourself. 
-
+- If you're really paranoid (and I won't blame you for that), grab the source, check the code and compile it yourself.
 
 ### Changelog:
 
