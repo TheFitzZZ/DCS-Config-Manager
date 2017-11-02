@@ -1,6 +1,6 @@
 # DCS Configuration Manager
 
-### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 RC7
+### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 R1
 **SmartScreen will still tell you it's not signed ... even though it is :-( - Will try to fix this asap**
 
 ### What's this?
@@ -25,12 +25,13 @@ Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time 
 - If you're really paranoid (and I won't blame you for that), grab the source, check the code and compile it yourself.
 
 ### Changelog:
-02.11.2017 - RC7
+02.11.2017 - RC7 -> R1
 - Warning message added for settings tab
 - Reset overhaul to include the "clone"
 - Fixed first run symlink detection (just visual problems)
 - Added prevention against starting two instances (e.g. app + shortcut clone)
 - Renamed "link controls" to "shared control" and overhauled instruction text for more clarity
+- Will now detect malformed options.lua files and quit before I put your settings into a blender. Nice of me, eh?
 
 01.11.2017 - RC6
 - Various fixes for crashes and inconsistencies
