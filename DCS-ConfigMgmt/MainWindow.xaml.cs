@@ -144,7 +144,7 @@ namespace DCS_ConfigMgmt
                 buttonCreate_Shortcut_Beta.IsEnabled = false;
             }
 
-            //check for current branch
+            //check for current branch for linking
             if(Properties.Settings.Default.sMasterBranch != "")
             {
                 if (Properties.Settings.Default.sMasterBranch == "Current") { radioButton_dcsdir_current.IsChecked = true; }
@@ -185,12 +185,19 @@ namespace DCS_ConfigMgmt
                     radioButton_dcsdir_beta.IsChecked = true;
                 }
 
-                Properties.Settings.Default.sMasterBranch = sMasterBranch;
-                Properties.Settings.Default.Save();
-                CopyConfig("save");
+                //If nothing got detected, go to square one
+                if (sMasterBranch != "")
+                {
+                    Properties.Settings.Default.sMasterBranch = sMasterBranch;
+                    Properties.Settings.Default.Save();
+                    CopyConfig("save");
 
-                button_unlinkcontrols.IsEnabled = true;
-                button_linkcontrols.IsEnabled = false;
+                    button_unlinkcontrols.IsEnabled = true;
+                    button_linkcontrols.IsEnabled = false;
+                    radioButton_dcsdir_current.IsEnabled = false;
+                    radioButton_dcsdir_alpha.IsEnabled = false;
+                    radioButton_dcsdir_beta.IsEnabled = false;
+                }
             }
 
             //Check configs for VR/nonVR and disable buttons accordingly
@@ -896,6 +903,9 @@ namespace DCS_ConfigMgmt
             }
         }
 
+        //
+        // Start DCS binary by branch
+        //
         private void DCSStarter(string branch)
         {
             try
@@ -903,22 +913,6 @@ namespace DCS_ConfigMgmt
                 Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
             }
             catch { }
-
-            ////Get path to game files
-            //if(branch == "current")
-            //{
-            //    Process.Start(GetDCSRegistryPath(branch)+"\\bin\\dcs_updater.exe");
-            //}
-            //else if(branch == "alpha")
-            //{
-            //    //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-            //    Process.Start(@"C:\windows\notepad.exe");
-            //}
-            //else if (branch == "beta")
-            //{
-            //    //System.Windows.Forms.MessageBox.Show(GetDCSRegistryPath(branch));
-            //    Process.Start(@"C:\windows\notepad.exe");
-            //}
         }
 
         //
@@ -1022,20 +1016,20 @@ namespace DCS_ConfigMgmt
             AppShortcutToDesktop("beta");
         }
 
+        //
+        // Settings Tab focus event - warning for users
+        //
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
             //Check for first run
-            //if (!Properties.Settings.Default.bSawConfigWarning)
-            //{
-            //    System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
-            //        "As this is your first time using this tool, please determine if your current DCS config has VR enabled or not.\n\n" +
-            //        "Click 'Load VR Settings' if VR is currently -DISABLED-.\n" +
-            //        "Click 'Load nonVR Settings' if VR is currently -ENABLED-.\n\nThis will create a copy of the current configuration. " +
-            //        "Please do this for every version installed. If you don't use VR, just ignore it.", "WATCH EKRAN");
+            if (!Properties.Settings.Default.bSawConfigWarning)
+                {
+                    System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
+                        "As this is your first time using this tool, please beware that the current and automatically detected setting will be fine for 99% of all players.\n\nOnly change this if you know what you are doing or risk mayor config fuckups.\n\nConcider yourself warned, pilot!", "WATCH EKRAN");
 
-            //    Properties.Settings.Default.bSawConfigWarning = true;
-            //    Properties.Settings.Default.Save();
-            //}
+                    Properties.Settings.Default.bSawConfigWarning = true;
+                    Properties.Settings.Default.Save();
+                }
         }
 
         //
@@ -1047,6 +1041,9 @@ namespace DCS_ConfigMgmt
             CopyConfig("save");
         }
 
+        //
+        // Function to copy the user.config between instances to preserve settings after updates and for the "clone"
+        //
         private void CopyConfig(string action)
         {
             var currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
@@ -1205,10 +1202,15 @@ namespace DCS_ConfigMgmt
 
         }
 
+        //
+        // Reset for all user.config settings - used for debugging and whatever
+        //
         private void LabelResetSettings_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Properties.Settings.Default.Reset();
             System.Windows.Forms.MessageBox.Show("Don't know why you touched this - but okay. Wish granted!", "Watch EKRAN");
+            //Delete settings & save to clone
+            Properties.Settings.Default.Reset();
+            CopyConfig("save");
             System.Windows.Application.Current.Shutdown();
         }
     }

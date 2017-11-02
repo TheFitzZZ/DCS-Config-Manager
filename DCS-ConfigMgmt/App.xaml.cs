@@ -22,6 +22,15 @@ namespace DCS_ConfigMgmt
         void App_Startup(object sender, StartupEventArgs e)
         {
             // Application is running
+
+            //Detect if another instance is running
+            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
+            {
+                MessageBox.Show("Application already running. Only one instance of this application is allowed! Please close the app before using the shortcuts!", "WATCH EKRAN!");
+                System.Windows.Application.Current.Shutdown();
+            }
+
+
             // Process command line args
             string sStartOption = "";
             
