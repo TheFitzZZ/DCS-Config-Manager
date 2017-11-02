@@ -1104,21 +1104,38 @@ namespace DCS_ConfigMgmt
 
 
             //Read the content
-            string[] sContent = File.ReadAllLines(sLuaPath);
-            //System.Windows.Forms.MessageBox.Show(sContent[3]);
-            
+            string[] sContent = null;
+            try
+            {
+                sContent = File.ReadAllLines(sLuaPath);
+            }
+            catch
+            {
+                Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? Bad boy!");
+            }
+
             //Search for VR setting in file
 
             string sVRoff = "		[\"enable\"] = false,";
             string sVRon = "		[\"enable\"] = true,";
 
-            if(sContent != null)
+            int iLineOn = 0;
+            int iLineOff = 0;
+
+            if (sContent != null)
             {
                 //This is a shit implementation but I am too lazy to integrate a Lua reader
-                int iLineOn = Array.IndexOf(sContent, sVRon);
-                int iLineOff = Array.IndexOf(sContent, sVRoff);
+                try
+                {
+                    iLineOn = Array.IndexOf(sContent, sVRon);
+                    iLineOff = Array.IndexOf(sContent, sVRoff);
+                }
+                catch
+                {
+                    Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                }
 
-                if(iLineOff > iLineOn)
+                if (iLineOff > iLineOn)
                 {
                     //Simulate button press to initiate the copying of the current config
                     switch (branch)
@@ -1138,7 +1155,7 @@ namespace DCS_ConfigMgmt
                     iLineToWrite = iLineOff;
                     sLineToWrite = sVRon;
                 }
-                else
+                else if(iLineOff < iLineOn)
                 {
                     //System.Windows.Forms.MessageBox.Show("On");
                     //Simulate button press to initiate the copying of the current config
@@ -1161,8 +1178,24 @@ namespace DCS_ConfigMgmt
                 }
 
                 //Write the file back with the opposite configuration
-                sContent[iLineToWrite] = sLineToWrite;
-                File.WriteAllLines(sLuaPath,sContent);
+
+                if(iLineToWrite != -1 & iLineToWrite != 0)
+                {
+                    try
+                    {
+                        sContent[iLineToWrite] = sLineToWrite;
+                        File.WriteAllLines(sLuaPath, sContent);
+                    }
+                    catch
+                    {
+                        Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                    }
+                }
+                else
+                {
+                    Panic("Something is wrong with your options.lua - " + branch + " Writeback part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                }
+               
 
                 //Switch back to original config to avoid confusion (especially for nonVR users)
                 if (iLineOff > iLineOn)
@@ -1180,7 +1213,7 @@ namespace DCS_ConfigMgmt
                             break;
                     }
                 }
-                else
+                else if (iLineOff < iLineOn)
                 {
                     switch (branch)
                     {
@@ -1212,6 +1245,29 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.Reset();
             CopyConfig("save");
             System.Windows.Application.Current.Shutdown();
+        }
+
+        //
+        //Panic button
+        //
+        private void Panic(string message)
+        {
+            string basemessage = "PULL UP! PULL UP!\n\nWe ran into a problem here, I'm sorry for that. Please be so kind and create an issue on GitHub or reach out to me in other forms.\nI'll shut down now and reset my settings. What happened? This:\n\n";
+
+            System.Windows.Forms.MessageBox.Show(basemessage + message);
+            //Delete settings & save to clone
+            Properties.Settings.Default.Reset();
+            CopyConfig("save");
+            Process.GetCurrentProcess().Kill();
+        }
+
+
+        //
+        // Change active item to not confuse user
+        //
+        private void TabItem_GotFocus_SharedControls(object sender, RoutedEventArgs e)
+        {
+            textBox.Focus();
         }
     }
 }
