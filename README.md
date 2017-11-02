@@ -31,6 +31,7 @@ Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time 
 - Fixed first run symlink detection (just visual problems)
 - Added prevention against starting two instances (e.g. app + shortcut clone)
 - Renamed "link controls" to "shared control" and overhauled instruction text for more clarity
+- Will now detect malformed options.lua files and quit before I put your settings into a blender. Nice of me, eh?
 
 01.11.2017 - RC6
 - Various fixes for crashes and inconsistencies
