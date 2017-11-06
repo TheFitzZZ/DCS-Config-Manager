@@ -76,10 +76,12 @@ namespace DCS_ConfigMgmt
         {
             InitializeComponent();
 
+            //labelVersion.Content = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
+
             //if(sStartOption != "")
             //{
-                //Get globalist agenda (aka load global config)
-                CopyConfig("load");
+            //Get globalist agenda (aka load global config)
+            CopyConfig("load");
 
                 //Reload configuration
                 Properties.Settings.Default.Reload();
@@ -1025,7 +1027,7 @@ namespace DCS_ConfigMgmt
             if (!Properties.Settings.Default.bSawConfigWarning)
                 {
                     System.Windows.Forms.MessageBox.Show("Hey there!\n\n" +
-                        "As this is your first time using this tool, please beware that the current and automatically detected setting will be fine for 99% of all players.\n\nOnly change this if you know what you are doing or risk mayor config fuckups.\n\nConcider yourself warned, pilot!", "WATCH EKRAN");
+                        "As this is your first time using this tool, please beware that the current and automatically detected setting will be fine for 99% of all players.\n\nThese settings point to the Saved Games folder -  NOT the install dir of your DCS instances!!\n\nOnly change this if you know what you are doing or risk mayor config fuckups.\n\nConcider yourself warned, pilot!", "WATCH EKRAN");
 
                     Properties.Settings.Default.bSawConfigWarning = true;
                     Properties.Settings.Default.Save();
@@ -1111,7 +1113,7 @@ namespace DCS_ConfigMgmt
             }
             catch
             {
-                Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
             }
 
             //Search for VR setting in file
@@ -1132,7 +1134,7 @@ namespace DCS_ConfigMgmt
                 }
                 catch
                 {
-                    Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                    Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
                 }
 
                 if (iLineOff > iLineOn)
@@ -1188,12 +1190,12 @@ namespace DCS_ConfigMgmt
                     }
                     catch
                     {
-                        Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                        Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
                     }
                 }
                 else
                 {
-                    Panic("Something is wrong with your options.lua - " + branch + " Writeback part - That's bad. Did you ever edit them with notepad? Bad boy!");
+                    Panic("Something is wrong with your options.lua - " + branch + " Writeback part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
                 }
                
 
@@ -1240,7 +1242,7 @@ namespace DCS_ConfigMgmt
         //
         private void LabelResetSettings_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Don't know why you touched this - but okay. Wish granted!", "Watch EKRAN");
+            System.Windows.Forms.MessageBox.Show("Don't know why you touched this - but okay. Wish granted!", "Watch EKRAN!");
             //Delete settings & save to clone
             Properties.Settings.Default.Reset();
             CopyConfig("save");
@@ -1254,7 +1256,7 @@ namespace DCS_ConfigMgmt
         {
             string basemessage = "PULL UP! PULL UP!\n\nWe ran into a problem here, I'm sorry for that. Please be so kind and create an issue on GitHub or reach out to me in other forms.\nI'll shut down now and reset my settings. What happened? This:\n\n";
 
-            System.Windows.Forms.MessageBox.Show(basemessage + message);
+            System.Windows.Forms.MessageBox.Show(basemessage + message,"Watch EKRAN!");
             //Delete settings & save to clone
             Properties.Settings.Default.Reset();
             CopyConfig("save");

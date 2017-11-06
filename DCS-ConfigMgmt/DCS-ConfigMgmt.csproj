@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>65</ApplicationRevision>
+    <ApplicationRevision>66</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -167,6 +167,7 @@
     <None Include="DCS-ConfigMgmt_TemporaryKey.pfx" />
     <None Include="DigiCert_CodeSigning_2017.pfx" />
     <None Include="Installer\DCSCM-Setup.zip" />
+    <None Include="Installer\Release-Portable-R2.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -254,22 +255,33 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\DCS_Icon_Current_VR_Blue.ico" />
     <Resource Include="Icons\924th.ico" />
     <Content Include="Icons\DCS_Icon_Alpha.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icons\DCS_Icon_Alpha_Blue.ico" />
+    <Resource Include="Icons\DCS_Icon_Alpha_Green.ico" />
     <Content Include="Icons\DCS_Icon_Alpha_VR.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icons\DCS_Icon_Alpha_VR_Blue.ico" />
+    <Resource Include="Icons\DCS_Icon_Alpha_VR_Green.ico" />
     <Content Include="Icons\DCS_Icon_Beta.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icons\DCS_Icon_Beta_Blue.ico" />
+    <Resource Include="Icons\DCS_Icon_Beta_Green.ico" />
     <Content Include="Icons\DCS_Icon_Beta_VR.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icons\DCS_Icon_Beta_VR_Blue.ico" />
+    <Resource Include="Icons\DCS_Icon_Beta_VR_Green.ico" />
     <Content Include="Icons\DCS_Icon_Current.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icons\DCS_Icon_Current_Blue.ico" />
+    <Resource Include="Icons\DCS_Icon_Current_Green.ico" />
     <Content Include="Icons\DCS_Icon_Current_VR.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
