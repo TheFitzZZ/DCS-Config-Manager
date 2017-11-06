@@ -24,31 +24,5 @@ Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time 
 - Windows 10 SmartScreen will not trust it in the early weeks of release (until I know how to stop it from ignoring the certificate when downloaded from the internet)
 - If you're really paranoid (and I won't blame you for that), grab the source, check the code and compile it yourself.
 
-### Changelog:
-02.11.2017 - RC7 -> R1
-- Warning message added for settings tab
-- Reset overhaul to include the "clone"
-- Fixed first run symlink detection (just visual problems)
-- Added prevention against starting two instances (e.g. app + shortcut clone)
-- Renamed "link controls" to "shared control" and overhauled instruction text for more clarity
-- Will now detect malformed options.lua files and quit before I put your settings into a blender. Nice of me, eh?
-
-01.11.2017 - RC6
-- Various fixes for crashes and inconsistencies
-- Binaries are now signed - such cert, very trust, much awesome - but when you download the zip SmartScreen still yells at you... this is very much not awesome! (Will try to fix next release)
-- First start won't switch configs anymore ... crisis averted!
-
-30.10.2017 - RC5
-- Added settings reset button ... a little hidden - you don't need that anyway!
-- Added checks so a re-install doesn't hurt anymore (hopefully)
-
-28.10.2017 - RC4
-- Added line tab separator
-- Disabled text wrap for directory textbox and lowered font size for more visibility
-- Anti-Aliasing enabled for images
-- Now automatically prepares configs for VR/non-vr
-- Added global configuration / temp application directory for shortcuts
-
-
 
 Please note: this project is neither related nor endorsed by Eagle Dynamics or The Fighter Collection. It's just a fan project for the community. If you as a rights holder have any issues with used assets, please contact me and I'll resolve this asap.
