@@ -1111,9 +1111,9 @@ namespace DCS_ConfigMgmt
             {
                 sContent = File.ReadAllLines(sLuaPath);
             }
-            catch
+            catch(Exception e)
             {
-                Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
+                Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
             }
 
             //Search for VR setting in file
@@ -1132,9 +1132,9 @@ namespace DCS_ConfigMgmt
                     iLineOn = Array.IndexOf(sContent, sVRon);
                     iLineOff = Array.IndexOf(sContent, sVRoff);
                 }
-                catch
+                catch (Exception e)
                 {
-                    Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
+                    Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
                 }
 
                 if (iLineOff > iLineOn)
@@ -1188,9 +1188,9 @@ namespace DCS_ConfigMgmt
                         sContent[iLineToWrite] = sLineToWrite;
                         File.WriteAllLines(sLuaPath, sContent);
                     }
-                    catch
+                    catch (Exception e)
                     {
-                        Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
+                        Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
                     }
                 }
                 else
@@ -1233,7 +1233,7 @@ namespace DCS_ConfigMgmt
 
 
             }
-            else { System.Windows.Forms.MessageBox.Show("Something went wrong! Your options.lua was not found!"); }
+            else { Panic("Something went wrong! Your options.lua was not found! - " + branch); }
 
         }
 
