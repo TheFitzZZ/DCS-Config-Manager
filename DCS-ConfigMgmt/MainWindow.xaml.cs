@@ -22,6 +22,7 @@ using System.Text;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
 using System.Configuration;
+using NLog;
 
 namespace DCS_ConfigMgmt
 {
@@ -66,6 +67,9 @@ namespace DCS_ConfigMgmt
 
         static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
 
+        //NLog integration
+        public static Logger log = LogManager.GetCurrentClassLogger();
+
         enum SymbolicLink
         {
             File = 0,
@@ -76,32 +80,46 @@ namespace DCS_ConfigMgmt
         {
             InitializeComponent();
 
-            //labelVersion.Content = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
+            log.Debug("Main windows initializing and loading config");
 
-            //if(sStartOption != "")
-            //{
-            //Get globalist agenda (aka load global config)
+            //Get global config if available
             CopyConfig("load");
+            Properties.Settings.Default.Reload();
 
-                //Reload configuration
-                Properties.Settings.Default.Reload();
-            //}
+            //Logging out current config
+            log.Info("PathCurrent = " + Properties.Settings.Default.sPathCurrent);
+            log.Info("PathAlpha = " + Properties.Settings.Default.sPathAlpha);
+            log.Info("PathBeta = " + Properties.Settings.Default.sPathBeta);
+            log.Info("sMasterBranch = " + Properties.Settings.Default.sMasterBranch); 
+            log.Info("bSawConfigWarning = " + Properties.Settings.Default.bSawConfigWarning);
+            log.Info("bVRConfActiveCurrent = " + Properties.Settings.Default.bVRConfActiveCurrent);
+            log.Info("bVRConfActiveAlpha = " + Properties.Settings.Default.bVRConfActiveAlpha);
+            log.Info("bVRConfActiveBeta = " + Properties.Settings.Default.bVRConfActiveBeta);
+            log.Info("bFirstUseVRCurrent = " + Properties.Settings.Default.bFirstUseVRCurrent);
+            log.Info("bFirstUseVRAlpha = " + Properties.Settings.Default.bFirstUseVRAlpha);
+            log.Info("bFirstUseVRBeta = " + Properties.Settings.Default.bFirstUseVRBeta);
+            log.Info("bManualPathCurrent = " + Properties.Settings.Default.bManualPathCurrent);
+            log.Info("bManualPathAlpha = " + Properties.Settings.Default.bManualPathAlpha);
+            log.Info("bManualPathBeta = " + Properties.Settings.Default.bManualPathBeta);
 
             //// Prefilling all DCS directories
             // Get DCS directories if settings are empty
             if (Properties.Settings.Default.sPathCurrent == "" | Properties.Settings.Default.sPathCurrent == "Not found.")
             {
                 Properties.Settings.Default.sPathCurrent = GetDCSSavePath("current");
+                log.Info("sPathCurrent is now = " + Properties.Settings.Default.sPathCurrent);
             }
 
             if (Properties.Settings.Default.sPathAlpha == "" | Properties.Settings.Default.sPathAlpha == "Not found.")
             {
                 Properties.Settings.Default.sPathAlpha = GetDCSSavePath("alpha");
+                log.Info("sPathAlpha is now = " + Properties.Settings.Default.sPathAlpha);
             }
 
             if (Properties.Settings.Default.sPathBeta == "" | Properties.Settings.Default.sPathBeta == "Not found.")
             {
                 Properties.Settings.Default.sPathBeta = GetDCSSavePath("beta");
+                log.Info("sPathBeta is now = " + Properties.Settings.Default.sPathBeta);
             }
             Properties.Settings.Default.Save();
             CopyConfig("save");
@@ -171,20 +189,25 @@ namespace DCS_ConfigMgmt
 
                 string sMasterBranch = "";
 
+                log.Info("Checking for junctions...");
+
                 if (JunctionPoint.Exists(sPathAlpha) & JunctionPoint.Exists(sPathBeta))
                 {
                     sMasterBranch = "Current";
                     radioButton_dcsdir_current.IsChecked = true;
+                    log.Info("Junction found at " + sMasterBranch);
                 }
                 else if (JunctionPoint.Exists(sPathBeta) & JunctionPoint.Exists(sPathCurrent))
                 {
                     sMasterBranch = "Alpha";
                     radioButton_dcsdir_alpha.IsChecked = true;
+                    log.Info("Junction found at " + sMasterBranch);
                 }
                 else if (JunctionPoint.Exists(sPathAlpha) & JunctionPoint.Exists(sPathCurrent))
                 {
                     sMasterBranch = "Beta";
                     radioButton_dcsdir_beta.IsChecked = true;
+                    log.Info("Junction found at " + sMasterBranch);
                 }
 
                 //If nothing got detected, go to square one
@@ -192,6 +215,7 @@ namespace DCS_ConfigMgmt
                 {
                     Properties.Settings.Default.sMasterBranch = sMasterBranch;
                     Properties.Settings.Default.Save();
+                    log.Info("Saving new junction information");
                     CopyConfig("save");
 
                     button_unlinkcontrols.IsEnabled = true;
@@ -266,9 +290,11 @@ namespace DCS_ConfigMgmt
                 //System.Windows.Forms.MessageBox.Show(sStartOption);
 
                 //Start the handler
+                log.Debug("Calling startup handler");
                 StartupHandler(sStartOption);
 
                 //We're done, exit.
+                log.Info("Exiting after DCS start");
                 System.Windows.Application.Current.Shutdown();
             }
 
@@ -284,9 +310,10 @@ namespace DCS_ConfigMgmt
         /// 
         private void Button_dcsdir_current_Click(object sender, RoutedEventArgs e)
         {
-            //string branch = "current";
+            log.Debug("Directory chooser clicked");
             string sTempDir = DirectoryPicker("current");
-            if(sTempDir != null)
+            log.Info("New directory current : " + sTempDir);
+            if (sTempDir != null)
             {
                 textBox_dcsdir_current.Text = sTempDir;
             }
@@ -301,7 +328,9 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_alpha_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Directory chooser clicked");
             string sTempDir = DirectoryPicker("alpha");
+            log.Info("New directory alpha : " + sTempDir);
             if (sTempDir != null)
             {
                 textBox_dcsdir_alpha.Text = sTempDir;
@@ -317,7 +346,9 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_beta_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Directory chooser clicked");
             string sTempDir = DirectoryPicker("beta");
+            log.Info("New directory beta : " + sTempDir);
             if (sTempDir != null)
             {
                 textBox_dcsdir_beta.Text = sTempDir;
@@ -336,6 +367,7 @@ namespace DCS_ConfigMgmt
         //Remove buttons
         private void Button_dcsdir_current_remove_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Directory remover clicked current");
             textBox_dcsdir_current.Text = "Not found.";
             radioButton_dcsdir_current.IsEnabled = false;
             button_load_nonvr_current.IsEnabled = false;
@@ -349,6 +381,7 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_alpha_remove_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Directory remover clicked alpha");
             textBox_dcsdir_alpha.Text = "Not found.";
             radioButton_dcsdir_alpha.IsEnabled = false;
             button_load_nonvr_alpha.IsEnabled = false;
@@ -362,6 +395,7 @@ namespace DCS_ConfigMgmt
         }
         private void Button_dcsdir_beta_remove_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Directory remover clicked beta");
             textBox_dcsdir_beta.Text = "Not found.";
             radioButton_dcsdir_beta.IsEnabled = false;
             button_load_nonvr_beta.IsEnabled = false;
@@ -404,21 +438,22 @@ namespace DCS_ConfigMgmt
             {
                 hkcu = hkcu.OpenSubKey(@"Software\Eagle Dynamics\DCS World");
                 try { sDCSpath = (string)hkcu.GetValue("Path"); }
-                catch { }
+                catch (Exception e) { log.Warn("Request for DCS Registry Path for " + branch + " failed. " + e.Message); }
             }
             else if (branch == "alpha")
             {
                 hkcu = hkcu.OpenSubKey(@"Software\Eagle Dynamics\DCS World 2 OpenAlpha");
                 try { sDCSpath = (string)hkcu.GetValue("Path"); }
-                catch { }
+                catch (Exception e) { log.Warn("Request for DCS Registry Path for " + branch + " failed. " + e.Message); }
             }
             else if (branch == "beta")
             {
                 hkcu = hkcu.OpenSubKey(@"Software\Eagle Dynamics\DCS World OpenBeta");
                 try { sDCSpath = (string)hkcu.GetValue("Path"); }
-                catch { }
+                catch (Exception e) { log.Warn("Request for DCS Registry Path for " + branch + " failed. " + e.Message); }
             }
 
+            log.Info("Requested DCS Registry Path for " + branch + " : " + sDCSpath);
             return sDCSpath;
         }
 
@@ -444,7 +479,13 @@ namespace DCS_ConfigMgmt
             }
             //System.Windows.Forms.MessageBox.Show(sDCSpath);
 
-            if(!Directory.Exists(sDCSpath)) { sDCSpath = "Not found."; }
+            log.Info("Requested DCS Save Path for " + branch + " : " + sDCSpath);
+
+            if (!Directory.Exists(sDCSpath))
+            {
+                sDCSpath = "Not found.";
+                log.Warn("Requested DCS Registry Path for " + branch + " does not exist!");
+            }
 
             return sDCSpath;
         }
@@ -468,6 +509,8 @@ namespace DCS_ConfigMgmt
 
         private void Button_linkcontrols_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Link controls clicked");
+
             string sMasterBranch = "";
             if (radioButton_dcsdir_current.IsChecked.Value) { sMasterBranch = "Current"; }
             else if (radioButton_dcsdir_alpha.IsChecked.Value) { sMasterBranch = "Alpha"; }
@@ -491,6 +534,8 @@ namespace DCS_ConfigMgmt
         }
         private void Button_unlinkcontrols_Click(object sender, RoutedEventArgs e)
         {
+            log.Debug("Unlink controls clicked");
+
             string sMasterBranch = "";
             if (radioButton_dcsdir_current.IsChecked.Value) { sMasterBranch = "Current"; }
             else if (radioButton_dcsdir_alpha.IsChecked.Value) { sMasterBranch = "Alpha"; }
@@ -543,6 +588,7 @@ namespace DCS_ConfigMgmt
         /// 
         private void LinkToBranch(string sMasterBranch, bool bUnlink)
         {
+            log.Debug("Linker called for branch/command: " + sMasterBranch + " " + bUnlink.ToString());
             //Prepare alternative paths
             string sPathCurrent = Properties.Settings.Default.sPathCurrent + "\\config\\input";
             string sPathCurrentBackup = Properties.Settings.Default.sPathCurrent + "\\config\\input.bak";
@@ -647,6 +693,7 @@ namespace DCS_ConfigMgmt
         /// 
         static void MoveDirectory(string sSource, string sTarget)
         {
+            log.Debug("Move Directory called. Source: " + sSource + " Target: " + sTarget);
             string sourceDirectory = @sSource;
             string destinationDirectory = @sTarget;
 
@@ -659,14 +706,16 @@ namespace DCS_ConfigMgmt
                 System.Windows.Forms.MessageBox.Show(e.Message + "\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
             }
         }
-
+        
         /// 
         ///Create a symlink - returns void
         /// 
         static void CreateSymLink(string sSource, string sTarget)
         {
+            log.Debug("Create junction point called. Source: " + sSource + " Target: " + sTarget);
             if (!JunctionPoint.Exists(sTarget))
             {
+                log.Info("Creating the junctions...");
                 JunctionPoint.Create(sTarget, sSource, false /*don't overwrite*/);
             }
         }
@@ -675,8 +724,10 @@ namespace DCS_ConfigMgmt
         /// 
         static void DeleteSymLink(string sTarget)
         {
+            log.Debug("Delete junction point called. Target: " + sTarget);
             if (JunctionPoint.Exists(sTarget))
             {
+                log.Info("Creating the junctions...");
                 JunctionPoint.Delete(sTarget);
             }
         }
@@ -1105,136 +1156,143 @@ namespace DCS_ConfigMgmt
             }
 
 
-            //Read the content
-            string[] sContent = null;
-            try
-            {
-                sContent = File.ReadAllLines(sLuaPath);
-            }
-            catch(Exception e)
-            {
-                Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
-            }
-
-            //Search for VR setting in file
-
-            string sVRoff = "		[\"enable\"] = false,";
-            string sVRon = "		[\"enable\"] = true,";
-
-            int iLineOn = 0;
-            int iLineOff = 0;
-
-            if (sContent != null)
-            {
-                //This is a shit implementation but I am too lazy to integrate a Lua reader
+            //if(File.Exists(sLuaPath))
+            //{
+                //Read the content
+                string[] sContent = null;
                 try
                 {
-                    iLineOn = Array.IndexOf(sContent, sVRon);
-                    iLineOff = Array.IndexOf(sContent, sVRoff);
+                    sContent = File.ReadAllLines(sLuaPath);
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
-                    Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
-                }
-
-                if (iLineOff > iLineOn)
-                {
-                    //Simulate button press to initiate the copying of the current config
-                    switch (branch)
-                    {
-                        case "current":
-                            Button_load_vr_current_Click(objNull, reeNull);
-                            break;
-                        case "alpha":
-                            Button_load_vr_alpha_Click(objNull, reeNull);
-                            break;
-                        case "beta":
-                            Button_load_vr_beta_Click(objNull, reeNull);
-                            break;
-                    }
-
-                    //Set variables for writing the new option
-                    iLineToWrite = iLineOff;
-                    sLineToWrite = sVRon;
-                }
-                else if(iLineOff < iLineOn)
-                {
-                    //System.Windows.Forms.MessageBox.Show("On");
-                    //Simulate button press to initiate the copying of the current config
-                    switch (branch)
-                    {
-                        case "current":
-                            Button_load_nonvr_current_Click(objNull, reeNull);
-                            break;
-                        case "alpha":
-                            Button_load_nonvr_alpha_Click(objNull, reeNull);
-                            break;
-                        case "beta":
-                            Button_load_nonvr_beta_Click(objNull, reeNull);
-                            break;
-                    }
-
-                    //Set variables for writing the new option
-                    iLineToWrite = iLineOn;
-                    sLineToWrite = sVRoff;
+                    Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
                 }
 
-                //Write the file back with the opposite configuration
+                //Search for VR setting in file
 
-                if(iLineToWrite != -1 & iLineToWrite != 0)
+                string sVRoff = "		[\"enable\"] = false,";
+                string sVRon = "		[\"enable\"] = true,";
+
+                int iLineOn = 0;
+                int iLineOff = 0;
+
+                if (sContent != null)
                 {
+                    //This is a shit implementation but I am too lazy to integrate a Lua reader
                     try
                     {
-                        sContent[iLineToWrite] = sLineToWrite;
-                        File.WriteAllLines(sLuaPath, sContent);
+                        iLineOn = Array.IndexOf(sContent, sVRon);
+                        iLineOff = Array.IndexOf(sContent, sVRoff);
                     }
                     catch (Exception e)
                     {
-                        Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
+                        Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
+                    }
+
+                    if (iLineOff > iLineOn)
+                    {
+                        //Simulate button press to initiate the copying of the current config
+                        switch (branch)
+                        {
+                            case "current":
+                                Button_load_vr_current_Click(objNull, reeNull);
+                                break;
+                            case "alpha":
+                                Button_load_vr_alpha_Click(objNull, reeNull);
+                                break;
+                            case "beta":
+                                Button_load_vr_beta_Click(objNull, reeNull);
+                                break;
+                        }
+
+                        //Set variables for writing the new option
+                        iLineToWrite = iLineOff;
+                        sLineToWrite = sVRon;
+                    }
+                    else if(iLineOff < iLineOn)
+                    {
+                        //System.Windows.Forms.MessageBox.Show("On");
+                        //Simulate button press to initiate the copying of the current config
+                        switch (branch)
+                        {
+                            case "current":
+                                Button_load_nonvr_current_Click(objNull, reeNull);
+                                break;
+                            case "alpha":
+                                Button_load_nonvr_alpha_Click(objNull, reeNull);
+                                break;
+                            case "beta":
+                                Button_load_nonvr_beta_Click(objNull, reeNull);
+                                break;
+                        }
+
+                        //Set variables for writing the new option
+                        iLineToWrite = iLineOn;
+                        sLineToWrite = sVRoff;
+                    }
+
+                    //Write the file back with the opposite configuration
+
+                    if(iLineToWrite != -1 & iLineToWrite != 0)
+                    {
+                        try
+                        {
+                            sContent[iLineToWrite] = sLineToWrite;
+                            File.WriteAllLines(sLuaPath, sContent);
+                        }
+                        catch (Exception e)
+                        {
+                            Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
+                        }
+                    }
+                    else
+                    {
+                        Panic("Something is wrong with your options.lua - " + branch + " Writeback part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
+                    }
+               
+
+                    //Switch back to original config to avoid confusion (especially for nonVR users)
+                    if (iLineOff > iLineOn)
+                    {
+                        switch (branch)
+                        {
+                            case "current":
+                                Button_load_nonvr_current_Click(objNull, reeNull); 
+                                break;
+                            case "alpha":
+                                Button_load_nonvr_alpha_Click(objNull, reeNull); 
+                                break;
+                            case "beta":
+                                Button_load_nonvr_beta_Click(objNull, reeNull); 
+                                break;
+                        }
+                    }
+                    else if (iLineOff < iLineOn)
+                    {
+                        switch (branch)
+                        {
+                            case "current":
+                                Button_load_vr_current_Click(objNull, reeNull);
+                                break;
+                            case "alpha":
+                                Button_load_vr_alpha_Click(objNull, reeNull);
+                                break;
+                            case "beta":
+                                Button_load_vr_beta_Click(objNull, reeNull);
+                                break;
+                        }
                     }
                 }
                 else
                 {
-                    Panic("Something is wrong with your options.lua - " + branch + " Writeback part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
+                    Panic("Something went wrong! Your options.lua was not found! - " + branch);
                 }
-               
-
-                //Switch back to original config to avoid confusion (especially for nonVR users)
-                if (iLineOff > iLineOn)
-                {
-                    switch (branch)
-                    {
-                        case "current":
-                            Button_load_nonvr_current_Click(objNull, reeNull); 
-                            break;
-                        case "alpha":
-                            Button_load_nonvr_alpha_Click(objNull, reeNull); 
-                            break;
-                        case "beta":
-                            Button_load_nonvr_beta_Click(objNull, reeNull); 
-                            break;
-                    }
-                }
-                else if (iLineOff < iLineOn)
-                {
-                    switch (branch)
-                    {
-                        case "current":
-                            Button_load_vr_current_Click(objNull, reeNull);
-                            break;
-                        case "alpha":
-                            Button_load_vr_alpha_Click(objNull, reeNull);
-                            break;
-                        case "beta":
-                            Button_load_vr_beta_Click(objNull, reeNull);
-                            break;
-                    }
-                }
-
-
-            }
-            else { Panic("Something went wrong! Your options.lua was not found! - " + branch); }
-
+            //}
+            //else
+            //{
+            //    //File wasn't found, so we think the branch isn't installed
+            //}
         }
 
         //

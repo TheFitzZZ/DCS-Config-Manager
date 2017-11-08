@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -18,14 +19,20 @@ namespace DCS_ConfigMgmt
     public partial class App : Application
     {
         private const int MINIMUM_SPLASH_TIME = 3000; // Miliseconds  
+                                                      
+        //NLog integration
+        public static Logger log = LogManager.GetCurrentClassLogger();
 
         void App_Startup(object sender, StartupEventArgs e)
         {
             // Application is running
+            log.Info("Application started");
+
 
             //Detect if another instance is running
             if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
             {
+                log.Fatal("Application already running. Shutting down.");
                 MessageBox.Show("Application already running. Only one instance of this application is allowed! Please close the app before using the shortcuts!", "WATCH EKRAN!");
                 System.Windows.Application.Current.Shutdown();
             }
@@ -37,6 +44,11 @@ namespace DCS_ConfigMgmt
             if (e.Args.Length != 0)
             {
                 sStartOption = e.Args[0];
+                log.Info("Used paramter = " + sStartOption);
+            }
+            else
+            {
+                log.Info("No parameter given.");
             }
 
             
@@ -46,12 +58,14 @@ namespace DCS_ConfigMgmt
             if (sStartOption == "")
             {
                 CopyApp();
+                log.Debug("Showing main window");
                 MainWindow mainWindow = new MainWindow(sStartOption);
                 mainWindow.Show();
                 //splash.Close();
             }
             else
             {
+                log.Debug("Showing splash window");
                 Splash splash = new Splash();
 
                 if (sStartOption == "current")
@@ -87,6 +101,7 @@ namespace DCS_ConfigMgmt
 
                 splash.Show();
                 MainWindow mainWindow = new MainWindow(sStartOption);
+                log.Debug("Sleeping for 4 seconds");
                 System.Threading.Thread.Sleep(4000);
                 splash.Close();
             }
@@ -98,11 +113,17 @@ namespace DCS_ConfigMgmt
         //
         void CopyApp()
         {
+            log.Debug("Starting clone copy");
+
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\";
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
 
+            log.Info("Clone directory = " + deskDir);
+            log.Info("App directory = " + appDir);
+
             try
             {
+                log.Debug("Trying clone copy");
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr");
 
                 //Now Create all of the directories
@@ -117,6 +138,7 @@ namespace DCS_ConfigMgmt
             }
             catch (Exception e)
             {
+                log.Fatal("Failed clone copy: " + e.Message);
                 System.Windows.Forms.MessageBox.Show(e.Message + "\nWatch EKRAN!\n Couldn't copy program data to AppData. Please report on my GitHub page, thanks!");
             }
         }
