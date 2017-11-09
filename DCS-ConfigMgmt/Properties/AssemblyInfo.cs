@@ -7,11 +7,11 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("DCS Configuration Manger")]
+[assembly: AssemblyTitle("DCS Configuration Manager")]
 [assembly: AssemblyDescription("Helps managing control and VR configuration for DCS")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Christoph Schmidt")]
-[assembly: AssemblyProduct("DCS Configuration Manger")]
+[assembly: AssemblyProduct("DCS Configuration Manager")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

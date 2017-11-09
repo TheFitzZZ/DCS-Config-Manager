@@ -792,6 +792,8 @@ namespace DCS_ConfigMgmt
         //
         private void SwitchVRConfig(string sBranch, bool bVR)
         {
+            log.Debug("Switch VR config called with " + sBranch + " " + bVR);
+
             //Prepare alternative paths
             string sPathCurrent = Properties.Settings.Default.sPathCurrent + "\\config\\options.lua";
             string sPathCurrentnonVR = Properties.Settings.Default.sPathCurrent + "\\config\\options.lua.nonvr";
@@ -863,21 +865,27 @@ namespace DCS_ConfigMgmt
         //
         private void MoveFile(string sSource, string sTarget, string sBranch)
         {
+            log.Debug("Movefile called with " + sSource + " - " + sTarget + " - " + sBranch);
             try
             {
                 if ((sBranch.Contains("current") & Properties.Settings.Default.bFirstUseVRCurrent & !sSource.Contains("vr")) | (sBranch.Contains("alpha") & Properties.Settings.Default.bFirstUseVRAlpha & !sSource.Contains("vr")) | (sBranch.Contains("beta") & Properties.Settings.Default.bFirstUseVRBeta & !sSource.Contains("vr")))
                 {
+                    log.Debug("Copying file " + sSource + " > " + sTarget);
                     File.Copy(sSource, sTarget, true);
                 }
                 else
                 {
                     if(File.Exists(sTarget) & !sSource.Contains("vr"))
                     {
+                        log.Debug("Deleting file " + sTarget);
                         File.Delete(sTarget);
+
+                        log.Debug("Moving file " + sSource + " > " + sTarget);
                         File.Move(sSource, sTarget);
                     }
                     else
                     {
+                        log.Debug("Moving file " + sSource + " > " + sTarget);
                         File.Move(sSource, sTarget);
                     }
                 }                
@@ -886,10 +894,11 @@ namespace DCS_ConfigMgmt
             {
                 if((sBranch.Contains("current") & Properties.Settings.Default.bFirstUseVRCurrent) | (sBranch.Contains("alpha") & Properties.Settings.Default.bFirstUseVRAlpha) | (sBranch.Contains("beta") & Properties.Settings.Default.bFirstUseVRBeta))
                 {
-                    //hmm
+                    log.Warn("Moving/copy file failed - might be expected though! " + e.Message);
                 }
                 else
                 {
+                    log.Fatal("Moving/copy file failed unexpectedly! " + e.Message + " || " + sBranch + " || " + sSource + " -> " + sTarget);
                     System.Windows.Forms.MessageBox.Show(e.Message + "\n" + sBranch + " || " + sSource + " -> " + sTarget + "\n\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
                 }
                 
@@ -905,6 +914,7 @@ namespace DCS_ConfigMgmt
         {
             //Possible option:
             //current, currentvr, alpha, alphavr, beta, betavr
+            log.Debug("Startup handler called with " + sStartOption);
 
             if (sStartOption == "current")
             {
@@ -961,8 +971,12 @@ namespace DCS_ConfigMgmt
         //
         private void DCSStarter(string branch)
         {
+            log.Debug("DCS starter called with " + branch);
+
             try
             {
+                log.Info("Starting DCS with " + GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
+
                 Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
             }
             catch { }
@@ -982,10 +996,15 @@ namespace DCS_ConfigMgmt
         //
         private void AppShortcutToDesktop(string branch)
         {
+            log.Debug("AppShortcutToDesktop called with " + branch);
+
             branch = branch.ToLower();
 
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string appDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.exe";
+            string appDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manager.exe";
+
+            log.Debug("deskDir " + deskDir);
+            log.Debug("appDir " + appDir);
 
             string linkDesc = "Changes your DCS " + branch + " configuration to non VR and starts it";
             string linkDescVR = "Changes your DCS " + branch + " configuration to VR and starts it";
@@ -1031,7 +1050,6 @@ namespace DCS_ConfigMgmt
             string linkName = "DCS " + branch + ".lnk";
             string linkNameVR = "DCS " + branch + " VR.lnk";
 
-            
 
             IShellLink link = (IShellLink)new ShellLink();
 
@@ -1082,7 +1100,8 @@ namespace DCS_ConfigMgmt
 
                     Properties.Settings.Default.bSawConfigWarning = true;
                     Properties.Settings.Default.Save();
-                }
+                    CopyConfig("save");
+            }
         }
 
         //
@@ -1099,13 +1118,19 @@ namespace DCS_ConfigMgmt
         //
         private void CopyConfig(string action)
         {
+            log.Debug("Copyconfig called with " + action);
+
             var currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
             string globalConfig = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\user.config";
 
+            log.Debug("currentconfig at " + currentConfig.FilePath);
+            log.Debug("globalCOnfig at " + globalConfig);
+
             try
             {
-                if(action =="save")
+                if(action == "save")
                 {
+                    log.Debug("Saving - Copying current config to global.");
                     File.Copy(currentConfig.FilePath, globalConfig, true);
                 }
                 else
@@ -1113,18 +1138,23 @@ namespace DCS_ConfigMgmt
                     //Lazy hack lol
                     if (File.Exists(globalConfig))
                     {
+                        log.Debug("Loading - Global config exists.");
                         if (!Directory.Exists(currentConfig.FilePath) & !File.Exists(currentConfig.FilePath))
                         {
+                            log.Debug("App config doesn't exist - creating path.");
                             Directory.CreateDirectory(currentConfig.FilePath);
                             Directory.Delete(currentConfig.FilePath);
                         }
+                        log.Debug("Copying global config to app.");
                         File.Copy(globalConfig, currentConfig.FilePath, true);
                     }
+                    else { log.Debug("Global config doesn't exist - skipping."); }
                 }
                 
             }
             catch (Exception reeeeeeeeeeeee)
             {
+                log.Fatal("Copy config failed. " + action + " || " + reeeeeeeeeeeee.Message);
                 System.Windows.Forms.MessageBox.Show(reeeeeeeeeeeee.Message + "\n\nWatch EKRAN!\n\nCouldn't copy program settings from/to AppData (Action: " + action + "). Please report on my GitHub page, thanks!");
             }
         }
@@ -1134,6 +1164,7 @@ namespace DCS_ConfigMgmt
         //
         private void CheckOptionsLua(string branch)
         {
+            log.Debug("CheckOptionLUA Called. " + branch);
             //Prepare stuff 
             object objNull = null;
             RoutedEventArgs reeNull = null;
@@ -1154,19 +1185,21 @@ namespace DCS_ConfigMgmt
             {
                 sLuaPath = Properties.Settings.Default.sPathBeta + "\\config\\options.lua";
             }
+            log.Info("sLuaPath = " + sLuaPath);
 
-
-            //if(File.Exists(sLuaPath))
-            //{
+            if (File.Exists(sLuaPath))
+            {
+                log.Debug("Options.lua exists, going forward...");
                 //Read the content
                 string[] sContent = null;
                 try
                 {
                     sContent = File.ReadAllLines(sLuaPath);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    Panic("Something is wrong with your options.lua - " + branch + " Readline part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
+                    log.Fatal("Reading options.lua failed");
+                    PanicLUA("Something is wrong with your options.lua - " + branch + " Readline part\n\n" + e.Message, branch);
                 }
 
                 //Search for VR setting in file
@@ -1179,19 +1212,25 @@ namespace DCS_ConfigMgmt
 
                 if (sContent != null)
                 {
+                    log.Debug("Content exists, searching for VR options");
                     //This is a shit implementation but I am too lazy to integrate a Lua reader
                     try
                     {
                         iLineOn = Array.IndexOf(sContent, sVRon);
                         iLineOff = Array.IndexOf(sContent, sVRoff);
+                        log.Debug("Line on = " + iLineOn);
+                        log.Debug("Line off = " + iLineOff);
                     }
                     catch (Exception e)
                     {
-                        Panic("Something is wrong with your options.lua - " + branch + " Array Index part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
+                        log.Fatal("Array IndexOf crashed the ting.");
+                        PanicLUA("Something is wrong with your options.lua - " + branch + " Array Index part\n\n" + e.Message, branch);
+                        return;
                     }
 
                     if (iLineOff > iLineOn)
                     {
+                        log.Info("VR was off, switching through.");
                         //Simulate button press to initiate the copying of the current config
                         switch (branch)
                         {
@@ -1210,9 +1249,9 @@ namespace DCS_ConfigMgmt
                         iLineToWrite = iLineOff;
                         sLineToWrite = sVRon;
                     }
-                    else if(iLineOff < iLineOn)
+                    else if (iLineOff < iLineOn)
                     {
-                        //System.Windows.Forms.MessageBox.Show("On");
+                        log.Info("VR was on, switching through.");
                         //Simulate button press to initiate the copying of the current config
                         switch (branch)
                         {
@@ -1234,42 +1273,49 @@ namespace DCS_ConfigMgmt
 
                     //Write the file back with the opposite configuration
 
-                    if(iLineToWrite != -1 & iLineToWrite != 0)
+                    if (iLineToWrite != -1 & iLineToWrite != 0)
                     {
                         try
                         {
+                            log.Debug("Trying to write options.lua");
                             sContent[iLineToWrite] = sLineToWrite;
                             File.WriteAllLines(sLuaPath, sContent);
                         }
                         catch (Exception e)
                         {
-                            Panic("Something is wrong with your options.lua - " + branch + " Writefile part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!\n\n" + e.Message);
+                            log.Fatal("Trying to write options.lua failed (writefile) || " + e.Message);
+                            PanicLUA("Something is wrong with your options.lua - " + branch + " Writefile part\n\n" + e.Message, branch);
+                            return;
                         }
                     }
                     else
                     {
-                        Panic("Something is wrong with your options.lua - " + branch + " Writeback part - That's bad. Did you ever edit them with notepad? You may need to delete it and let DCS create a new one!");
+                        log.Fatal("Trying to write options.lua failed (writeback) || " + branch);
+                        PanicLUA("Something is wrong with your options.lua - " + branch + " Writeback part", branch);
+                        return;
                     }
-               
+
 
                     //Switch back to original config to avoid confusion (especially for nonVR users)
                     if (iLineOff > iLineOn)
                     {
+                        log.Debug("Switching back to nonVR for " + branch);
                         switch (branch)
                         {
                             case "current":
-                                Button_load_nonvr_current_Click(objNull, reeNull); 
+                                Button_load_nonvr_current_Click(objNull, reeNull);
                                 break;
                             case "alpha":
-                                Button_load_nonvr_alpha_Click(objNull, reeNull); 
+                                Button_load_nonvr_alpha_Click(objNull, reeNull);
                                 break;
                             case "beta":
-                                Button_load_nonvr_beta_Click(objNull, reeNull); 
+                                Button_load_nonvr_beta_Click(objNull, reeNull);
                                 break;
                         }
                     }
                     else if (iLineOff < iLineOn)
                     {
+                        log.Debug("Switching back to VR for " + branch);
                         switch (branch)
                         {
                             case "current":
@@ -1286,13 +1332,20 @@ namespace DCS_ConfigMgmt
                 }
                 else
                 {
-                    Panic("Something went wrong! Your options.lua was not found! - " + branch);
+                    //log.Fatal("Options.lua not found || " + branch);
+                    //Panic("Something went wrong! Your options.lua was not found! - " + branch);
+                    log.Fatal("Options.lua not found but we did not panic. Resetting that directory. || " + branch);
+                    PanicLUA("Options.lua not found! - " + branch + " Writeback part", branch);
+                    return;
                 }
-            //}
-            //else
-            //{
-            //    //File wasn't found, so we think the branch isn't installed
-            //}
+            }
+            else
+            {
+                //File wasn't found, so we think the branch isn't installed
+                log.Fatal("Options.lua not found but we did not panic. Resetting that directory. || " + branch);
+                PanicLUA("Options.lua not found! - " + branch + " Writeback part", branch);
+                return;
+            }
         }
 
         //
@@ -1301,6 +1354,7 @@ namespace DCS_ConfigMgmt
         private void LabelResetSettings_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             System.Windows.Forms.MessageBox.Show("Don't know why you touched this - but okay. Wish granted!", "Watch EKRAN!");
+            log.Info("Reset called");
             //Delete settings & save to clone
             Properties.Settings.Default.Reset();
             CopyConfig("save");
@@ -1310,15 +1364,35 @@ namespace DCS_ConfigMgmt
         //
         //Panic button
         //
-        private void Panic(string message)
+        private void PanicLUA(string message, string branch)
         {
-            string basemessage = "PULL UP! PULL UP!\n\nWe ran into a problem here, I'm sorry for that. Please be so kind and create an issue on GitHub or reach out to me in other forms.\nI'll shut down now and reset my settings. What happened? This:\n\n";
+            log.Fatal("Panic called! " + message);
 
-            System.Windows.Forms.MessageBox.Show(basemessage + message,"Watch EKRAN!");
-            //Delete settings & save to clone
-            Properties.Settings.Default.Reset();
-            CopyConfig("save");
-            Process.GetCurrentProcess().Kill();
+            //Prepare stuff 
+            object objNull = null;
+            RoutedEventArgs reeNull = null;
+
+            //string basemessage = "PULL UP! PULL UP!\n\nWe ran into a problem here, I'm sorry for that. Please be so kind and create an issue on GitHub or reach out to me in other forms.\nI'll shut down now and reset my settings. What happened? This:\n\n";
+
+            //System.Windows.Forms.MessageBox.Show(basemessage + message,"Watch EKRAN!");
+            ////Delete settings & save to clone
+            //Properties.Settings.Default.Reset();
+            //CopyConfig("save");
+            //Process.GetCurrentProcess().Kill();
+
+            log.Fatal("Panic: " + message + " || " + branch);
+            switch (branch)
+            {
+                case "current":
+                    Button_dcsdir_current_remove_Click(objNull, reeNull);
+                    break;
+                case "alpha":
+                    Button_dcsdir_alpha_remove_Click(objNull, reeNull);
+                    break;
+                case "beta":
+                    Button_dcsdir_beta_remove_Click(objNull, reeNull);
+                    break;
+            }
         }
 
 
