@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:DCS_ConfigMgmt"
         mc:Ignorable="d"
          Title="SplashWindow" Height="100" Width="547.714"
-        
-        
-          
                       ResizeMode="NoResize" WindowStyle="None"  
                       WindowStartupLocation="CenterScreen" 
                       Background="#FF2B2B2B" 
