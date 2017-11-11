@@ -26,8 +26,13 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>https://raw.githubusercontent.com/TheFitzZZ/DCS-Config-Manager/master/DCS-ConfigMgmt/publish/</UpdateUrl>
+    <SupportUrl>https://github.com/TheFitzZZ/DCS-Config-Manager</SupportUrl>
+    <ErrorReportUrl>https://github.com/TheFitzZZ/DCS-Config-Manager/issues</ErrorReportUrl>
+    <ProductName>DCS Configuration Manager</ProductName>
+    <PublisherName>FitzZZ</PublisherName>
+    <SuiteName>DCS Toolbox</SuiteName>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>74</ApplicationRevision>
+    <ApplicationRevision>75</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
