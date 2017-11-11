@@ -1,6 +1,6 @@
 # DCS Configuration Manager
 
-### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 R2
+### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 R3
 **SmartScreen will still tell you it's not signed ... even though it is :-( - Will try to fix this asap**
 
 ### What's this?
