@@ -1403,5 +1403,20 @@ namespace DCS_ConfigMgmt
         {
             textBox.Focus();
         }
+
+        //
+        //Open Lofgile
+        //
+        private void LabelLogfile_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            log.Debug("Open log called");
+
+            try
+            {
+                string globalLog = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCSCM.log";
+                Process.Start(globalLog);
+            }
+            catch { }
+        }
     }
 }

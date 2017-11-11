@@ -35,6 +35,7 @@
                         <Hyperlink Foreground="White" NavigateUri="https://www.reddit.com/user/The_FitzZZ/" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">PM me on Reddit</Hyperlink>
                     </TextBlock>
                     <Label x:Name="labelResetSettings" Content="Reset settings" HorizontalAlignment="Left" Margin="483,181,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDoubleClick="LabelResetSettings_MouseDoubleClick"/>
+                    <Label x:Name="labelLogfile" Content="Open Log" HorizontalAlignment="Left" Margin="424,181,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDown="LabelLogfile_MouseDown"/>                    
                     <Label x:Name="labelVersion" Content="Label" HorizontalAlignment="Left" Margin="0,182,0,0" VerticalAlignment="Top" Foreground="#FF4D4B4D" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
@@ -80,7 +81,7 @@
                     <Image x:Name="image3" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Current.png"/>
                     <Image x:Name="image3_Copy" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="61" Margin="10,77,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Alpha.png"/>
                     <Image x:Name="image3_Copy1" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="61" Margin="10,144,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Beta.png" SnapsToDevicePixels="True"/>
-                    <TextBox x:Name="textBox_Settings_Info" HorizontalAlignment="Left" Height="195" Margin="380,10,0,0" TextWrapping="Wrap" Text="This sets the paths to the configuration folders, typically in &quot;Saved Games&quot;.&#xD;&#xA;&#xD;&#xA;!!NOT THE INSTALLATION DIRECTORY OF DCS!!&#xA;&#xA;I tried to detect your DCS config directories and most of you should be fine. &#xA;" VerticalAlignment="Top" Width="174" TextDecorations="{x:Null}"/>
+                    <TextBox x:Name="textBox_Settings_Info" HorizontalAlignment="Left" Height="195" Margin="380,10,0,0" TextWrapping="Wrap" Text="This sets the paths to the configuration folders, typically in &quot;Saved Games&quot;.&#xA;&#xA;!!NOT THE INSTALLATION DIRECTORY OF DCS!!&#xA;&#xA;If it sais &quot;Not found&quot; but you expect it to be there, the app couldn't find/understand your options. Check DCMCM.log&#xA;" VerticalAlignment="Top" Width="174" TextDecorations="{x:Null}"/>
                     <Button x:Name="button_dcsdir_current_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,11,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_current_remove_Click"/>
                     <Button x:Name="button_dcsdir_alpha_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,77,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_alpha_remove_Click"/>
                     <Button x:Name="button_dcsdir_beta_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,144,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_beta_remove_Click"/>
