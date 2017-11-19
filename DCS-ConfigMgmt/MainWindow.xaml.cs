@@ -1001,7 +1001,7 @@ namespace DCS_ConfigMgmt
             branch = branch.ToLower();
 
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string appDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manager.exe";
+            string appDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.exe";
 
             log.Debug("deskDir " + deskDir);
             log.Debug("appDir " + appDir);
