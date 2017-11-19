@@ -32,7 +32,7 @@
     <PublisherName>FitzZZ</PublisherName>
     <SuiteName>DCS Toolbox</SuiteName>
     <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -176,7 +176,9 @@
     <None Include="DigiCert_CodeSigning_2017.pfx" />
     <None Include="Installer\DCSCM-Setup.zip" />
     <None Include="Installer\Release-Portable-R2.zip" />
-    <Resource Include="Icons\DCS_Rainbow_Putin.ico" />
+    <Content Include="Icons\DCS_Rainbow_Putin.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
