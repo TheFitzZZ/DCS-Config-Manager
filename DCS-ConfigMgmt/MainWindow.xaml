@@ -56,6 +56,10 @@
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                 </Grid>
             </TabItem>
+            <TabItem Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabItem_GotFocus_SharedControls">
+                <Grid Background="#FF3F3F46" Margin="10,0,0,0">
+                </Grid>
+            </TabItem>
             <TabItem Header="VR Config" Padding="1,2,6,2" Margin="7,0,-7,0">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                     <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_current_Click"/>
