@@ -34,7 +34,7 @@
                         <Hyperlink Foreground="White" NavigateUri="https://www.reddit.com/user/The_FitzZZ/" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">PM me on Reddit</Hyperlink>
                     </TextBlock>
                     <Label x:Name="labelResetSettings" Content="Reset settings" HorizontalAlignment="Left" Margin="483,181,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDoubleClick="LabelResetSettings_MouseDoubleClick"/>
-                    <Label x:Name="labelLogfile" Content="Open Log" HorizontalAlignment="Left" Margin="424,181,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDown="LabelLogfile_MouseDown"/>                    
+                    <Label x:Name="labelLogfile" Content="Open Log" HorizontalAlignment="Left" Margin="424,181,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDown="LabelLogfile_MouseDown"/>
                     <Label x:Name="labelVersion" Content="Label" HorizontalAlignment="Left" Margin="0,182,0,0" VerticalAlignment="Top" Foreground="#FF4D4B4D" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
@@ -59,6 +59,7 @@
             <TabItem Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabItem_GotFocus_SharedControls">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                     <Button Content="Get Audio Devices" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Click="ButtonGetAudioDevices_Click"/>
+                    <ListBox x:Name="ListboxOutput" HorizontalAlignment="Left" Height="102" Margin="10,52,0,0" VerticalAlignment="Top" Width="554"/>
                 </Grid>
             </TabItem>
             <TabItem Header="VR Config" Padding="1,2,6,2" Margin="7,0,-7,0">

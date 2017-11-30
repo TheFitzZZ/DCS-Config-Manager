@@ -1421,7 +1421,11 @@ namespace DCS_ConfigMgmt
 
         private void ButtonGetAudioDevices_Click(object sender, RoutedEventArgs e)
         {
-            Soundswitcher.GetAudioDevices("input");
+            
+
+            
+
+            ListboxOutput.ItemsSource = Soundswitcher.GetAudioDevices("input");
         }
     }
 }
