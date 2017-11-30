@@ -1418,5 +1418,10 @@ namespace DCS_ConfigMgmt
             }
             catch { }
         }
+
+        private void ButtonGetAudioDevices_Click(object sender, RoutedEventArgs e)
+        {
+            Soundswitcher.GetAudioDevices("input");
+        }
     }
 }

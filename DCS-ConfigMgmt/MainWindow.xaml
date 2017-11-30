@@ -58,6 +58,7 @@
             </TabItem>
             <TabItem Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabItem_GotFocus_SharedControls">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
+                    <Button Content="Get Audio Devices" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Click="ButtonGetAudioDevices_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="VR Config" Padding="1,2,6,2" Margin="7,0,-7,0">

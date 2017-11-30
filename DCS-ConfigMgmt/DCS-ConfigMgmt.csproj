@@ -130,6 +130,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="soundswitcher.cs" />
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
@@ -174,8 +175,17 @@
     </EmbeddedResource>
     <None Include="DCS-ConfigMgmt_TemporaryKey.pfx" />
     <None Include="DigiCert_CodeSigning_2017.pfx" />
+    <Content Include="ExternalTools\NirCmd.chm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Installer\DCSCM-Setup.zip" />
     <None Include="Installer\Release-Portable-R2.zip" />
+    <Content Include="ExternalTools\nircmd.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ExternalTools\nircmdc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\DCS_Rainbow_Putin.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
