@@ -13,6 +13,7 @@
                       BorderBrush="#FF96ACC0">
     <Grid>
         <Image x:Name="image_SplashWindow" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="Resources/DCS_Icon_Current.png"/>
-        <Label x:Name="label_SplashWindow" Content="Starting DCS Current VR" HorizontalAlignment="Left" Margin="104,17,0,0" VerticalAlignment="Top" Height="69" Width="433" FontWeight="Bold" FontSize="36" Foreground="White"/>
+        <Label x:Name="label_SplashWindow" Content="Starting DCS Current VR" HorizontalAlignment="Left" Margin="104,17,0,0" VerticalAlignment="Top" Height="60" Width="433" FontWeight="Bold" FontSize="36" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="109,74,0,0" TextWrapping="Wrap" Text="If you used the sound device switcher, this will stay open until DCS closes!" VerticalAlignment="Top" Foreground="White" FontSize="10"/>
     </Grid>
 </Window>

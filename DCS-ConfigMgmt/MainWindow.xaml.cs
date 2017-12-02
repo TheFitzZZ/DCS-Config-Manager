@@ -101,6 +101,10 @@ namespace DCS_ConfigMgmt
             log.Info("bManualPathCurrent = " + Properties.Settings.Default.bManualPathCurrent);
             log.Info("bManualPathAlpha = " + Properties.Settings.Default.bManualPathAlpha);
             log.Info("bManualPathBeta = " + Properties.Settings.Default.bManualPathBeta);
+            log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundInput);
+            log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundInputRevert);
+            log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundOutput);
+            log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundOutputRevert);
 
             //// Prefilling all DCS directories
             // Get DCS directories if settings are empty
@@ -279,7 +283,24 @@ namespace DCS_ConfigMgmt
             else if (Properties.Settings.Default.bFirstUseVRAlpha & Properties.Settings.Default.sPathAlpha != "Not found.")
             {
                 CheckOptionsLua("alpha");
-            }   
+            }
+
+            //Initialize soundswitcher
+            Soundswitcher.Initialize();
+            ListboxInput.ItemsSource = Soundswitcher.GetAudioDevices("input");
+            ListboxOutput.ItemsSource = Soundswitcher.GetAudioDevices("output");
+            textCurrentInput.Text = Properties.Settings.Default.sSoundInput;
+            textCurrentOutput.Text = Properties.Settings.Default.sSoundOutput;
+
+            //Debug
+            //System.Windows.Forms.MessageBox.Show(Soundswitcher.GetStandardSoundDevice("input"));
+            //System.Windows.Forms.MessageBox.Show(Soundswitcher.GetStandardSoundDevice("output"));
+            //Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundOutput);
+
+            //Get current standard devices
+            Properties.Settings.Default.sSoundInputRevert = Soundswitcher.GetStandardSoundDevice("input");
+            Properties.Settings.Default.sSoundOutputRevert = Soundswitcher.GetStandardSoundDevice("output");
+
 
             //
             // Automated startup
@@ -291,10 +312,20 @@ namespace DCS_ConfigMgmt
 
                 //Start the handler
                 log.Debug("Calling startup handler");
+                if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
+                {
+                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundOutput);
+                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundInput);
+                }
                 StartupHandler(sStartOption);
+                if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
+                {
+                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundOutputRevert);
+                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundInputRevert);
+                }
 
                 //We're done, exit.
-                log.Info("Exiting after DCS start");
+                log.Info("Exiting after DCS end");
                 System.Windows.Application.Current.Shutdown();
             }
 
@@ -977,7 +1008,11 @@ namespace DCS_ConfigMgmt
             {
                 log.Info("Starting DCS with " + GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
 
-                Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
+                var process = Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
+                if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
+                {
+                    process.WaitForExit();
+                }
             }
             catch { }
         }
@@ -1419,13 +1454,34 @@ namespace DCS_ConfigMgmt
             catch { }
         }
 
-        private void ButtonGetAudioDevices_Click(object sender, RoutedEventArgs e)
+        private void ListboxOutput_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            
+            log.Debug("Sound Switcher selection changed for output: " + ListboxOutput.SelectedValue.ToString());
+            textCurrentOutput.Text = ListboxOutput.SelectedValue.ToString();
+            Properties.Settings.Default.sSoundOutput = ListboxOutput.SelectedValue.ToString();
+            Properties.Settings.Default.Save();
+            CopyConfig("save");
+        }
 
-            
+        private void ListboxInput_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            log.Debug("Sound Switcher selection changed for input: " + ListboxInput.SelectedValue.ToString());
+            textCurrentInput.Text = ListboxInput.SelectedValue.ToString();
+            Properties.Settings.Default.sSoundInput = ListboxInput.SelectedValue.ToString();
+            Properties.Settings.Default.Save();
+            CopyConfig("save");
+        }
 
-            ListboxOutput.ItemsSource = Soundswitcher.GetAudioDevices("input");
+        private void ButtonResetSettingsSoundSwitcher_Click(object sender, RoutedEventArgs e)
+        {
+            log.Debug("Sound Switcher selection reset called");
+            textCurrentOutput.Text = "";
+            textCurrentInput.Text = "";
+
+            Properties.Settings.Default.sSoundInput = "";
+            Properties.Settings.Default.sSoundOutput = "";
+            Properties.Settings.Default.Save();
+            CopyConfig("save");
         }
     }
 }

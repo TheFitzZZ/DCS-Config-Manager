@@ -202,5 +202,53 @@ namespace DCS_ConfigMgmt.Properties {
                 this["bManualPathBeta"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sSoundInput {
+            get {
+                return ((string)(this["sSoundInput"]));
+            }
+            set {
+                this["sSoundInput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sSoundOutput {
+            get {
+                return ((string)(this["sSoundOutput"]));
+            }
+            set {
+                this["sSoundOutput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sSoundInputRevert {
+            get {
+                return ((string)(this["sSoundInputRevert"]));
+            }
+            set {
+                this["sSoundInputRevert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sSoundOutputRevert {
+            get {
+                return ((string)(this["sSoundOutputRevert"]));
+            }
+            set {
+                this["sSoundOutputRevert"] = value;
+            }
+        }
     }
 }
