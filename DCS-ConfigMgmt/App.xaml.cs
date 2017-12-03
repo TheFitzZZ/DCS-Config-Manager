@@ -53,7 +53,7 @@ namespace DCS_ConfigMgmt
 
             
             //Debug
-            //sStartOption = "current";
+            sStartOption = "currentvr";
 
             if (sStartOption == "")
             {
@@ -120,26 +120,6 @@ namespace DCS_ConfigMgmt
 
             log.Info("Clone directory = " + deskDir);
             log.Info("App directory = " + appDir);
-
-            //Delete old stuff
-            //try
-            //{
-            //    if(File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.exe"))
-            //    {
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.exe");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.manifest");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\DCSConfMgr\\DCS Configuration Manger.application");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DCS current.lnk");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DCS current VR.lnk");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DCS alpha.lnk");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DCS alpha VR.lnk");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DCS beta.lnk");
-            //        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\DCS beta VR.lnk");
-            //    }
-                
-            //}
-            //catch { }
-
 
             try
             {

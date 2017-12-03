@@ -1011,7 +1011,17 @@ namespace DCS_ConfigMgmt
                 var process = Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
                 if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
                 {
+                    //Wait for the updater to close
                     process.WaitForExit();
+                    //System.Threading.Thread.Sleep(10000);
+                    //Catch the dcs executable
+                    var processDCS = Process.GetProcessesByName("DCS");
+                    foreach (var process2 in Process.GetProcesses())
+                    {
+                        Console.WriteLine(process2.ProcessName);
+                    }
+                    //Wait for it to close
+                    processDCS[0].WaitForExit();
                 }
             }
             catch { }
@@ -1482,6 +1492,11 @@ namespace DCS_ConfigMgmt
             Properties.Settings.Default.sSoundOutput = "";
             Properties.Settings.Default.Save();
             CopyConfig("save");
+        }
+
+        private void TabSoundSwitcher_GotFocus(object sender, RoutedEventArgs e)
+        {
+           Soundswitcher.FixSoundNames();
         }
     }
 }

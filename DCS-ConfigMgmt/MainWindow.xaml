@@ -23,14 +23,14 @@
 
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="331" VerticalAlignment="Top" Width="852" Foreground="#FF3F3F46" TabStripPlacement="Left" Margin="-2,-2,-5,-2">
-            <TabItem Header="About" Margin="7,0,-7,0">
+            <TabItem Header="About" Margin="4,0,-7,0">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
-                    <Image x:Name="image924thLogo" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="169" Margin="10,20,0,0" VerticalAlignment="Top" Width="162" Source="Resources/j9241.png" Stretch="Fill"/>
-                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="144" Width="382" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version "/><Run FontWeight="Bold" FontSize="16" Text="2017 "/><Run FontWeight="Bold" FontSize="16" Text="R"/><Run FontWeight="Bold" FontSize="16" Text="4"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Please p"/><Run Text="ost issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
-                    <TextBlock Margin="189,169,326,139" FontWeight="Bold" Foreground="White">          
+                    <Image x:Name="image924thLogo" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="246" Margin="10,0,0,0" VerticalAlignment="Top" Width="236" Source="Resources/j9241.png" Stretch="Fill"/>
+                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="251,12,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="144" Width="320" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version "/><Run FontWeight="Bold" FontSize="16" Text="2017 "/><Run FontWeight="Bold" FontSize="16" Text="R"/><Run FontWeight="Bold" FontSize="16" Text="4"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Please p"/><Run Text="ost issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
+                    <TextBlock Margin="251,161,264,147" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://github.com/TheFitzZZ/DCS-Config-Manager" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">Visit GitHub project</Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="328,169,199,139" FontWeight="Bold" Foreground="White">          
+                    <TextBlock Margin="454,161,73,147" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://www.reddit.com/user/The_FitzZZ/" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">PM me on Reddit</Hyperlink>
                     </TextBlock>
                     <Label x:Name="labelResetSettings" Content="Reset settings" HorizontalAlignment="Left" Margin="500,294,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDoubleClick="LabelResetSettings_MouseDoubleClick"/>
@@ -51,26 +51,8 @@
                     <Image x:Name="image1_Copy1" RenderOptions.BitmapScalingMode="HighQuality"  HorizontalAlignment="Left" Height="88" Margin="231,10,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Beta.png" SnapsToDevicePixels="True"/>
                     <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="195" Margin="342,10,0,0" TextWrapping="Wrap" Text="Shared control mappings!&#xA;&#xA;You can share your input mappings beween your DCS instances by choosing one as your &quot;master&quot;.&#xD;&#xA;&#xD;&#xA;Step 1: mark &quot;master&quot; DCS instance&#xD;&#xA;Step 2: click &quot;share controls&quot;&#xD;&#xA;&#xD;&#xA;Note: your old mappings are backed up and can be restored by unsharing.&#xA;" VerticalAlignment="Top" Width="212"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Shared Logbooks" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabItem_GotFocus_SharedControls">
-                <Grid Background="#FF3F3F46" Margin="10,0,0,0">
-                </Grid>
-            </TabItem>
-            <TabItem x:Name="TabSoundSwitcher" Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0">
-                <Grid Background="#FF3F3F46" Margin="10,0,0,0">
-                    <Button x:Name="ButtonResetSettingsSoundSwitcher" Content="Reset settings" HorizontalAlignment="Left" Margin="473,289,0,0" VerticalAlignment="Top" Width="92" Click="ButtonResetSettingsSoundSwitcher_Click"/>
-                    <ListBox x:Name="ListboxOutput" HorizontalAlignment="Left" Height="102" Margin="10,34,0,0" VerticalAlignment="Top" Width="386" SelectionChanged="ListboxOutput_SelectionChanged"/>
-                    <ListBox x:Name="ListboxInput" HorizontalAlignment="Left" Height="95" Margin="10,189,0,0" VerticalAlignment="Top" Width="386" SelectionChanged="ListboxInput_SelectionChanged"/>
-                    <TextBox x:Name="textBoxSoundSwitcherHelptext" HorizontalAlignment="Left" Height="250" Margin="401,34,0,0" TextWrapping="Wrap" Text="Change standard audio devices when playing in VR!&#xA;&#xA;As not all headsets automatically use SteamVR, this will allow you to change up what you standard in- and output device will be for the game session.&#xD;&#xA;&#xD;&#xA;Only activated when VR shortcut is used.&#xD;&#xA;&#xD;&#xA;Will revert after DCS closes.&#xA;" VerticalAlignment="Top" Width="164"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Playback devices:" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"><Run Text="Recording"/><Run Text=" devices:"/></TextBlock>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19"><Run Text="Currently selected device:"/><LineBreak/><Run/></TextBlock>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19"><Run Text="Currently selected device:"/><LineBreak/><Run/></TextBlock>
-                    <TextBlock x:Name="textCurrentOutput" HorizontalAlignment="Left" Margin="150,141,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="246"/>
-                    <TextBlock x:Name="textCurrentInput" HorizontalAlignment="Left" Margin="150,289,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="246"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="VR Config" Padding="1,2,6,2" Margin="7,0,-7,0">
+            </TabItem>   
+            <TabItem Header="VR Configuration" Padding="1,2,6,2" Margin="7,0,-7,0">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                     <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_current_Click"/>
                     <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_current_Click"/>
@@ -85,6 +67,20 @@
                     <Button x:Name="buttonCreate_Shortcut_Current" Content="Create Shortcut" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="87" FontSize="8" Click="ButtonCreate_Shortcut_Current_Click"/>
                     <Button x:Name="buttonCreate_Shortcut_Alpha" Content="Create Shortcut" HorizontalAlignment="Left" Margin="127,176,0,0" VerticalAlignment="Top" Width="87" FontSize="8" Click="ButtonCreate_Shortcut_Alpha_Click"/>
                     <Button x:Name="buttonCreate_Shortcut_Beta" Content="Create Shortcut" HorizontalAlignment="Left" Margin="248,175,0,0" VerticalAlignment="Top" Width="87" FontWeight="Bold" FontSize="8" Click="ButtonCreate_Shortcut_Beta_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabSoundSwitcher" Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabSoundSwitcher_GotFocus">
+                <Grid Background="#FF3F3F46" Margin="10,0,0,0">
+                    <Button x:Name="ButtonResetSettingsSoundSwitcher" Content="Reset settings" HorizontalAlignment="Left" Margin="473,289,0,0" VerticalAlignment="Top" Width="92" Click="ButtonResetSettingsSoundSwitcher_Click"/>
+                    <ListBox x:Name="ListboxOutput" HorizontalAlignment="Left" Height="102" Margin="10,34,0,0" VerticalAlignment="Top" Width="386" SelectionChanged="ListboxOutput_SelectionChanged"/>
+                    <ListBox x:Name="ListboxInput" HorizontalAlignment="Left" Height="95" Margin="10,189,0,0" VerticalAlignment="Top" Width="386" SelectionChanged="ListboxInput_SelectionChanged"/>
+                    <TextBox x:Name="textBoxSoundSwitcherHelptext" HorizontalAlignment="Left" Height="250" Margin="401,34,0,0" TextWrapping="Wrap" Text="Change standard audio devices when playing in VR!&#xA;&#xA;As not all headsets automatically use SteamVR, this will allow you to change up what you standard in- and output device will be for the game session.&#xD;&#xA;&#xD;&#xA;Only activated when VR shortcut is used.&#xD;&#xA;&#xD;&#xA;Will revert after DCS closes.&#xA;" VerticalAlignment="Top" Width="164"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Playback devices:" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"><Run Text="Recording"/><Run Text=" devices:"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19"><Run Text="Currently selected device:"/><LineBreak/><Run/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19"><Run Text="Currently selected device:"/><LineBreak/><Run/></TextBlock>
+                    <TextBlock x:Name="textCurrentOutput" HorizontalAlignment="Left" Margin="150,141,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="246"/>
+                    <TextBlock x:Name="textCurrentInput" HorizontalAlignment="Left" Margin="150,289,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="246"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Settings" GotFocus="TabItem_GotFocus" Padding="1,2,6,2" Margin="7,0,-7,0">
@@ -102,6 +98,10 @@
                     <Button x:Name="button_dcsdir_current_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,11,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_current_remove_Click"/>
                     <Button x:Name="button_dcsdir_alpha_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,77,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_alpha_remove_Click"/>
                     <Button x:Name="button_dcsdir_beta_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,144,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_beta_remove_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Shared Logbooks" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabItem_GotFocus_SharedControls" Visibility="Hidden">
+                <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                 </Grid>
             </TabItem>
 
