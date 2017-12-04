@@ -734,7 +734,7 @@ namespace DCS_ConfigMgmt
             }
             catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show(e.Message + "\nHow about you don't screw with the path?\nOkay, maybe it's my fault... JUST MAYBE\nBe so kind and open an issue on github via the support link.\nThanks!");
+                System.Windows.Forms.MessageBox.Show(e.Message + "\nWelllll there was an issue moving away your folder. It may still be fine.\nIf not: be so kind and open an issue on github via the support link or talk to me on Discord.\nThanks!");
             }
         }
         

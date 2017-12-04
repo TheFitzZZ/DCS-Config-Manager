@@ -53,7 +53,7 @@ namespace DCS_ConfigMgmt
 
             
             //Debug
-            sStartOption = "currentvr";
+            //sStartOption = "currentvr";
 
             if (sStartOption == "")
             {
