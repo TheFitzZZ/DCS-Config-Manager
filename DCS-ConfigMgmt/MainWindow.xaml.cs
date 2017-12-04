@@ -1496,7 +1496,7 @@ namespace DCS_ConfigMgmt
 
         private void TabSoundSwitcher_GotFocus(object sender, RoutedEventArgs e)
         {
-           Soundswitcher.FixSoundNames();
+           Soundswitcher.FixSoundNamesElevator();
         }
     }
 }

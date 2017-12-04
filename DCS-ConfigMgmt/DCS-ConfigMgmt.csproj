@@ -123,14 +123,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="JunctionPoint.cs" />
+    <Compile Include="Classes\ElevationHelper.cs" />
+    <Compile Include="Classes\JunctionPoint.cs" />
+    <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
-    <Compile Include="soundswitcher.cs" />
+    <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Classes\soundswitcher.cs" />
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>

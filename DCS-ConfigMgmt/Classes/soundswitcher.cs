@@ -79,9 +79,15 @@ namespace DCS_ConfigMgmt
 
         public static void Initialize()
         {
-            
-        }
 
+        }
+        public static void FixSoundNamesElevator()
+        {
+            if (ElevationHelper.Elevate())
+            {
+                FixSoundNames();
+            }
+        }
 
         //Check for identical named soud devices and number them to allow proper change
         public static void FixSoundNames()
@@ -100,7 +106,7 @@ namespace DCS_ConfigMgmt
             //Get Devicename from each one
             foreach (string sDevice in arrDevicesOutput)
             {
-                RegistryKey deviceregpath = hklmOutput.OpenSubKey(sDevice + @"\Properties");
+                RegistryKey deviceregpath = hklmOutput.OpenSubKey(sDevice + @"\Properties", true);
 
                 string isVisible = null;
                 string isDeactivated = null;
@@ -122,17 +128,14 @@ namespace DCS_ConfigMgmt
                     else
                     {
                         //Name is duplicated, we change it and add the new one to the list
-                        //deviceregpath.SetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2", "{a45c254e-df1c-4efd-8020-67d146a850e0},2" + "-");
-                        //arrNames.Add(deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString() + "-");
-                        System.Windows.Forms.MessageBox.Show("Duplicate sound device name detected. Please rename it yourself.\nJust right-click the speaker icon in the traybar and select either playback or recording devices. Doubleclick the device in question and give it a new name.\n" + deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString());
-
+                        
+                        deviceregpath.SetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2", "{a45c254e-df1c-4efd-8020-67d146a850e0},2" + "#");
+                        arrNames.Add(deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString() + "#");
+                        //System.Windows.Forms.MessageBox.Show("Duplicate sound device name detected. Please rename it yourself.\nJust right-click the speaker icon in the traybar and select either playback or recording devices. Doubleclick the device in question and give it a new name.\n" + deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString());
                     }
-
                 }
-
             }
-            
-            
+
             //Grab existing audio output device paths
 
             hklmInput = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture");
@@ -164,10 +167,10 @@ namespace DCS_ConfigMgmt
                     else
                     {
                         //Name is duplicated, we change it and add the new one to the list
-                        //deviceregpath.SetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2", "{a45c254e-df1c-4efd-8020-67d146a850e0},2" + "-");
-                        //arrNames.Add(deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString() + "-");
-                        System.Windows.Forms.MessageBox.Show("Duplicate sound device name detected. Please rename it yourself.\n\nJust right-click the speaker icon in the traybar and select either playback or recording devices. Doubleclick the device in question and give it a new name.\n\nDuplicate name:" + deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString());
-                        System.Windows.Forms.MessageBox.Show("Sorry for nagging - but also restart the app after renaming them, thanks :-)");
+                        deviceregpath.SetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2", "{a45c254e-df1c-4efd-8020-67d146a850e0},2" + "#");
+                        arrNames.Add(deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString() + "#");
+                        //System.Windows.Forms.MessageBox.Show("Duplicate sound device name detected. Please rename it yourself.\n\nJust right-click the speaker icon in the traybar and select either playback or recording devices. Doubleclick the device in question and give it a new name.\n\nDuplicate name:" + deviceregpath.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},2").ToString());
+                        //System.Windows.Forms.MessageBox.Show("Sorry for nagging - but also restart the app after renaming them, thanks :-)");
                     }
 
                 }
