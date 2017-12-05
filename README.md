@@ -1,13 +1,12 @@
 # DCS Configuration Manager
 
-### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 R3
-**SmartScreen will still tell you it's not signed ... even though it is :-( - Will try to fix this asap**
+### [Download](https://github.com/TheFitzZZ/DCS-Config-Manager/raw/master/DCS-ConfigMgmt/Installer/DCSCM-Setup.zip) current version 2017 R4
 
 ### What's this?
 The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files! The goal was to make you interact with the app itself as little as possible, as noone likes more overhead before you can go fly your sortie! Use it once, set everything up - done!
 
 
-![DCSCM](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/DCM.gif)
+![DCSCM](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/DCMR4.gif)
 
 
 ### Features:
@@ -15,6 +14,8 @@ The DCS Configuration Manager was created to make the tough DCS life a little ea
 Links your control settings of all your DCS instances to just one. No more import/export when you changed your mappings and switch from 1.5 to 2.0! (or to beta, or any direction really).
 - **VR configuration management!**
 Don't own a GeForce 1280ti yet? Need to turn down you GFX to play VR every time and switch it back later? Now you can change between VR and non-VR configurations with just one click in the app. Don't want to start the app? Let it create shortcuts for you, so you can directly launch the right version with the right configuration!
+- **Sound device switcher for VR users!**
+Users of VR headsets like the Oculus usually have to change sound output und input devices manually before starting DCS. The app now allows you to select what you want to switch to when you use the VR shortcut! Know what's even better? It will switch back to what it was when you started the game! Neat, right?
 
 - **Updater!** Starting the app will also check for updates, so you don't miss out on new features. Doesn't happen when you use the app created shortcuts, though. DCS startup times are long enough...
 
