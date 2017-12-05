@@ -102,9 +102,7 @@ namespace DCS_ConfigMgmt
             log.Info("bManualPathAlpha = " + Properties.Settings.Default.bManualPathAlpha);
             log.Info("bManualPathBeta = " + Properties.Settings.Default.bManualPathBeta);
             log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundInput);
-            log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundInputRevert);
             log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundOutput);
-            log.Info("bManualPathBeta = " + Properties.Settings.Default.sSoundOutputRevert);
 
             //// Prefilling all DCS directories
             // Get DCS directories if settings are empty
@@ -297,11 +295,7 @@ namespace DCS_ConfigMgmt
             //System.Windows.Forms.MessageBox.Show(Soundswitcher.GetStandardSoundDevice("output"));
             //Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundOutput);
 
-            //Get current standard devices
-            Properties.Settings.Default.sSoundInputRevert = Soundswitcher.GetStandardSoundDevice("input");
-            Properties.Settings.Default.sSoundOutputRevert = Soundswitcher.GetStandardSoundDevice("output");
-
-
+            
             //
             // Automated startup
             //
@@ -310,18 +304,22 @@ namespace DCS_ConfigMgmt
                 //Debug
                 //System.Windows.Forms.MessageBox.Show(sStartOption);
 
+                //Get the current standard sound devices
+                var originalPlaybackDevice = Soundswitcher.GetStandardSoundDevice("output");
+                var originalCaptureDevice = Soundswitcher.GetStandardSoundDevice("input");
+
                 //Start the handler
                 log.Debug("Calling startup handler");
                 if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
                 {
-                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundOutput);
-                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundInput);
+                    Soundswitcher.FindSoundDeviceByName("output", Properties.Settings.Default.sSoundOutput);
+                    Soundswitcher.FindSoundDeviceByName("input", Properties.Settings.Default.sSoundInput);
                 }
                 StartupHandler(sStartOption);
                 if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
                 {
-                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundOutputRevert);
-                    Soundswitcher.ChangeSoundDevice(Properties.Settings.Default.sSoundInputRevert);
+                    Soundswitcher.ChangeStandardSoundDevice(originalCaptureDevice);
+                    Soundswitcher.ChangeStandardSoundDevice(originalPlaybackDevice);
                 }
 
                 //We're done, exit.
@@ -1496,7 +1494,7 @@ namespace DCS_ConfigMgmt
 
         private void TabSoundSwitcher_GotFocus(object sender, RoutedEventArgs e)
         {
-           Soundswitcher.FixSoundNamesElevator();
+           
         }
     }
 }
