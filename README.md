@@ -6,7 +6,7 @@
 The DCS Configuration Manager was created to make the tough DCS life a little easier and help you with those pesky configuration files! The goal was to make you interact with the app itself as little as possible, as noone likes more overhead before you can go fly your sortie! Use it once, set everything up - done!
 
 
-![DCSCM](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/DCM.gif)
+![DCSCM](https://github.com/TheFitzZZ/DCS-Config-Manager/blob/master/DCMR4.gif)
 
 
 ### Features:
