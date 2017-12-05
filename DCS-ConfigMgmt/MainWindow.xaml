@@ -48,47 +48,55 @@
             </TabItem>
             <TabItem Header="Shared Controls" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabItem_GotFocus_SharedControls">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
-                    <RadioButton x:Name="radioButton_dcsdir_current" Content="" HorizontalAlignment="Left" Margin="55,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_current_Checked"/>
-                    <RadioButton x:Name="radioButton_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="167,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_alpha_Checked"/>
-                    <RadioButton x:Name="radioButton_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="277,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_beta_Checked"/>
+                    <GroupBox Header="Choose master DCS Instance" HorizontalAlignment="Left" Height="161" Margin="10,10,0,0" VerticalAlignment="Top" Width="338"/>
+                    <GroupBox Header="Share / unshare controls" HorizontalAlignment="Left" Height="85" Margin="10,176,0,0" VerticalAlignment="Top" Width="338"/>
+                    <RadioButton x:Name="radioButton_dcsdir_current" Content="" HorizontalAlignment="Left" Margin="55,142,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_current_Checked"/>
+                    <RadioButton x:Name="radioButton_dcsdir_alpha" Content="" HorizontalAlignment="Left" Margin="167,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_alpha_Checked"/>
+                    <RadioButton x:Name="radioButton_dcsdir_beta" Content="" HorizontalAlignment="Left" Margin="277,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.053,-0.2" GroupName="DCSPath" Checked="RadioButton_dcsdir_beta_Checked"/>
 
-                    <Button x:Name="button_linkcontrols" Content="Share controls" HorizontalAlignment="Left" Margin="55,157,0,0" VerticalAlignment="Top" Width="109" Click="Button_linkcontrols_Click" IsEnabled="False"/>
-                    <Button x:Name="button_unlinkcontrols" Content="Unshare controls" HorizontalAlignment="Left" Margin="188,157,0,0" VerticalAlignment="Top" Width="113" Click="Button_unlinkcontrols_Click" IsEnabled="False"/>
-                    <Image x:Name="image1" RenderOptions.BitmapScalingMode="HighQuality"  HorizontalAlignment="Left" Height="88" Margin="21,11,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Current.png"/>
-                    <Image x:Name="image1_Copy" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="88" Margin="133,11,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Alpha.png"/>
-                    <Image x:Name="image1_Copy1" RenderOptions.BitmapScalingMode="HighQuality"  HorizontalAlignment="Left" Height="88" Margin="242,11,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Beta.png" SnapsToDevicePixels="True"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="286" Margin="353,10,0,0" TextWrapping="Wrap" Text="Shared control mappings!&#xA;&#xA;You can share your input mappings between your DCS instances by choosing one of them as your &quot;master&quot;.&#xA;&#xA;Step 1: mark &quot;master&quot; DCS instance&#xA;Step 2: click &quot;share controls&quot;&#xA;&#xA;Note: your old mappings are backed up and can be restored by unsharing.&#xA;" VerticalAlignment="Top" Width="212"/>
+                    <Button x:Name="button_linkcontrols" Content="Share controls" HorizontalAlignment="Left" Margin="55,219,0,0" VerticalAlignment="Top" Width="109" Click="Button_linkcontrols_Click" IsEnabled="False"/>
+                    <Button x:Name="button_unlinkcontrols" Content="Unshare controls" HorizontalAlignment="Left" Margin="188,219,0,0" VerticalAlignment="Top" Width="113" Click="Button_unlinkcontrols_Click" IsEnabled="False"/>
+                    <Image x:Name="image1" RenderOptions.BitmapScalingMode="HighQuality"  HorizontalAlignment="Left" Height="88" Margin="21,49,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Current.png"/>
+                    <Image x:Name="image1_Copy" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="88" Margin="133,49,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Alpha.png"/>
+                    <Image x:Name="image1_Copy1" RenderOptions.BitmapScalingMode="HighQuality"  HorizontalAlignment="Left" Height="88" Margin="242,49,0,0" VerticalAlignment="Top" Width="88" Source="Resources/DCS_Icon_Beta.png" SnapsToDevicePixels="True"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="286" Margin="353,10,0,0" TextWrapping="Wrap" Text="Shared control mappings!&#xA;&#xA;You can share your input mappings between your DCS instances by choosing one of them as your &quot;master&quot;.&#xA;&#xA;Step 1: mark &quot;master&quot; DCS instance&#xA;Step 2: click &quot;share controls&quot;&#xA;&#xA;Note: your old mappings are backed up and can be restored by clicking  &quot;unshare controls&quot;.&#xA;" VerticalAlignment="Top" Width="212"/>
                 </Grid>
             </TabItem>
             <TabItem Header="VR Configuration" Padding="1,2,6,2" Margin="7,0,-7,0">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
-                    <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="20,103,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_current_Click"/>
-                    <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="20,135,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_current_Click"/>
-                    <Button x:Name="button_load_nonvr_alpha" Content="Load non-VR" HorizontalAlignment="Left" Margin="137,103,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_alpha_Click"/>
-                    <Button x:Name="button_load_vr_alpha" Content="Load VR" HorizontalAlignment="Left" Margin="137,135,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_alpha_Click"/>
-                    <Button x:Name="button_load_nonvr_beta" Content="Load non-VR" HorizontalAlignment="Left" Margin="258,103,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_beta_Click"/>
-                    <Button x:Name="button_load_vr_beta" Content="Load VR" HorizontalAlignment="Left" Margin="258,134,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_beta_Click"/>
-                    <Image x:Name="image_VRConfig_DCSCurrent" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="87" Margin="21,11,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Current_VR.png"/>
-                    <Image x:Name="image2_VRConfig_DCSAlpha" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="87" Margin="138,11,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Alpha_VR.png"/>
-                    <Image x:Name="image2_VRConfig_DCSBeta" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="87" Margin="259,11,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Beta_VR.png"/>
-                    <TextBox x:Name="textBox_VRConfig_Info" HorizontalAlignment="Left" Height="287" Margin="372,10,0,0" TextWrapping="Wrap" Text="Easily switch to VR!&#xA;&#xA;With this option you can jump between VR and non VR configurations with ease. &#xA;&#xA;You can also create shortcuts on your desktop so you don't even have to start this app!&#xA;" VerticalAlignment="Top" Width="188"/>
-                    <Button x:Name="buttonCreate_Shortcut_Current" Content="Create Shortcut" HorizontalAlignment="Left" Margin="20,177,0,0" VerticalAlignment="Top" Width="87" FontSize="8" Click="ButtonCreate_Shortcut_Current_Click"/>
-                    <Button x:Name="buttonCreate_Shortcut_Alpha" Content="Create Shortcut" HorizontalAlignment="Left" Margin="137,177,0,0" VerticalAlignment="Top" Width="87" FontSize="8" Click="ButtonCreate_Shortcut_Alpha_Click"/>
-                    <Button x:Name="buttonCreate_Shortcut_Beta" Content="Create Shortcut" HorizontalAlignment="Left" Margin="258,176,0,0" VerticalAlignment="Top" Width="87" FontWeight="Bold" FontSize="8" Click="ButtonCreate_Shortcut_Beta_Click"/>
+                    <GroupBox Header="VR Configuration manual toggle" HorizontalAlignment="Left" Height="206" Margin="10,10,0,0" VerticalAlignment="Top" Width="348"/>
+                    <GroupBox Header="Create VR / nonVR desktop shortcuts" HorizontalAlignment="Left" Height="76" Margin="10,221,0,0" VerticalAlignment="Top" Width="348"/>
+                    <Button x:Name="button_load_nonvr_current" Content="Load non-VR" HorizontalAlignment="Left" Margin="21,144,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_current_Click"/>
+                    <Button x:Name="button_load_vr_current" Content="Load VR" HorizontalAlignment="Left" Margin="21,176,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_current_Click"/>
+                    <Button x:Name="button_load_nonvr_alpha" Content="Load non-VR" HorizontalAlignment="Left" Margin="138,144,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_alpha_Click"/>
+                    <Button x:Name="button_load_vr_alpha" Content="Load VR" HorizontalAlignment="Left" Margin="138,176,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_alpha_Click"/>
+                    <Button x:Name="button_load_nonvr_beta" Content="Load non-VR" HorizontalAlignment="Left" Margin="259,144,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_nonvr_beta_Click"/>
+                    <Button x:Name="button_load_vr_beta" Content="Load VR" HorizontalAlignment="Left" Margin="259,175,0,0" VerticalAlignment="Top" Width="87" Click="Button_load_vr_beta_Click"/>
+                    <Image x:Name="image_VRConfig_DCSCurrent" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="87" Margin="21,48,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Current_VR.png"/>
+                    <Image x:Name="image2_VRConfig_DCSAlpha" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="87" Margin="138,48,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Alpha_VR.png"/>
+                    <Image x:Name="image2_VRConfig_DCSBeta" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="87" Margin="259,48,0,0" VerticalAlignment="Top" Width="87" Source="Resources/DCS_Icon_Beta_VR.png"/>
+                    <TextBox x:Name="textBox_VRConfig_Info" HorizontalAlignment="Left" Height="287" Margin="372,10,0,0" TextWrapping="Wrap" Text="Easily switch to VR!&#xA;&#xA;With this option you can jump between VR and non VR configurations with ease. &#xA;&#xA;You can also create shortcuts on your desktop so you don't even have to start this app! The will switch the configuration for you!&#xD;&#xA;&#xD;&#xA;If you are used to manually switch audio devices, look at the sound switcher option, too!&#xA;" VerticalAlignment="Top" Width="188"/>
+                    <Button x:Name="buttonCreate_Shortcut_Current" Content="Create Shortcut" HorizontalAlignment="Left" Margin="21,260,0,0" VerticalAlignment="Top" Width="87" FontSize="8" Click="ButtonCreate_Shortcut_Current_Click"/>
+                    <Button x:Name="buttonCreate_Shortcut_Alpha" Content="Create Shortcut" HorizontalAlignment="Left" Margin="138,260,0,0" VerticalAlignment="Top" Width="87" FontSize="8" Click="ButtonCreate_Shortcut_Alpha_Click"/>
+                    <Button x:Name="buttonCreate_Shortcut_Beta" Content="Create Shortcut" HorizontalAlignment="Left" Margin="259,260,0,0" VerticalAlignment="Top" Width="87" FontWeight="Bold" FontSize="8" Click="ButtonCreate_Shortcut_Beta_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TabSoundSwitcher" Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabSoundSwitcher_GotFocus">
+            <TabItem x:Name="TabSoundSwitcher" Header="Sound Switcher" Padding="1,2,6,2" Margin="7,0,-7,0" GotFocus="TabSoundSwitcher_GotFocus" Height="39" VerticalAlignment="Bottom">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
-                    <Button x:Name="ButtonResetSettingsSoundSwitcher" Content="Reset settings" HorizontalAlignment="Left" Margin="473,289,0,0" VerticalAlignment="Top" Width="92" Click="ButtonResetSettingsSoundSwitcher_Click"/>
-                    <ListBox x:Name="ListboxOutput" HorizontalAlignment="Left" Height="102" Margin="10,34,0,0" VerticalAlignment="Top" Width="386" SelectionChanged="ListboxOutput_SelectionChanged"/>
-                    <ListBox x:Name="ListboxInput" HorizontalAlignment="Left" Height="95" Margin="10,189,0,0" VerticalAlignment="Top" Width="386" SelectionChanged="ListboxInput_SelectionChanged"/>
-                    <TextBox x:Name="textBoxSoundSwitcherHelptext" HorizontalAlignment="Left" Height="274" Margin="401,10,0,0" TextWrapping="Wrap" Text="Select the standard audio device to use when playing in VR!&#xA;&#xA;As not all headsets automatically use SteamVR, this will allow you to change what you standard in- and output device will be for the game session.&#xA;&#xA;Only activated when VR shortcut is used.&#xA;&#xA;Will revert after DCS closes.&#xA;" VerticalAlignment="Top" Width="164"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Playback devices:" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"><Run Text="Recording"/><Run Text=" devices:"/></TextBlock>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19"><Run Text="Currently selected device:"/><LineBreak/><Run/></TextBlock>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19"><Run Text="Currently selected device:"/><LineBreak/><Run/></TextBlock>
-                    <TextBlock x:Name="textCurrentOutput" HorizontalAlignment="Left" Margin="150,141,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="246"/>
-                    <TextBlock x:Name="textCurrentInput" HorizontalAlignment="Left" Margin="150,289,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="246"/>
+                    <GroupBox Header="Choose VR playback device " HorizontalAlignment="Left" Height="128" Margin="10,10,0,0" VerticalAlignment="Top" Width="386"/>
+                    <GroupBox Header="Choose VR recording device" HorizontalAlignment="Left" Height="128" Margin="10,145,0,0" VerticalAlignment="Top" Width="386"/>
+                    <Button x:Name="ButtonResetSettingsSoundSwitcher" Content="Reset settings" HorizontalAlignment="Left" Margin="473,279,0,0" VerticalAlignment="Top" Width="92" Click="ButtonResetSettingsSoundSwitcher_Click"/>
+                    <ListBox x:Name="ListboxOutput" HorizontalAlignment="Left" Height="76" Margin="11,38,0,0" VerticalAlignment="Top" Width="384" SelectionChanged="ListboxOutput_SelectionChanged">
+
+                    </ListBox>
+                    <ListBox x:Name="ListboxInput" HorizontalAlignment="Left" Height="76" Margin="11,174,0,0" VerticalAlignment="Top" Width="384" SelectionChanged="ListboxInput_SelectionChanged">
+
+                    </ListBox>
+                    <TextBox x:Name="textBoxSoundSwitcherHelptext" HorizontalAlignment="Left" Height="263" Margin="401,10,0,0" TextWrapping="Wrap" Text="Select the standard audio device to use when playing in VR!&#xA;&#xA;As not all headsets automatically use SteamVR, this will allow you to change what you standard in- and output device will be for the game session.&#xA;&#xA;Only activated when VR shortcut is used.&#xA;&#xA;Will revert after DCS closes.&#xA;" VerticalAlignment="Top" Width="164"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="14,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="102"><Run Text="Currently selected:"/><LineBreak/><Run/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="14,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="102"><Run Text="Currently selected:"/><LineBreak/><Run/></TextBlock>
+                    <TextBlock x:Name="textCurrentOutput" HorizontalAlignment="Left" Margin="121,117,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="266"/>
+                    <TextBlock x:Name="textCurrentInput" HorizontalAlignment="Left" Margin="121,252,0,0" TextWrapping="Wrap" Text="not initialized" VerticalAlignment="Top" Width="266"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Settings" GotFocus="TabItem_GotFocus" Padding="1,2,6,2" Margin="7,0,-7,0">
@@ -102,7 +110,7 @@
                     <Image x:Name="image3" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Current.png"/>
                     <Image x:Name="image3_Copy" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="61" Margin="10,77,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Alpha.png"/>
                     <Image x:Name="image3_Copy1" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="61" Margin="10,144,0,0" VerticalAlignment="Top" Width="61" Source="Resources/DCS_Icon_Beta.png" SnapsToDevicePixels="True"/>
-                    <TextBox x:Name="textBox_Settings_Info" HorizontalAlignment="Left" Height="195" Margin="380,10,0,0" TextWrapping="Wrap" Text="This sets the paths to the configuration folders, typically in &quot;Saved Games&quot;.&#xA;&#xA;!!NOT THE INSTALLATION DIRECTORY OF DCS!!&#xA;&#xA;If it sais &quot;Not found&quot; but you expect it to be there, the app couldn't find/understand your options. Check DCMCM.log&#xA;" VerticalAlignment="Top" Width="174" TextDecorations="{x:Null}"/>
+                    <TextBox x:Name="textBox_Settings_Info" HorizontalAlignment="Left" Height="212" Margin="380,10,0,0" TextWrapping="Wrap" Text="This sets the paths to the configuration folders, typically in &quot;Saved Games&quot;.&#xA;&#xA;THIS IS NOT THE INSTALLATION DIRECTORY OF DCS&#xA;&#xA;If it sais &quot;Not found&quot; but you expect it to be there, the app couldn't find/understand your options. Check DCMCM.log&#xA;" VerticalAlignment="Top" Width="174" TextDecorations="{x:Null}"/>
                     <Button x:Name="button_dcsdir_current_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,11,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_current_remove_Click"/>
                     <Button x:Name="button_dcsdir_alpha_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,77,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_alpha_remove_Click"/>
                     <Button x:Name="button_dcsdir_beta_remove" Content="Remove directory" HorizontalAlignment="Left" Margin="230,144,0,0" VerticalAlignment="Top" Width="145" Click="Button_dcsdir_beta_remove_Click"/>
@@ -112,7 +120,6 @@
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                 </Grid>
             </TabItem>
-
         </TabControl>
     </Grid>
 </Controls:MetroWindow>
