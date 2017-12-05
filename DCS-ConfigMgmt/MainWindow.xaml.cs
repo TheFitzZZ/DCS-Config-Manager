@@ -303,6 +303,7 @@ namespace DCS_ConfigMgmt
             {
                 //Debug
                 //System.Windows.Forms.MessageBox.Show(sStartOption);
+                //System.Windows.Forms.MessageBox.Show(sStartOption.Contains("vr").ToString());
 
                 //Get the current standard sound devices
                 var originalPlaybackDevice = Soundswitcher.GetStandardSoundDevice("output");
@@ -310,13 +311,13 @@ namespace DCS_ConfigMgmt
 
                 //Start the handler
                 log.Debug("Calling startup handler");
-                if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
+                if ((Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "") & sStartOption.Contains("vr") )
                 {
                     Soundswitcher.FindSoundDeviceByName("output", Properties.Settings.Default.sSoundOutput);
                     Soundswitcher.FindSoundDeviceByName("input", Properties.Settings.Default.sSoundInput);
                 }
                 StartupHandler(sStartOption);
-                if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
+                if ((Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "") & sStartOption.Contains("vr"))
                 {
                     Soundswitcher.ChangeStandardSoundDevice(originalCaptureDevice);
                     Soundswitcher.ChangeStandardSoundDevice(originalPlaybackDevice);
@@ -951,7 +952,7 @@ namespace DCS_ConfigMgmt
                 {
                     SwitchVRConfig("current", false);
                 }
-                DCSStarter("current");
+                DCSStarter("current", sStartOption);
             }
             else if (sStartOption == "alpha")
             {
@@ -959,7 +960,7 @@ namespace DCS_ConfigMgmt
                 {
                     SwitchVRConfig("alpha", false);
                 }
-                DCSStarter("alpha");
+                DCSStarter("alpha", sStartOption);
             }
             else if (sStartOption == "beta")
             {
@@ -967,7 +968,7 @@ namespace DCS_ConfigMgmt
                 {
                     SwitchVRConfig("beta", false);
                 }
-                DCSStarter("beta");
+                DCSStarter("beta", sStartOption);
             }
             else if (sStartOption == "currentvr")
             {
@@ -975,7 +976,7 @@ namespace DCS_ConfigMgmt
                 {
                     SwitchVRConfig("current", true);
                 }
-                DCSStarter("current");
+                DCSStarter("current", sStartOption);
             }
             else if (sStartOption == "alphavr")
             {
@@ -983,7 +984,7 @@ namespace DCS_ConfigMgmt
                 {
                     SwitchVRConfig("alpha", true);
                 }
-                DCSStarter("alpha");
+                DCSStarter("alpha", sStartOption);
             }
             else if (sStartOption == "betavr")
             {
@@ -991,14 +992,14 @@ namespace DCS_ConfigMgmt
                 {
                     SwitchVRConfig("beta", true);
                 }
-                DCSStarter("beta");
+                DCSStarter("beta", sStartOption);
             }
         }
 
         //
         // Start DCS binary by branch
         //
-        private void DCSStarter(string branch)
+        private void DCSStarter(string branch, string sStartoption)
         {
             log.Debug("DCS starter called with " + branch);
 
@@ -1007,7 +1008,7 @@ namespace DCS_ConfigMgmt
                 log.Info("Starting DCS with " + GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
 
                 var process = Process.Start(GetDCSRegistryPath(branch) + "\\bin\\dcs_updater.exe");
-                if (Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "")
+                if ((Properties.Settings.Default.sSoundOutput != "" | Properties.Settings.Default.sSoundInput != "") & sStartoption.Contains("vr"))
                 {
                     //Wait for the updater to close
                     process.WaitForExit();
