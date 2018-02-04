@@ -35,6 +35,9 @@ I have the following options:
   - DOGE: DDq5ChkLt82pRYimKPRibdeWuYMQShYKdk
   - BCH: 1Ci8ZRUXzUbqjyYj2y7m5CdJAtcjF9MF4L 
 
+Wanna get into crypto:
+- [Coinbase](https://www.coinbase.com/join/5a383d1dada1050742ff705a) to buy cypto (one of the most popular methods)
+- [Binance](https://www.binance.com/?ref=16671900) is my preferred exchange to trade stuff ... if you wanna dive in :-)
 
 ### Things to note:
 - Windows 10 SmartScreen will not trust it in the early weeks of release (until I know how to stop it from ignoring the certificate when downloaded from the internet)
