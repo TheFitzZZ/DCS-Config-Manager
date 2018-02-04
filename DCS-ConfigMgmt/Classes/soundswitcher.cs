@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
-using AudioSwitcher.AudioApi.Session;
+//using AudioSwitcher.AudioApi.Session;
 
 namespace DCS_ConfigMgmt
 {
@@ -64,8 +64,11 @@ namespace DCS_ConfigMgmt
         public static void ChangeStandardSoundDevice(CoreAudioDevice device)
         {
             CoreAudioController Controller = new CoreAudioController();
-            Controller.SetDefaultDevice(device);
-            Controller.SetDefaultCommunicationsDevice(device);
+            //Controller.SetDefaultDevice(device);
+            //Controller.SetDefaultCommunicationsDevice(device);
+            //Controller.DefaultPlaybackDevice.SetAsDefault();
+            device.SetAsDefault();
+            device.SetAsDefaultCommunications();
         }
 
         public static void FindSoundDeviceByName(string sType, string sName)
@@ -101,24 +104,24 @@ namespace DCS_ConfigMgmt
             }
         }
 
-        public static void Test()
-        {
-            string test = "Mikrofon (USB Audio Device)";
+        //public static void Test()
+        //{
+        //    string test = "Mikrofon (USB Audio Device)";
 
-            CoreAudioController Controller = new CoreAudioController();
-            var devices = Controller.GetCaptureDevices(DeviceState.Active);
+        //    CoreAudioController Controller = new CoreAudioController();
+        //    var devices = Controller.GetCaptureDevices(DeviceState.Active);
             
-            foreach (var d in devices)
-            {
-                if (d.FullName == test)
-                {
-                    System.Windows.Forms.MessageBox.Show("Yeah");
-                }
-            }
+        //    foreach (var d in devices)
+        //    {
+        //        if (d.FullName == test)
+        //        {
+        //            System.Windows.Forms.MessageBox.Show("Yeah");
+        //        }
+        //    }
 
-            return;
+        //    return;
             
-        }
+        //}
         
     }
 }

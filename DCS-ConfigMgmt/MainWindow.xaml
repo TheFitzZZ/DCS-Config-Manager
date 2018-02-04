@@ -26,23 +26,27 @@
             <TabItem Header="About" Margin="4,0,-7,0">
                 <Grid Background="#FF3F3F46" Margin="10,0,0,0">
                     <Image x:Name="image924thLogo" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="245" Margin="10,1,0,0" VerticalAlignment="Top" Width="236" Source="Resources/j9241.png" Stretch="Fill"/>
-                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="251,11,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="144" Width="320" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version "/><Run FontWeight="Bold" FontSize="16" Text="2017 "/><Run FontWeight="Bold" FontSize="16" Text="R"/><Run FontWeight="Bold" FontSize="16" Text="4"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Please p"/><Run Text="ost issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
-                    <TextBlock Margin="286,171,229,137" FontWeight="Bold" Foreground="White">          
+                    <TextBlock x:Name="textBlock_About" HorizontalAlignment="Left" Margin="251,11,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="144" Width="320" RenderTransformOrigin="0.5,0.525"><Run FontWeight="Bold" FontSize="22" Text="DCS Configuration Manager"/><LineBreak/><Run FontWeight="Bold" FontSize="16" Text="Version "/><Run FontWeight="Bold" FontSize="16" Text="2017 "/><Run FontWeight="Bold" FontSize="16" Text="R"/><Run FontWeight="Bold" FontSize="16" Text="5"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="Dedicated to "/><Run Text="the 924th vFW"/><LineBreak/><Run Text="Badly written by FitzZZ"/><LineBreak/><Run/><LineBreak/><Run Text="Please p"/><Run Text="ost issues and suggestions "/><Run Text="on the GitHub page."/></TextBlock>
+                    <TextBlock Margin="286,169,229,139" FontWeight="Bold" Foreground="White">          
+                        <Hyperlink Foreground="White" NavigateUri="https://github.com/TheFitzZZ/DCS-Config-Manager/wiki/Donations" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">Donate a coffee :-)</Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="286,200,229,108" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://github.com/TheFitzZZ/DCS-Config-Manager" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">Visit GitHub project</Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="286,209,214,99" FontWeight="Bold" Foreground="White">          
+                    <TextBlock Margin="286,231,214,77" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://discord.gg/UYcu2Wz" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">Talk to me on Discord</Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="286,244,241,64" FontWeight="Bold" Foreground="White">          
+                    <TextBlock Margin="286,261,241,47" FontWeight="Bold" Foreground="White">          
                         <Hyperlink Foreground="White" NavigateUri="https://www.reddit.com/user/The_FitzZZ/" RequestNavigate="Hyperlink_RequestNavigate" FontWeight="Normal">PM me on Reddit</Hyperlink>
                     </TextBlock>
                     <Label x:Name="labelResetSettings" Content="Reset settings" HorizontalAlignment="Left" Margin="500,295,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDoubleClick="LabelResetSettings_MouseDoubleClick"/>
                     <Label x:Name="labelLogfile" Content="Open Log" HorizontalAlignment="Left" Margin="409,294,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FF4B4B55" MouseDown="LabelLogfile_MouseDown"/>
                     <Label x:Name="labelVersion" Content="Label" HorizontalAlignment="Left" Margin="0,182,0,0" VerticalAlignment="Top" Foreground="#FF4D4B4D" Visibility="Hidden"/>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="30" Margin="251,202,0,0" VerticalAlignment="Top" Width="30" Source="Resources/icons8-discord-528.png"/>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="30" Margin="251,225,0,0" VerticalAlignment="Top" Width="30" Source="Resources/icons8-discord-528.png"/>
                     <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="20" Margin="389,297,0,0" VerticalAlignment="Top" Width="20" Source="Resources/icons8-file-528.png" Opacity="0.5"/>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="30" Margin="251,166,0,0" VerticalAlignment="Top" Width="30" Source="Resources/icons8-github-528.png"/>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="30" Margin="251,236,0,0" VerticalAlignment="Top" Width="30" Source="Resources/icons8-reddit-528.png"/>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="30" Margin="251,195,0,0" VerticalAlignment="Top" Width="30" Source="Resources/icons8-github-528.png"/>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="29" Margin="251,163,0,0" VerticalAlignment="Top" Width="30" Source="Resources/donate.png"/>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="30" Margin="251,252,0,0" VerticalAlignment="Top" Width="30" Source="Resources/icons8-reddit-528.png"/>
                     <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="20" Margin="480,297,0,0" VerticalAlignment="Top" Width="20" Source="Resources/icons8-support-528.png" Opacity="0.5"/>
                 </Grid>
             </TabItem>

@@ -1015,10 +1015,10 @@ namespace DCS_ConfigMgmt
                     //System.Threading.Thread.Sleep(10000);
                     //Catch the dcs executable
                     var processDCS = Process.GetProcessesByName("DCS");
-                    foreach (var process2 in Process.GetProcesses())
-                    {
-                        Console.WriteLine(process2.ProcessName);
-                    }
+                    //foreach (var process2 in Process.GetProcesses())
+                    //{
+                    //    Console.WriteLine(process2.ProcessName);
+                    //}
                     //Wait for it to close
                     processDCS[0].WaitForExit();
                 }
