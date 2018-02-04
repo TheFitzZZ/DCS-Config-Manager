@@ -25,7 +25,7 @@ Users of VR headsets like the Oculus usually have to change sound output und inp
 If you want to support my work or just leave a little thanks, I'd appreciate a small donation towards my coffee fund :-) 
 
 I have the following options:
-- Donorbox: https://donorbox.org/dcs-cm
+- Donorbox: https://donorbox.org/dcs-cm (for PayPal and CC)
 - Crypto:
   - BTC: 1KtsAMGCkJPv3R8fa2zCxznB3PhdSPDf9d
   - ETH: 0x4c336e3ea18756bef54d9d022a5788352304dbed
