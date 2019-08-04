@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using static Standard.NtDll;
+//using static Standard.NtDll;
 
 namespace DCS_ConfigMgmt
 {
