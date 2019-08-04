@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="DCS Configuration Manger.exe" version="1.5.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="924th.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="DCS Configuration Manger" version="0.1.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="DCS Configuration Manger.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AudioSwitcher.AudioApi.dll" size="35840">
+      <assemblyIdentity name="AudioSwitcher.AudioApi" version="4.0.0.308" publicKeyToken="FDA5729E2DB3A64F" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>7fzAX3ba2f5zVfQ38GPu3Sag8jW8dAF/8Q4wAC4EvBw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AudioSwitcher.AudioApi.CoreAudio.dll" size="98816">
+      <assemblyIdentity name="AudioSwitcher.AudioApi.CoreAudio" version="4.0.0.308" publicKeyToken="FDA5729E2DB3A64F" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>vrBDZNZTkHzFqrnk11APv61ZI8OHIEeWr3C87VqvBrI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ControlzEx.dll" size="180224">
+      <assemblyIdentity name="ControlzEx" version="3.0.2.4" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Vcrgr4UXrC14eyEKxvecmqx/WANbafqvYgqQ8z4mdvw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DCS Configuration Manger.exe" size="2727424">
+      <assemblyIdentity name="DCS Configuration Manger" version="0.1.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>LW2f7CSQl9ZO00jxwqm9doZ/hLACIixGri4V4YGZ/xA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MahApps.Metro.dll" size="1097216">
+      <assemblyIdentity name="MahApps.Metro" version="1.6.5.1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>CWWXjcLsWdBx8guO44Bvmp4kwMRFg6QWueZpQBSXEi4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NLog.dll" size="817152">
+      <assemblyIdentity name="NLog" version="4.0.0.0" publicKeyToken="5120E14C03D0593C" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>2gikYLyb+DQP9v7/l+6V4CfzqnDTF87ZpLD7U0ihXAU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Windows.Interactivity.dll" size="55904">
+      <assemblyIdentity name="System.Windows.Interactivity" version="4.5.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>k/vFnkiAr8nxNsOsCXatp/P6p8rO3OXIJLM3y8qdLr8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="924th.ico" size="81179">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FLkna/OT+qcJvkj5QpA0JJHI75grXAifGQTy1N+39gs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DCS Configuration Manger.exe.config" size="3291">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>nwikpcgiXg3Pz945oerWkXmbiRqObsm5EMMTA/gdmxQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Alpha.ico" size="68840">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>kCZJSzhbQ1yRX2Yvdntz3oMxqXJRNJORl4aEyk3apX0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Alpha_Blue.ico" size="78314">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>PCw8matiZxo+2LcVYFUFKQu7/8KvdpQanhZpv7pIJJo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Alpha_Green.ico" size="76727">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>4pWG5KyGeaeQFLyBOPRxeO2ZvdXf9iJFEmdt42+moQA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Alpha_VR.ico" size="72395">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>QY80LiJ03cweWLG9WfGKQ92D9whsFSHNw516NVkgT+c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Alpha_VR_Blue.ico" size="81521">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>r1Zkc5Oqfypc1+91h6LjnHQyFjXbaqvFtogY/7dRqtc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Alpha_VR_Green.ico" size="79865">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>wkqUCVpLXyC1a4zLsnGuC55Gd6Qq3Yo6Q74b85FDXyI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Beta.ico" size="67341">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>kGhko+JZ4/NQLXXRxrJsUJUOYRR6yWP6/NGOVnqpYGg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Beta_Blue.ico" size="77029">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>qZuC3+1lORQ1OYmILOWTHdMbmTfM0Q9ZzyEoPWQIWA4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Beta_Green.ico" size="51844">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>LAS/eWLumv5CAn5eR+8YMH/sbHrUJxB4u+TTPfWXoJ4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Beta_VR.ico" size="70879">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>VfxF0LAS4DjoDtHBDIm71GmL59RPAUGlG1ljkQ8KfJY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Beta_VR_Blue.ico" size="80246">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>T7W6Bzlg7n9LAqQiQo0b6ua0lK50GAtQYqlgzc3EBwU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Beta_VR_Green.ico" size="78531">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>afQHCrOft6zl7KkIJudP60dWfwie27Pb7QQLJI3Mu8w=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Current.ico" size="62776">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>DxEZ3Xz+CuzgA2u6o9mf+8JHHEtMHnftsf1qWrgCwmA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Current_Blue.ico" size="73049">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>x4Kt0/k3OwqsKglDnZoHueyyHr+puRC9XyNjdpTCbX8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Current_Green.ico" size="71282">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6Yijb4C5u2KwfEDJLpZ+7QpceN3AMmB4WgOm+q+tkik=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Current_VR.ico" size="66303">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>50HtWCqPl4+xSuTOO0561a7K1PxCooco175J3GctiVE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Current_VR_Blue.ico" size="76313">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>GQsqEzkDUTexf3JGlwTKFg2Hma+Q7SBe0xMgfCNED2c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Icon_Current_VR_Green.ico" size="74483">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IuQrDG6FUn29sfRKPXU/v7SCuFtdioaG1qfvYD3VNG0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\DCS_Rainbow_Putin.ico" size="110591">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>tsI0uPWDMlZNGja7mu6lMu4zwyU9okjCnl791mJ1Z5s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="NLog.config" size="1368">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>bLBO3BObxyoHk7mOSKHTKSvTVEtBdbLlIa1hLyFWPWE=</dsig:DigestValue>
+    </hash>
+  </file>
+</asmv1:assembly>
